@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <UserSecretsId>aspnet-KanbanApi-B364631F-D079-4CB6-B3E1-62954E6FAE83</UserSecretsId>
+    <UserSecretsId>aspnet-KanbanApi-76939E24-D0B2-4E1D-B91C-492FC49848EB</UserSecretsId>
   </PropertyGroup>
 
 	<ItemGroup>

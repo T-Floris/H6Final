@@ -5,15 +5,15 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{0868C94A-B8A6-485B-B910-D772E4B39134}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanApi", "KanbanApi\KanbanApi.csproj", "{1067A9A7-A64B-4958-B68A-368818D99470}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanApi.EmailService", "KanbanApi.EmailService\KanbanApi.EmailService.csproj", "{CB022E23-1BB7-43BF-8609-94E775502C03}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanApi.EmailService", "KanbanApi.EmailService\KanbanApi.EmailService.csproj", "{CB022E23-1BB7-43BF-8609-94E775502C03}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanApi.Library", "KanbanApi.Library\KanbanApi.Library.csproj", "{DF56766A-1F01-48A2-BC41-7528276A4799}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KanbanApi.Library", "KanbanApi.Library\KanbanApi.Library.csproj", "{DF56766A-1F01-48A2-BC41-7528276A4799}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{44E632D9-AFFB-4D39-A37C-197CCDB9ADEA}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "KanbanData", "KanbanData\KanbanData.sqlproj", "{5B8B1432-1CAC-45BB-B629-08EFB8AA52C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanApi", "KanbanApi\KanbanApi.csproj", "{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1067A9A7-A64B-4958-B68A-368818D99470}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1067A9A7-A64B-4958-B68A-368818D99470}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1067A9A7-A64B-4958-B68A-368818D99470}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1067A9A7-A64B-4958-B68A-368818D99470}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CB022E23-1BB7-43BF-8609-94E775502C03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CB022E23-1BB7-43BF-8609-94E775502C03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB022E23-1BB7-43BF-8609-94E775502C03}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,15 +35,19 @@ Global
 		{5B8B1432-1CAC-45BB-B629-08EFB8AA52C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B8B1432-1CAC-45BB-B629-08EFB8AA52C7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B8B1432-1CAC-45BB-B629-08EFB8AA52C7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1067A9A7-A64B-4958-B68A-368818D99470} = {0868C94A-B8A6-485B-B910-D772E4B39134}
 		{CB022E23-1BB7-43BF-8609-94E775502C03} = {0868C94A-B8A6-485B-B910-D772E4B39134}
 		{DF56766A-1F01-48A2-BC41-7528276A4799} = {0868C94A-B8A6-485B-B910-D772E4B39134}
 		{5B8B1432-1CAC-45BB-B629-08EFB8AA52C7} = {44E632D9-AFFB-4D39-A37C-197CCDB9ADEA}
+		{0BFA2B6B-9DFE-41DC-A56F-DE5EE753D875} = {0868C94A-B8A6-485B-B910-D772E4B39134}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B9D93E20-4CD1-44B4-83F8-77634896CF57}
