@@ -1,0 +1,34 @@
+{
+  "kanban": "Kanban",
+
+  "comment": "HEROSECTION STARTS HERE",
+  "hero_section_text": "Kanban helps teams work better.",
+  "hero_section_button_text": "Get started",
+
+  "comment": "ANNOUNCEMENT STARTS HERE",
+  "announcement_text": "Sign up for free!",
+
+  "comment": "INFOSECTION STARTS HERE",
+  "info_section_buttonLabel": "Learn more",
+
+  "info_section_topLine1": "Teamwork makes the dream work",
+  "info_section_headLine1": "It’s a way of working together.",
+  "info_section_desc1": "Manage projects, organize tasks, and build team spirit — all gathered in one place.",
+
+  "info_section_topLine2": "dive into the details",
+  "info_section_headLine2": "Cards contain everything you need.",
+  "info_section_desc2": "Cards are your portal to more organized work—where every single part of your task can be managed, tracked, and shared with teammates.",
+
+  "info_section_topLine3": "on time",
+  "info_section_headLine3": "Complete project before deadline.",
+  "info_section_desc3": "With our features give any team the overview of the project & ability to quickly set up and complete tasks before deadline.",
+
+  "comment": "SERVICES STARTS HERE",
+  "services_title": "Our Services",
+  "services_sub_title1": "Time saving",
+  "services_sub_title2": "Online planning",
+  "services_sub_title3": "All platforms",
+  "services_text1": "We reduce time waste & increase your efficiency at work.",
+  "services_text2": "Cooperate from anywhere & anytime.",
+  "services_text3": "You can access our platform online on any devices & anywhere."
+}
