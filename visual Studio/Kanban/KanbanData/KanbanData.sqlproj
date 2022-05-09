@@ -56,5 +56,25 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="PublishLocations" />
+    <Folder Include="dbo\NewFolder1\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Group.sql" />
+    <Build Include="dbo\Tables\GroupAccess.sql" />
+    <Build Include="dbo\Tables\GroupUser.sql" />
+    <Build Include="dbo\Tables\Board.sql" />
+    <Build Include="dbo\Tables\BoardGroup.sql" />
+    <Build Include="dbo\Tables\BoardAccess.sql" />
+    <Build Include="dbo\Tables\Table.sql" />
+    <Build Include="dbo\Tables\BoardTable.sql" />
+    <Build Include="dbo\Tables\Card.sql" />
+    <Build Include="dbo\Tables\TableCard.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PublishLocations\KanbanData.publish.xml" />
   </ItemGroup>
 </Project>
