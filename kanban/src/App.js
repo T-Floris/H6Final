@@ -1,10 +1,12 @@
-
+import { GlobalStyle } from "./components/Assets/GlobalStyles";
+import NavigateRoutes from "./NavigateRoutes";
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <GlobalStyle />
+      <NavigateRoutes />
+    </>
   );
 }
 
