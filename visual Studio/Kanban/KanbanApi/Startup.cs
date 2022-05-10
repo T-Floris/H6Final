@@ -1,7 +1,7 @@
 using KanbanApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.HttpsPolicy; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.EntityFrameworkCore;
@@ -17,6 +17,8 @@ namespace KanbanApi
 {
     public class Startup
     {
+        private const string _defaultTokenProviderName = "Default";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
