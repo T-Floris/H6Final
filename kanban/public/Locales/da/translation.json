@@ -1,0 +1,37 @@
+{
+  "app_title": "Titel",
+  "language": "Sprog",
+  "welcome_message": "Velkommen",
+  "kanban": "Kanban",
+
+  "comment": "HEROSECTION STARTS HERE",
+  "hero_section_text": "Kanban hjælper teams med at arbejde bedre.",
+  "hero_section_button_text": "Kom igang",
+
+  "comment": "ANNOUNCEMENT STARTS HERE",
+  "announcement_text": "Gratis tilmelding!",
+
+  "comment": "INFOSECTION STARTS HERE",
+  "info_section_buttonLabel": "Lær mere",
+
+  "info_section_topLine1": "Teamwork får drømmen til at fungere",
+  "info_section_headLine1": "Det er en måde at arbejde sammen på.",
+  "info_section_desc1": "Administrer projekter, organiser opgaver og opbyg teamånd – alt samlet ét sted.",
+
+  "info_section_topLine2": "dykke ned i detaljerne",
+  "info_section_headLine2": "Kortene indeholder alt hvad du skal bruge.",
+  "info_section_desc2": "Kort er din portal til mere organiseret arbejde – hvor hver enkelt del af din opgave kan administreres, spores og deles med holdkammerater.",
+
+  "info_section_topLine3": "til tiden",
+  "info_section_headLine3": "Afslut projektet inden deadline.",
+  "info_section_desc3": "Med vores funktioner giver ethvert team overblik over projektet og mulighed for hurtigt at opsætte og fuldføre opgaver inden deadline.",
+
+  "comment": "SERVICES STARTS HERE",
+  "services_title": "Vores Tjenester",
+  "services_sub_title1": "Tidsbesparelse",
+  "services_sub_title2": "Online planlægning",
+  "services_sub_title3": "Alle platforme",
+  "services_text1": "Vi reducerer tidsspild og øger din effektivitet på arbejdet.",
+  "services_text2": "Samarbejd hvor som helst og når som helst.",
+  "services_text3": "Du kan få adgang til vores platform online på alle enheder og hvor som helst."
+}

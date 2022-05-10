@@ -1,0 +1,38 @@
+{
+  "app_title": "标题",
+  "language": "语言",
+  "welcome_message": "欢迎",
+  "kanban": "看板",
+
+  "comment": "HEROSECTION STARTS HERE",
+  "hero_section_text": "看板帮助团队更好地工作。",
+  "hero_section_button_text": "开始使用",
+
+  "comment": "ANNOUNCEMENT STARTS HERE",
+  "announcement_text": "免费注册！",
+
+  "comment": "INFOSECTION STARTS HERE",
+  "info_section_buttonLabel": "了解更多",
+
+  "info_section_topLine1": "团队合作让梦想成真",
+  "info_section_headLine1": "这是一种合作方式。",
+  "info_section_desc1": "管理项目、组织任务和建立团队精神 - 所有这些都聚集在一个地方。",
+
+  "info_section_topLine2": "深入细节",
+  "info_section_headLine2": "卡片包含您需要的一切。",
+  "info_section_desc2": "卡片是您进行更有条理的工作的门户 - 您的任务的每个部分都可以被管理、跟踪并与团队成员共享。",
+
+  "info_section_topLine3": "准时",
+  "info_section_headLine3": "在截止日期前完成项目。",
+  "info_section_desc3": "借助我们的功能，任何团队都可以了解项目的概况以及在截止日期前快速设置和完成任务的能力。",
+
+  "comment": "SERVICES STARTS HERE",
+  "services_title": "我们的服务",
+  "services_sub_title1": "节省时间",
+  "services_sub_title2": "线上规划",
+  "services_sub_title3": "所有平台",
+  "services_text1": "我们减少浪费的时间并提高您的工作效率。",
+  "services_text2": "随时随地进行合作。",
+  "services_text3": "您可以在任何设备和任何地方在线访问我们的平台。"
+
+}
