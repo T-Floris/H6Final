@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import i18next from "i18next";
-import cookies from "js-cookie";
+
 
 import {
   FaFacebook,
