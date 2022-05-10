@@ -33,6 +33,46 @@
   "services_sub_title3": "所有平台",
   "services_text1": "我们减少浪费的时间并提高您的工作效率。",
   "services_text2": "随时随地进行合作。",
-  "services_text3": "您可以在任何设备和任何地方在线访问我们的平台。"
+  "services_text3": "您可以在任何设备和任何地方在线访问我们的平台。",
 
+  "comment": "NEWSLETTER STARTS HERE",
+  "newsletter": "简报",
+  "newsletter_decs": "订阅以接收有关看板的最新更新和功能",
+  "placeholder": "请在此处输入您的电子邮件",
+
+  "comment": "FOOTER STARTS HERE",
+  "about_us_title": "关于我们",
+  "about_us_array": [
+    { "label": "联系我们", "to": "/contact" },
+    { "label": "条款&条件", "to": "/terms" },
+    { "label": "隐私政策", "to": "/privacy" }
+  ],
+  "explore_title": "探索",
+  "explore_array": [
+    { "label": "主页", "to": "/" },
+    { "label": "了解更多", "to": "/learnmore" },
+    { "label": "登入", "to": "/signin" },
+    { "label": "注册", "to": "/signup" }
+  ],
+  "follow_us_at_title": "关注我们",
+  "follow_us_at_array": [
+    { "label": "脸书", "to": "//www.facebook.com/" },
+    { "label": "油管", "to": "//www.youtube.com/" },
+    { "label": "推特", "to": "//twitter.com/" },
+    { "label": "即时", "to": "//www.instagram.com/" },
+    { "label": "领英", "to": "//www.linkedin.com/" }
+  ],
+  "help_title": "帮助",
+  "help_array": [{ "label": "入门", "to": "/" }],
+  "rights": "版权所有.",
+
+  "comment": "CONTACTFORM STARTS HERE",
+  "contact_us_title": "联系我们",
+  "contact_us_subtitle1": "联系信息",
+  "contact_us_text": "与我们连接",
+  "contact_us_subtitle2": "给我们发信息",
+  "contact_us_placeholder1": "你的名字",
+  "contact_us_placeholder2": "你的邮件",
+  "contact_us_placeholder3": "你的信息...",
+  "contact_us_button": "发送消息"
 }

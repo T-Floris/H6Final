@@ -33,5 +33,46 @@
   "services_sub_title3": "Alle platforme",
   "services_text1": "Vi reducerer tidsspild og øger din effektivitet på arbejdet.",
   "services_text2": "Samarbejd hvor som helst og når som helst.",
-  "services_text3": "Du kan få adgang til vores platform online på alle enheder og hvor som helst."
+  "services_text3": "Du kan få adgang til vores platform online på alle enheder og hvor som helst.",
+
+  "comment": "NEWSLETTER STARTS HERE",
+  "newsletter": "Nyhedsbrev",
+  "newsletter_decs": "Abonner for at modtage de nyeste opdateringer og funktioner om Kanban",
+  "placeholder": "Indtast venligst din e-mail her",
+
+  "comment": "FOOTER STARTS HERE",
+  "about_us_title": "Om Os",
+  "about_us_array": [
+    { "label": "Kontakt Os", "to": "/contact" },
+    { "label": "Vilkår & Betingelser", "to": "/terms" },
+    { "label": "Fortrolighedspolitik", "to": "/privacy" }
+  ],
+  "explore_title": "Udforske",
+  "explore_array": [
+    { "label": "Hjem", "to": "/" },
+    { "label": "Lær mere", "to": "/learnmore" },
+    { "label": "Log ind", "to": "/signin" },
+    { "label": "Tilmelde", "to": "/signup" }
+  ],
+  "follow_us_at_title": "Følg Os På",
+  "follow_us_at_array": [
+    { "label": "Facebook", "to": "//www.facebook.com/" },
+    { "label": "Youtube", "to": "//www.youtube.com/" },
+    { "label": "Twitter", "to": "//twitter.com/" },
+    { "label": "Instagram", "to": "//www.instagram.com/" },
+    { "label": "Linkedin", "to": "//www.linkedin.com/" }
+  ],
+  "help_title": "Hjælp",
+  "help_array": [{ "label": "Kom godt i gang", "to": "/" }],
+  "rights": "Alle rettigheder forbeholdes.",
+
+  "comment": "CONTACTFORM STARTS HERE",
+  "contact_us_title": "Kontakt Os",
+  "contact_us_subtitle1": "Kontakt Information",
+  "contact_us_text": "Forbind med os:",
+  "contact_us_subtitle2": "Send Os En Besked",
+  "contact_us_placeholder1": "Dit Navn",
+  "contact_us_placeholder2": "Din Email",
+  "contact_us_placeholder3": "Din Besked...",
+  "contact_us_button": "Send Besked"
 }

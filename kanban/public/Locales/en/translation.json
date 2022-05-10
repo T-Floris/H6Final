@@ -1,4 +1,7 @@
 {
+  "app_title": "Title",
+  "language": "Language",
+  "welcome_message": "Welcome",
   "kanban": "Kanban",
 
   "comment": "HEROSECTION STARTS HERE",
@@ -30,5 +33,46 @@
   "services_sub_title3": "All platforms",
   "services_text1": "We reduce time waste & increase your efficiency at work.",
   "services_text2": "Cooperate from anywhere & anytime.",
-  "services_text3": "You can access our platform online on any devices & anywhere."
+  "services_text3": "You can access our platform online on any devices & anywhere.",
+
+  "comment": "NEWSLETTER STARTS HERE",
+  "newsletter": "NewsLetter",
+  "newsletter_decs": "Subscribe to receive the newest updates and features about Kanban",
+  "placeholder": "Please enter your email here",
+
+  "comment": "FOOTER STARTS HERE",
+  "about_us_title": "About Us",
+  "about_us_array": [
+    { "label": "Contact Us", "to": "/contact" },
+    { "label": "Terms & Conditions", "to": "/terms" },
+    { "label": "Privacy Policy", "to": "/privacy" }
+  ],
+  "explore_title": "Explore",
+  "explore_array": [
+    { "label": "Home", "to": "/" },
+    { "label": "Learn More", "to": "/learnmore" },
+    { "label": "Sign In", "to": "/signin" },
+    { "label": "Sign Up", "to": "/signup" }
+  ],
+  "follow_us_at_title": "Follow Us At",
+  "follow_us_at_array": [
+    { "label": "Facebook", "to": "//www.facebook.com/" },
+    { "label": "Youtube", "to": "//www.youtube.com/" },
+    { "label": "Twitter", "to": "//twitter.com/" },
+    { "label": "Instagram", "to": "//www.instagram.com/" },
+    { "label": "Linkedin", "to": "//www.linkedin.com/" }
+  ],
+  "help_title": "Help",
+  "help_array": [{ "label": "Getting Started", "to": "/" }],
+  "rights": "All rights reserved.",
+
+  "comment": "CONTACTFORM STARTS HERE",
+  "contact_us_title": "Contact Us",
+  "contact_us_subtitle1": "Contact Information",
+  "contact_us_text": "Connect with us:",
+  "contact_us_subtitle2": "Send Us A Message",
+  "contact_us_placeholder1": "Your Name",
+  "contact_us_placeholder2": "Your Email",
+  "contact_us_placeholder3": "Your Message...",
+  "contact_us_button": "Send Message"
 }
