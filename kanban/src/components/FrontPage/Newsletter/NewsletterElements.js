@@ -41,6 +41,11 @@ export const Input = styled.input`
   border: none;
   flex: 8;
   padding-left: 20px;
+  &:focus {
+    border: 3px solid;
+    border-color: #562bf6;
+    outline: none;
+  }
 `;
 export const Button = styled.button`
   flex: 1;
@@ -48,4 +53,5 @@ export const Button = styled.button`
   background-color: #562bf6;
   color: white;
   cursor: pointer;
+
 `;
