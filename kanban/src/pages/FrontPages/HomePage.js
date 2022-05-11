@@ -6,12 +6,18 @@ import InfoSection from "../../components/FrontPage/InfoSection";
 import Services from "../../components/FrontPage/Services";
 import Newsletter from "../../components/FrontPage/Newsletter";
 import Footer from "../../components/FrontPage/Footer";
+import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
+const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const Container = styled.div``;
 
 const HomePage = () => {
   return (
     <Container>
+      <MetaDecorator
+        title={MetaData.homePageTitle}
+        description={MetaData.homePageDesc}
+      />
       <Announcement />
       <HeroSection />
       <InfoSection />
