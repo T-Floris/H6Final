@@ -5,7 +5,7 @@ export const Container = styled.div`
   user-select: none;
   position: relative;
 `;
-export const Button = styled.div`
+export const LanguagesButton = styled.div`
   padding: 15px 20px;
   border: none;
   cursor: pointer;
@@ -19,15 +19,17 @@ export const GlobalIcon = styled(AiOutlineGlobal)`
 `;
 export const Content = styled.div`
   position: absolute;
-  top: 100%;
+  /* top: 100%; */
+  bottom: 100%;
   left: -10px;
   padding: 20px;
   background-color: #fff;
 `;
 export const ContainerItem = styled.ul`
-  text-decoration: none;
+  list-style-type: none;
   cursor: pointer;
 `;
 export const Item = styled.li`
   cursor: pointer;
+  
 `;

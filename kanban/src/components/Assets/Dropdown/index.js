@@ -4,7 +4,7 @@ import cookies from "js-cookie";
 
 import {
   Container,
-  Button,
+  LanguagesButton,
   Content,
   ContainerItem,
   Item,
@@ -19,10 +19,10 @@ const Dropdown = ({ selected, setSelected }) => {
 
   return (
     <Container>
-      <Button onClick={(e) => setIsActive(!isActive)}>
+      <LanguagesButton onClick={(e) => setIsActive(!isActive)}>
         {selected}
         <GlobalIcon />
-      </Button>
+      </LanguagesButton>
       {isActive && (
         <Content>
           <ContainerItem>
