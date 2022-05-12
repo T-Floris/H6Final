@@ -9,9 +9,9 @@ import {
   ContainerItem,
   Item,
   GlobalIcon,
-} from "./DropdownElements";
+} from "./LanguagesDropdownElements";
 
-const Dropdown = ({ selected, setSelected }) => {
+const LanguagesDropdown = ({ selected, setSelected }) => {
   const [isActive, setIsActive] = useState(false);
 
   //i18next
@@ -68,4 +68,4 @@ const languages = [
   },
 ];
 
-export default Dropdown;
+export default LanguagesDropdown;
