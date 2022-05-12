@@ -16,7 +16,7 @@ const TermsAndConditions = () => {
     <Container>
       <InfoContainer>
         <TitleTop>Terms and Conditions</TitleTop>
-        <Date>Last updated: January 25, 2022</Date>
+        <Date>Last updated: May 12, 2022</Date>
         <Text>Welcome to Kaban!</Text>
 
         <Text>

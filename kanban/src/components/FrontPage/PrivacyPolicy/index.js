@@ -19,7 +19,7 @@ const index = () => {
       <InfoContainer>
         <TitleTop>Privacy Policy</TitleTop>
 
-        <Date>Last updated: January 25, 2022</Date>
+        <Date>Last updated: May 12, 2022</Date>
         <Text>
           This Privacy Policy describes Our policies and procedures on the
           collection, use and disclosure of Your information when You use the
