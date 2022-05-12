@@ -1,6 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+//Front page
 import HomePage from "./pages/FrontPages/HomePage";
+import PrivacyPolicyPage from "./pages/FrontPages/PrivacyPolicyPage";
+import TermsAndConditionsPage from "./pages/FrontPages/TermsAndConditionsPage";
+import ContactFormPage from "./pages/FrontPages/ContactFormPage";
+import LearnMorePage from "./pages/FrontPages/LearnMorePage";
+// 404
 import NotFoundPage from "./pages/404/NotFoundPage";
 
 
@@ -11,6 +18,10 @@ const NavigateRoutes = () => {
       <Routes>
         {/* Front pages */}
         <Route index element={<HomePage />} />
+        <Route path="/contact" element={<ContactFormPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
+        <Route path="/terms" element={<TermsAndConditionsPage />} />
+        <Route path="/learnmore" element={<LearnMorePage />} />
 
 
         {/* 404 */}
