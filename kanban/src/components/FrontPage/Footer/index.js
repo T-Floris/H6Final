@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-
 import {
   FaFacebook,
   FaInstagram,
@@ -23,10 +22,9 @@ import {
   SocialIcons,
   SocialIconLink,
   WebsiteRights,
-
 } from "./FooterElements";
 
-import Dropdown from "../../Assets/Dropdown";
+import LanguagesDropdown from "../../Assets/LanguagesDropdown";
 
 const Footer = () => {
   //scrolls back to top when clicked
@@ -42,6 +40,7 @@ const Footer = () => {
   const follow_us_at_array = t("follow_us_at_array", { returnObjects: true });
   const help_array = t("help_array", { returnObjects: true });
 
+  //dropdown
   const [selected, setSelected] = useState();
 
   return (
@@ -86,14 +85,18 @@ const Footer = () => {
             </FooterLinkItems>
           </FooterLinksWrapper>
         </FooterLinksContainer>
-        <Dropdown selected={selected} setSelected={setSelected} />
+
+        <LanguagesDropdown selected={selected} setSelected={setSelected} />
+
         <SocialMediaWrap>
           <SoicalLogo to="/" onClick={toggleHome}>
             {t("kanban")}
           </SoicalLogo>
+
           <WebsiteRights>
             {t("kanban")} &copy; {new Date().getFullYear()} {t("rights")}
           </WebsiteRights>
+
           <SocialIcons>
             {SocialMediaLinksArray.map(({ label, to, icon }) => (
               <SocialIconLink
@@ -108,13 +111,9 @@ const Footer = () => {
           </SocialIcons>
         </SocialMediaWrap>
       </FooterWrap>
-
-      
-
     </FooterContainer>
   );
 };
-
 
 const SocialMediaLinksArray = [
   {
