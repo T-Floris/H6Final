@@ -39,13 +39,12 @@ namespace KanbanApi.Library.Internal.DataAccess
             conn.Execute(storedProcedure, parameters,
                 commandType: CommandType.StoredProcedure);
         }
-
+        
+        /// used to dispose if an error acordes
         public void Dispose()
         {
 
         }
-
-
 
 
         /// <summary>
