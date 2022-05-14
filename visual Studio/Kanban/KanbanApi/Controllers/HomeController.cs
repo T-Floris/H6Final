@@ -13,9 +13,21 @@ namespace KanbanApi.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly RoleManager<IdentityRole> _roleManager;
+        /// <summary>
+        /// 
+        /// </summary>
         private readonly UserManager<IdentityUser> _userManager;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="logger"></param>
+        /// <param name="roleManager"></param>
+        /// <param name="userManager"></param>
         public HomeController(ILogger<HomeController> logger, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
