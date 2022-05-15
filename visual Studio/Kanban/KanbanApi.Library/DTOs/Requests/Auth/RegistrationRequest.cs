@@ -9,7 +9,6 @@ namespace KanbanApi.Library.DTOs.Requests.Auth
 {
     public class RegistrationRequest
     {
-        [Required]
         public string Id { get; set; }
         [Required]
         public string FirstName { get; set; }
@@ -24,5 +23,10 @@ namespace KanbanApi.Library.DTOs.Requests.Auth
         public string Password { get; set; }
         [Required]
         public string Avatar { get; set; }
+        [Required]
+        public DateTime CreatedDate
+        {
+            get; set;
+        }
     }
 }

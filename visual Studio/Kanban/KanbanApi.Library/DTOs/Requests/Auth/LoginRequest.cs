@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Requests.Auth
 {
-    public class LoginRequest
+    public class LogInRequest
     {
         [Required]
         [EmailAddress]
