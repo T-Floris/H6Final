@@ -10,5 +10,10 @@ namespace KanbanApi.EmailService.Models.EmailSender
     public interface IEmailSender
     {
         Task ConfirmEmailAsync(Message message, IdentityUser existingUser);
+
+
+
+        Task FirstTimeLoggedInFromIpEmailAsync(Message message, string ip);
+
     }
 }

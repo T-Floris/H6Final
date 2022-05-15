@@ -29,7 +29,7 @@ namespace KanbanApi.EmailService.Models.EmailSender
         /// 1. gets the curent path
         /// 2. exit folder and enter the MailTemplates folder
         /// </summary>
-        private readonly string emailPath = Path.Combine(Environment.CurrentDirectory, @"..\KNBNApi.EmailService\MailTemplates\");
+        private readonly string emailPath = Path.Combine(Environment.CurrentDirectory, @"..\KanbanApi.EmailService\MailTemplates\");
 
         /// <summary>
         /// Pathe to image (stordt on googel drive)
@@ -50,6 +50,7 @@ namespace KanbanApi.EmailService.Models.EmailSender
         /// path to unsubscribe on the webside
         /// </summary>
         private readonly string unsubscribe = "http://localhost:3000/unsubscribe";
+
         /// <summary>
         /// the address of the organisation
         /// </summary>
@@ -157,6 +158,10 @@ namespace KanbanApi.EmailService.Models.EmailSender
 
         #endregion
 
+
+
+
+
         /// <summary>
         /// sending email
         /// </summary>
@@ -193,5 +198,69 @@ namespace KanbanApi.EmailService.Models.EmailSender
             }
         }
 
+        public async Task FirstTimeLoggedInFromIpEmailAsync(Message message, string ip)
+        {
+            var firstTimeLoggedIn = FirstTimeLoggedInFromIpEmailMessage(message, ip);
+
+            await SendAsync(firstTimeLoggedIn);
+        }
+
+        private MimeMessage[] FirstTimeLoggedInFromIpEmailMessage(Message message, string ip)
+        {
+            MimeMessage[] emailsToSend = new MimeMessage[message.To.Count];
+            foreach (var to in message.To.Select((value, i) => new { i, value }))
+            {
+                try
+                {
+                    var emailMessage = new MimeMessage();
+                    emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
+                    emailMessage.To.Add(message.To[to.i]);
+                    emailMessage.Subject = message.Subject;
+
+
+                    var bodyBuilder = new BodyBuilder();
+
+                    ///setup the email
+                    string pathToFile = emailPath + "FirstTimeLoggedInFromIp_EmailTemplate.html";
+                    string SourceReader = File.OpenText(pathToFile).ReadToEnd();
+                    bodyBuilder.HtmlBody = SourceReader;
+
+
+                    string title = $"first time logged in from ip: { ip }";
+                    string preheader = "test";
+
+                    string token = message.Link;
+                    string action = "New login location detected";
+
+
+
+                    string messageBody = string.Format(bodyBuilder.HtmlBody,
+                        title,
+                        preheader,
+                        knbnLink,
+                        logoimage,
+                        organisationName,
+                        token,
+                        action,
+                        unsubscribe,
+                        address
+                        );
+
+                    emailMessage.Body = new TextPart("html")
+                    {
+                        Text = messageBody
+                    };
+
+                    emailsToSend[to.i] = emailMessage;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+            }
+
+            return emailsToSend;
+
+        }
     }
 }
