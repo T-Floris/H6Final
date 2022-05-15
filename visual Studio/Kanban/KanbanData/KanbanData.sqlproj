@@ -9,8 +9,7 @@
     <ProjectGuid>{5b8b1432-1cac-45bb-b629-08efb8aa52c7}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>KanbanData</RootNamespace>
     <AssemblyName>KanbanData</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -59,7 +57,8 @@
     <Folder Include="dbo" />
     <Folder Include="dbo\Tables" />
     <Folder Include="PublishLocations" />
-    <Folder Include="dbo\NewFolder1\" />
+    <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="dbo\Stored Procedures\User" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
@@ -73,6 +72,8 @@
     <Build Include="dbo\Tables\BoardTable.sql" />
     <Build Include="dbo\Tables\Card.sql" />
     <Build Include="dbo\Tables\TableCard.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Registration.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Search.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\KanbanData.publish.xml" />
