@@ -5,7 +5,7 @@
 	@EmailAddress nvarchar(256),
 	@UserName nvarchar(256),
 	@Avatar nvarchar(50),
-	@CreatedDate datetime2(7)
+	@CreatedDate datetime
 AS
 BEGIN
 	SET NOCOUNT ON
