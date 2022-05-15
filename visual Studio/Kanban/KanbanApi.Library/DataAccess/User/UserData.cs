@@ -24,7 +24,8 @@ namespace KanbanApi.Library.DataAccess.User
 
         public void Registration(RegistrationRequest registration)
         {
-            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar}, "KanbanData");
+            /// save data in database
+            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, "KanbanData");
         }
 
         public void UpdateEmail(UpdateEmailRequest updateEmail)
