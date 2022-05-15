@@ -29,8 +29,4 @@
 	  <ProjectReference Include="..\KanbanApi.Library\KanbanApi.Library.csproj" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Configuration\" />
-	</ItemGroup>
-
 </Project>
