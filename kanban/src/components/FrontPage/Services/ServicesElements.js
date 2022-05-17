@@ -48,7 +48,7 @@ export const ServicesCard = styled.div`
   /* max-height: 340px; */
   height: 340px;
   padding: 30px;
-  box-shadow: 0 5px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
 
   &:hover {
