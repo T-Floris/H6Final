@@ -3,15 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <Name>KanbanData</Name>
+    <Name>KanbanData2</Name>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>4.1</ProjectVersion>
-    <ProjectGuid>{5b8b1432-1cac-45bb-b629-08efb8aa52c7}</ProjectGuid>
+    <ProjectGuid>{6d53f673-5300-4e55-a467-81fa4c1b3106}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath />
-    <RootNamespace>KanbanData</RootNamespace>
-    <AssemblyName>KanbanData</AssemblyName>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>KanbanData2</RootNamespace>
+    <AssemblyName>KanbanData2</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
     <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
     <DeployToDatabase>True</DeployToDatabase>
@@ -47,6 +48,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -55,27 +57,30 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
-    <Folder Include="dbo\Tables" />
     <Folder Include="PublishLocations" />
+    <Folder Include="dbo\Table" />
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Stored Procedures\User" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\Group.sql" />
-    <Build Include="dbo\Tables\GroupAccess.sql" />
-    <Build Include="dbo\Tables\GroupUser.sql" />
-    <Build Include="dbo\Tables\Board.sql" />
-    <Build Include="dbo\Tables\BoardGroup.sql" />
-    <Build Include="dbo\Tables\BoardAccess.sql" />
-    <Build Include="dbo\Tables\Table.sql" />
-    <Build Include="dbo\Tables\BoardTable.sql" />
-    <Build Include="dbo\Tables\Card.sql" />
-    <Build Include="dbo\Tables\TableCard.sql" />
-    <Build Include="dbo\Stored Procedures\User\spUser_Registration.sql" />
-    <Build Include="dbo\Stored Procedures\User\spUser_Search.sql" />
+    <None Include="PublishLocations\KanbanData2.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="PublishLocations\KanbanData.publish.xml" />
+    <Build Include="dbo\Table\User.sql" />
+    <Build Include="dbo\Table\TableCard.sql" />
+    <Build Include="dbo\Table\Table.sql" />
+    <Build Include="dbo\Table\GroupUser.sql" />
+    <Build Include="dbo\Table\GroupAccess.sql" />
+    <Build Include="dbo\Table\Group.sql" />
+    <Build Include="dbo\Table\Card.sql" />
+    <Build Include="dbo\Table\BoardTable.sql" />
+    <Build Include="dbo\Table\BoardGroup.sql" />
+    <Build Include="dbo\Table\Board.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Registration.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Search.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Select.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_UpdateEmail.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_UpdateUserName.sql" />
   </ItemGroup>
 </Project>

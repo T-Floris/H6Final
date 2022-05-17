@@ -5,13 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Requests.Auth
+namespace KanbanApi.Library.DTOs.Requests.Token
 {
-    public class UpdatePasswordRequest
+    public class TokenRefreshRequest
     {
         [Required]
-        public string OldPassword { get; set; }
+        public string Token { get; set; }
+
         [Required]
-        public string NewPassword { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

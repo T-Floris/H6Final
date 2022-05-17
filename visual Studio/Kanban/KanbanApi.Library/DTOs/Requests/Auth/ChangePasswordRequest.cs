@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Requests.Auth
 {
-    public class DeleteUserRequest
+    public class ChangePasswordRequest
     {
         [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "User not deleted")]
-        public bool DeleteUser { get; set; }
+        public string OldPassword { get; set; }
+        [Required]
+        public string NewPassword { get; set; }
     }
 }

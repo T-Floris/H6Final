@@ -9,11 +9,15 @@ namespace KanbanApi.EmailService.Models.EmailSender
 {
     public interface IEmailSender
     {
+        Task ResetPasswordEmailAsync(Message message);
+        Task ChangeEmailAsync(Message message);
         Task ConfirmEmailAsync(Message message, IdentityUser existingUser);
 
 
 
-        Task FirstTimeLoggedInFromIpEmailAsync(Message message, string ip);
+
+
+        Task FirstTimeLoggedInFromIpEmailAsync(Message message, IdentityUser existingUser, string ip);
 
     }
 }

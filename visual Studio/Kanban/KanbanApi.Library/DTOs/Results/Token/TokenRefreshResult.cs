@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Responses.Auth
+namespace KanbanApi.Library.DTOs.Results.Token
 {
-    internal class UpdateUserNameResponse
+    public class TokenRefreshResult : TokenResult
     {
     }
 }

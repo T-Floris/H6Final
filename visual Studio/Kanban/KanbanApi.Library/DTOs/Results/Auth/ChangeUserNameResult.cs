@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Results.Auth
 {
-    internal class UpdatePasswordResult
+    public class ChangeUserNameResult
     {
+        public bool IsSuccess { get; set; }
+        public string Message { get; set; }
     }
 }

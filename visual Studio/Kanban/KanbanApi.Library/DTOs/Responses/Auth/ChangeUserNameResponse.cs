@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Responses.Auth
 {
-    public class ForgotPasswordResponse : ForgotPasswordResult
+    public class ChangeUserNameResponse : ChangeUserNameResult
     {
+        public List<string> Errors { get; set; }
+
     }
 }

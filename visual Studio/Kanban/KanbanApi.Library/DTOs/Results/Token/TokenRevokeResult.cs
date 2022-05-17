@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Results.Auth
+namespace KanbanApi.Library.DTOs.Results.Token
 {
-    public class RegistrationResult
+    public class TokenRevokeResult
     {
         public bool IsSuccess { get; set; }
         public List<string> Message { get; set; }

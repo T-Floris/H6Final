@@ -5,11 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Requests.Auth
+namespace KanbanApi.Library.DTOs.Requests.Token
 {
-    public class UpdateUserNameRequest
+    public class TokenRevokeRequest
     {
         [Required]
-        public string UserName { get; set; }
+        public string Token { get; set; }
+
+        [Required]
+        public string RefreshToken { get; set; }
     }
 }

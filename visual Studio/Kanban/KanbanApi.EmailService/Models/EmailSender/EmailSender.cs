@@ -158,45 +158,12 @@ namespace KanbanApi.EmailService.Models.EmailSender
 
         #endregion
 
-
-
-
-
+        #region first time login
         /// <summary>
         /// sending email
         /// </summary>
         /// <param name="mailMessage">all info the email contin</param>
         /// <returns></returns>
-        private async Task SendAsync(MimeMessage[] mailMessage)
-        {
-            /// setup the mail client 
-            using var client = new MailKit.Net.Smtp.SmtpClient();
-            try
-            {
-                /// connet to the mail server
-                await client.ConnectAsync(_emailConfiguration.SmtpServer, _emailConfiguration.Port, true);
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-                /// log in to the mail server
-                await client.AuthenticateAsync(_emailConfiguration.UserName, _emailConfiguration.Password);
-
-                /// sending mail to all in email ther are in the arry
-                foreach (var sendmail in mailMessage)
-                {
-                    await client.SendAsync(sendmail);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                /// Disconnect conation to the server
-                await client.DisconnectAsync(true);
-                /// Dispose of the mail client
-                client.Dispose();
-            }
-        }
 
         public async Task FirstTimeLoggedInFromIpEmailAsync(Message message, string ip)
         {
@@ -261,6 +228,227 @@ namespace KanbanApi.EmailService.Models.EmailSender
 
             return emailsToSend;
 
+        }
+        #endregion
+
+        #region reset password
+        public async Task ResetPasswordEmailAsync(Message message)
+        {
+            var ressetPassword = RessetPasswordEmailMessage(message);
+
+            await SendAsync(ressetPassword);
+        }
+
+        private MimeMessage[] RessetPasswordEmailMessage(Message message)
+        {
+            MimeMessage[] emailsToSend = new MimeMessage[message.To.Count];
+            foreach (var to in message.To.Select((value, i) => new { i, value }))
+            {
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
+                emailMessage.To.Add(message.To[to.i]);
+                emailMessage.Subject = message.Subject;
+
+                var bodyBuilder = new BodyBuilder();
+
+                ///setup the email
+                string pathToFile = emailPath + "RessetPassword_EmailTemplate.html";
+                string SourceReader = File.OpenText(pathToFile).ReadToEnd();
+                bodyBuilder.HtmlBody = SourceReader;
+
+                string action = "Create user";
+                string token = message.Link;
+
+                string title = "test";
+                string preheader = "test";
+
+
+                bodyBuilder.HtmlBody = string.Format(bodyBuilder.HtmlBody,
+                    title,
+                    preheader,
+                    knbnLink,
+                    logoimage,
+                    organisationName,
+                    token,
+                    action,
+                    unsubscribe,
+                    address
+                    );
+
+
+
+                emailMessage.Body = bodyBuilder.ToMessageBody();
+
+                emailsToSend[to.i] = emailMessage;
+            }
+
+            return emailsToSend;
+
+        }
+
+        #endregion
+
+        #region first login
+
+        public async Task FirstTimeLoggedInFromIpEmailAsync(Message message, IdentityUser existingUser, string ip)
+        {
+            var firstTimeLoggedIn = FirstTimeLoggedInFromIpEmailMessage(message, existingUser, ip);
+
+            await SendAsync(firstTimeLoggedIn);
+
+        }
+
+        private MimeMessage[] FirstTimeLoggedInFromIpEmailMessage(Message message, IdentityUser existingUser, string ip)
+        {
+            MimeMessage[] emailsToSend = new MimeMessage[message.To.Count];
+            foreach (var to in message.To.Select((value, i) => new { i, value }))
+            {
+                try
+                {
+                    var emailMessage = new MimeMessage();
+                    emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
+                    emailMessage.To.Add(message.To[to.i]);
+                    emailMessage.Subject = message.Subject;
+
+
+                    var bodyBuilder = new BodyBuilder();
+
+                    ///setup the email
+                    string pathToFile = emailPath + "FirstTimeLoggedInFromIp_EmailTemplate.html";
+                    string SourceReader = File.OpenText(pathToFile).ReadToEnd();
+                    bodyBuilder.HtmlBody = SourceReader;
+
+
+                    string title = $"first time logged in from ip: { ip }";
+                    string preheader = "test";
+
+                    string token = message.Link;
+                    string action = "New login location detected";
+
+
+
+                    string messageBody = string.Format(bodyBuilder.HtmlBody,
+                        title,
+                        preheader,
+                        knbnLink,
+                        logoimage,
+                        organisationName,
+                        token,
+                        action,
+                        unsubscribe,
+                        address
+                        );
+
+                    emailMessage.Body = new TextPart("html")
+                    {
+                        Text = messageBody
+                    };
+
+                    emailsToSend[to.i] = emailMessage;
+                }
+                catch (Exception)
+                {
+
+
+                    throw;
+                }
+            }
+
+            return emailsToSend;
+
+        }
+
+        #endregion
+
+        #region Change Email
+        public async Task ChangeEmailAsync(Message message)
+        {
+            var changeEmail = ChangeEmailMessage(message);
+
+            await SendAsync(changeEmail);
+        }
+
+        private MimeMessage[] ChangeEmailMessage(Message message)
+        {
+            MimeMessage[] emailsToSend = new MimeMessage[message.To.Count];
+            foreach (var to in message.To.Select((value, i) => new { i, value }))
+            {
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(new MailboxAddress(_emailConfiguration.From));
+                emailMessage.To.Add(message.To[to.i]);
+                emailMessage.Subject = message.Subject;
+
+                var bodyBuilder = new BodyBuilder();
+
+                ///setup the email
+                string pathToFile = emailPath + "ChangeEmail_EmailTemplate.html";
+                string SourceReader = File.OpenText(pathToFile).ReadToEnd();
+                bodyBuilder.HtmlBody = SourceReader;
+
+                string action = "Change email";
+                string token = message.Link;
+
+                string title = "Change email";
+                string preheader = "";
+
+
+                bodyBuilder.HtmlBody = string.Format(bodyBuilder.HtmlBody,
+                    title,
+                    preheader,
+                    knbnLink,
+                    logoimage,
+                    organisationName,
+                    token,
+                    action,
+                    unsubscribe,
+                    address
+                    );
+
+                emailMessage.Body = bodyBuilder.ToMessageBody();
+
+                emailsToSend[to.i] = emailMessage;
+            }
+
+
+            return emailsToSend;
+        }
+        #endregion
+
+
+        /// <summary>
+        /// Send the email
+        /// </summary>
+        /// <param name="mailMessage">email to send</param>
+        /// <returns></returns>
+        private async Task SendAsync(MimeMessage[] mailMessage)
+        {
+            /// setup the mail client 
+            using var client = new MailKit.Net.Smtp.SmtpClient();
+            try
+            {
+                /// connet to the mail server
+                await client.ConnectAsync(_emailConfiguration.SmtpServer, _emailConfiguration.Port, true);
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                /// log in to the mail server
+                await client.AuthenticateAsync(_emailConfiguration.UserName, _emailConfiguration.Password);
+
+                /// sending mail to all in email ther are in the arry
+                foreach (var sendmail in mailMessage)
+                {
+                    await client.SendAsync(sendmail);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                /// Disconnect conation to the server
+                await client.DisconnectAsync(true);
+                /// Dispose of the mail client
+                client.Dispose();
+            }
         }
     }
 }

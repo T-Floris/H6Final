@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Requests.Auth
 {
-    public class DeleteUserRequest
+    public class ChangeEmailRequest
     {
         [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "User not deleted")]
-        public bool DeleteUser { get; set; }
+        [EmailAddress]
+        public string NewEmailAddress { get; set; }
     }
 }

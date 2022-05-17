@@ -1,5 +1,6 @@
 ﻿using KanbanApi.Library.DTOs.Requests.Auth;
 using KanbanApi.Library.Internal.DataAccess;
+using KanbanApi.Library.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace KanbanApi.Library.DataAccess.User
     public class UserData : IUserData
     {
         private readonly ISqlDataAccess _sql;
+        private string DatabaseName = "KanbanData";
 
         public UserData(ISqlDataAccess sql)
         {
@@ -19,23 +21,35 @@ namespace KanbanApi.Library.DataAccess.User
 
         public void DeleteUser(DeleteUserRequest deleteUser)
         {
-            throw new NotImplementedException();
+            _sql.DeleteData("spUser_Delete", new { }, DatabaseName);
+        }
+
+        public UserModel GetUser(string Id)
+        {
+            var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Select", new { Id }, DatabaseName).FirstOrDefault();
+            return output;
         }
 
         public void Registration(RegistrationRequest registration)
         {
             /// save data in database
-            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, "KanbanData");
+            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, DatabaseName);
         }
 
-        public void UpdateEmail(UpdateEmailRequest updateEmail)
+        public List<UserModel> SearchForUser(string userName)
         {
-            throw new NotImplementedException();
+            var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Search", new { userName }, DatabaseName);
+            return output;
         }
 
-        public void UpdateUserName(UpdateUserNameRequest updateUserName)
+        public void UpdateEmail(ChangeEmailRequest updateEmail)
         {
-            throw new NotImplementedException();
+            _sql.UpdateData("spUser_UpdateEmail", new { updateEmail.NewEmailAddress }, DatabaseName);
+        }
+
+        public void UpdateUserName(ChangeUserNameRequest updateUserName)
+        {
+            _sql.UpdateData("spUser_UpdateUserName", new {updateUserName.Id, updateUserName.UserName }, DatabaseName);
         }
     }
 }

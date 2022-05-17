@@ -1,15 +1,22 @@
 ﻿using KanbanApi.Data;
+using KanbanApi.Models;
+
 using KanbanApi.EmailService.Models;
 using KanbanApi.EmailService.Models.EmailSender;
+
 using KanbanApi.Library.DataAccess.User;
 using KanbanApi.Library.DTOs.Requests.Auth;
+using KanbanApi.Library.DTOs.Requests.Token;
 using KanbanApi.Library.DTOs.Responses.Auth;
+using KanbanApi.Library.DTOs.Responses.Token;
 using KanbanApi.Library.DTOs.Results.Auth;
-using KanbanApi.Models;
+using KanbanApi.Library.DTOs.Results.Token;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -169,7 +176,12 @@ namespace KanbanApi.Controllers
                     RegistrationResult registrationResult = registrationResponse;
 
                     /// return 
-                    return Ok(registrationResult);
+                    return Ok(new RegistrationResult()
+                    {
+                        IsSuccess = registrationResult.IsSuccess,
+                        Errors = registrationResult.Errors,
+                        Message = registrationResult.Message
+                    });
                 }
                 else
                 {
@@ -185,6 +197,7 @@ namespace KanbanApi.Controllers
                 
             }
 
+            /// return an error if the paylode is Invalid
             return BadRequest(new RegistrationResponse()
             {
                 Errors = new List<string>()
@@ -194,6 +207,7 @@ namespace KanbanApi.Controllers
                 IsSuccess = false
             });
         }
+
 
         [HttpPost]
         [AllowAnonymous]
@@ -256,18 +270,21 @@ namespace KanbanApi.Controllers
                     var message = new Message(new string[] { "psnfloris@gmail.com" }, subject, content, attachments, confimeEmailLink);
 
                     /// send email to user, there is a new login location
-                    await _emailSender.FirstTimeLoggedInFromIpEmailAsync(message, ip);
+                    await _emailSender.FirstTimeLoggedInFromIpEmailAsync(message, user, ip);
                 }
 
                 /// Generate token
                 var jwtToken = await GenerateJwtToken(user, ip);
 
+                /// check if there are an error
                 if (jwtToken.Errors.Count > 0)
                     return BadRequest(jwtToken);
 
+                /// return the token information
                 return Ok(jwtToken);
             }
 
+            /// return an error if the paylode is Invalid
             return BadRequest(new LogInResponse()
             {
                 Errors = new List<string>()
@@ -278,7 +295,427 @@ namespace KanbanApi.Controllers
             });
         }
 
-        private async Task<LogInResult> GenerateJwtToken(IdentityUser user, string ip)
+        [HttpPost]
+        [Route("LogOff")]
+        public async Task<IActionResult> Logoff()
+        {
+            /// store token's
+            TokenRevokeRequest revokeToken = new();
+
+            /// get tokens from cookies 
+            revokeToken.Token = Request.Cookies["Token"];
+            revokeToken.RefreshToken = Request.Cookies["RefreshToken"];
+
+            /// make sure the model is validate
+            if (TryValidateModel(revokeToken))
+            {
+                /// Revoke Token and make it unusebale
+                TokenRevokeResult tokenRevoke = await RevokeToken(revokeToken);
+
+                /// null check 
+                if (tokenRevoke == null)
+                {
+                    return BadRequest(new TokenRevokeResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "Invalid tokens"
+                        },
+                        IsSuccess = false
+                    });
+                }
+
+                /// Delete all cokies from login
+                foreach (var cookie in Request.Cookies.Keys)
+                {
+                    Response.Cookies.Delete(cookie);
+                }
+
+                /// return result
+                return Ok(tokenRevoke);
+            }
+
+            /// return an error if the paylode is Invalid
+            return BadRequest(new TokenRevokeResult()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                },
+                IsSuccess = false
+            });
+        }
+
+
+        [HttpDelete]
+        [Route("Delete")]
+        public async Task<IActionResult> DeleteUser([FromBody] DeleteUserRequest deleteUser)
+        {
+            if (ModelState.IsValid)
+            {
+                /// find logged in user
+                string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                /// make sure the user wont to delet thery acount
+                if (deleteUser.DeleteUser)
+                {
+                    /// find user by id
+                    IdentityUser user = await _userManager.FindByIdAsync(loggedInUserId);
+
+                    /// null check
+                    if (user is null)
+                    {
+                        return NotFound(new DeleteUserResponse 
+                        {
+                            Error = $"user whit id: {loggedInUserId} no found",
+                            IsSuccess = false
+                        });
+
+                    }
+
+                    /// delet user
+                    await _userManager.DeleteAsync(user);
+
+                    /// return Success message
+                    return Ok(new DeleteUserResult()
+                    {
+                        IsSuccess = true,
+                        Message = $"the user is deletet"
+                    }); 
+                }
+
+                /// return if the user did not accept to delete thery
+                return Ok(new DeleteUserResponse()
+                {
+                    Error = "user did not accept to have thery account deleted",
+                    IsSuccess = false
+                });
+
+            }
+            /// return an error if the paylode is Invalid
+            return BadRequest(new DeleteUserResponse()
+            {
+                Error = "Invalid payload",
+                IsSuccess = false
+            });
+
+        }
+
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("ForgotPassword")]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordRequest email)
+        {
+            if (ModelState.IsValid)
+            {
+                /// check if email is in use
+                var existingUser = await _userManager.FindByEmailAsync(email.EmailAddress);
+
+                /// null check
+                if (existingUser == null)
+                {
+                    return BadRequest(new ForgotPasswordResponse()
+                    {
+                        EmailAddress = email.EmailAddress,
+                        Errors = "email not found",
+                        IsSuccess = false
+
+                    });
+                }
+
+                /// Generate token to password reset
+                var token = await _userManager.GeneratePasswordResetTokenAsync(existingUser);
+
+
+                /// check if ther is a token
+                if (token == null)
+                {
+                    return NotFound(new ForgotPasswordResponse()
+                    {
+
+                        EmailAddress = email.EmailAddress,
+                        IsSuccess = false,
+                        Errors = "token not created"
+                    });
+                }
+
+
+                /// Email subject
+                string subject = "Forgot password";
+                /// email to send Message to
+                string[] to = { existingUser.Email };
+                string content = "";
+                IFormFileCollection attachments = null;
+                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?userid={existingUser.Id}&token={token}";
+
+
+                // TODO: change email
+                /// create email to send
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+                //var message = new Message(to, subject, content, attachments, confimeEmailLink);
+
+                ///send reset password email
+                await _emailSender.ResetPasswordEmailAsync(message);
+
+                /// Return result 
+                return Ok(new ForgotPasswordResult()
+                {
+                    EmailAddress = existingUser.Email,
+                    UserId = existingUser.Id,
+                    Token = token,
+                    IsSuccess = true,
+                    Message = "email send"
+                });
+            }
+            /// return an error if the paylode is Invalid
+            return BadRequest(new ForgotPasswordResponse()
+            {
+                Errors = "Invalid payload",
+                IsSuccess = false
+            });
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordRequest changePassword)
+        {
+            if (ModelState.IsValid)
+            {
+                /// find logt in user by id
+                string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                /// find user by id
+                IdentityUser user = await _userManager.FindByIdAsync(loggedInUserId);
+
+                /// null check
+                if (user == null)
+                    return NotFound(new ChangePasswordResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = "User not foundt"
+                    });
+
+                /// check the password is valid
+                bool isPassword = await _userManager.CheckPasswordAsync(user, changePassword.OldPassword);
+
+                /// check if the password is wrong
+                if (!isPassword)
+                {
+                    return BadRequest(new ChangePasswordResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = "The password is invalid"
+                    });
+                }
+                /// change the password
+                await _userManager.ChangePasswordAsync(user, changePassword.OldPassword, changePassword.NewPassword);
+
+                /// return success message
+                return Ok(new ChangePasswordResult()
+                {
+                    Message = "the password has been change",
+                    IsSuccess = true
+                });
+            }
+            /// return an error if the paylode is Invalid
+            return BadRequest(new ChangePasswordResponse()
+            {
+                Errors = "Invalid payload",
+                IsSuccess = false
+            });
+        }
+
+        [HttpPost]
+        [Route("ChangeEmail")]
+        public async Task<IActionResult> ChangeEmail([FromBody] ChangeEmailRequest changeEmail)
+        {
+            if (ModelState.IsValid)
+            {
+                /// find logt in user by id
+                string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                /// find user by id
+                IdentityUser user = await _userManager.FindByIdAsync(loggedInUserId);
+
+                /// null check
+                if (user == null)
+                {
+                    return NotFound(new ChangeEmailResponse()
+                    {
+                        IsSuccess = false,
+                        Message = "Can not findt the user"
+                    });
+                }
+
+                /// Generate token to change email
+                var token = await _userManager.GenerateChangeEmailTokenAsync(user, changeEmail.NewEmailAddress);
+
+                /// null check
+                if (token == null)
+                {
+                    return NotFound(new ChangeEmailResponse()
+                    {
+                        IsSuccess = false,
+                        Errors =
+                        {
+                            "token not created"
+                        }
+                    });
+                }
+
+                /// send email with token
+
+                string[] to = { user.Email };
+                string subject = "change email";
+                string content = "";
+                IFormFileCollection attachments = null;
+                /// token link
+                string changeEmailLink = $"http://localhost:3000/ChangeEmail?userid={user.Id}&token={token}";
+
+
+
+
+                //var message = new Message(to, subject, content, attachments, changeEmailLink);
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, changeEmailLink);
+
+                /// send email
+                await _emailSender.ChangeEmailAsync(message);
+
+                /// return result
+                return Ok(new ChangeEmailResult()
+                {
+                    IsSuccess = true,
+                    Message = "An Email has been send to the user with info"
+                });
+            }
+            /// return an error if the paylode is Invalid
+            return BadRequest(new ChangeEmailResponse()
+            {
+                Errors = { "Invalid payload" },
+                IsSuccess = false
+            });
+
+        }
+
+        [HttpPost]
+        [Route("ChangeUserName")]
+        public async Task<IActionResult> ChangeUserName([FromBody] ChangeUserNameRequest changeUserName)
+        {
+            if (ModelState.IsValid)
+            {
+                /// find logt in user by id
+                string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                /// set userid
+                changeUserName.Id = loggedInUserId;
+
+                /// find user by id
+                IdentityUser user = await _userManager.FindByIdAsync(loggedInUserId);
+
+                /// null check
+                if (user == null)
+                    return NotFound(new ChangeUserNameResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = { "User not foundt" }
+                    });
+
+                ///find a user with username
+                var checkUsername = await _userManager.FindByNameAsync(changeUserName.UserName);
+                
+
+                /// change the password
+                if (checkUsername is not null)
+                {
+                    ChangeUserNameResponse userNameResponse = new ChangeUserNameResponse()
+                    {
+  
+                    };
+                    return BadRequest(new ChangeUserNameResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string> { "username is in use" }
+                    });
+                }
+
+                /// update username for user
+                await _userManager.SetUserNameAsync(user, changeUserName.UserName);
+
+                /// update the username
+                _userData.UpdateUserName(changeUserName);
+
+                return Ok(new ChangeUserNameResult
+                {
+                    IsSuccess = true,
+                    Message = "User Name is updated"
+                });
+
+
+            }
+
+            return BadRequest(new ChangeUserNameResponse()
+            {
+                Errors = { "Invalid payload" },
+                IsSuccess = false
+            });
+
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("RefreshToken")]
+        public async Task<IActionResult> RefreshToken()
+        {
+            /// store token's
+            TokenRefreshRequest tokenRequest = new();
+
+            /// get tokens from cookies 
+            tokenRequest.Token = Request.Cookies["Token"];
+            tokenRequest.RefreshToken = Request.Cookies["RefreshToken"];
+
+            /// make sure the model is validate
+            if (TryValidateModel(tokenRequest))
+            {
+                /// Verify and generate
+                var result = await VerifyAndGenerateToken(tokenRequest);
+
+                /// null check
+                if (result == null)
+                {
+                    return BadRequest(new TokenRefreshResult()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "Invalid tokens"
+                        },
+                        IsSuccess = false
+                    });
+                }
+
+                if (result.Errors.Count > 0)
+                {
+                    return BadRequest(result);
+
+                }
+
+
+                return Ok(result);
+            }
+            /// return an error if the paylode is Invalid
+            return BadRequest(new TokenRefreshResult()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                },
+                IsSuccess = false
+            });
+        }
+
+
+        
+        private async Task<TokenResult> GenerateJwtToken(IdentityUser user, string ip)
         {
             /// Set the rules for the cookie
             CookieOptions cookieOptions = new()
@@ -367,31 +804,393 @@ namespace KanbanApi.Controllers
             /// save changes and update database
             await _context.SaveChangesAsync();
 
+            /// create ruton message
             LogInResult logInResult = new()
             {
-                Roles = new List<string>(),
-                IsSuccess = false,
-                Message = new List<string>(),
-                Errors = new List<string>()
+                Errors = new List<string>(),
+                Message = new List<string>()
+                
             };
 
             logInResult.IsSuccess = true;
             logInResult.Token = Access_Token;
             logInResult.RefreshToken = refreshToken.Token;
+            logInResult.Message.Add("token has benn created");
             foreach (var role in roles)
             {
                 logInResult.Roles.Add(role.Name);
             }
 
-            /// return login result
+
+
+            /// return
             return logInResult;
 
 
         }
 
+        private async Task<TokenResult> VerifyAndGenerateToken(TokenRefreshRequest tokenRequest)
+        {
+            JwtSecurityTokenHandler jwtTokenHandler = new();
+
+            try
+            {
+                /// Validation 1 - Validation JWT token format and encryption alg
+                var principal = GetPrincipalFromExpiredToken(tokenRequest.Token);
+
+
+
+
+                /// validation 2 - validate existence of the token
+                var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequest.RefreshToken);
+
+                if (storedToken is null)
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token does not exist"
+                        }
+                    };
+                }
+
+                /// Validation 3 - validate expiry date
+                var utcExpiryDate = long.Parse(principal.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Exp).Value);
+
+                var expiryDate = UnixTimeStampToDateTime(utcExpiryDate);
+
+                if (expiryDate.ToUniversalTime() > DateTime.UtcNow)
+                {
+                    var roles = from ur in _context.UserRoles
+                                join r in _context.Roles on ur.RoleId equals r.Id
+                                where ur.UserId == storedToken.UserId
+                                select new
+                                {
+                                    ur.UserId,
+                                    ur.RoleId,
+                                    r.Name
+                                };
+
+                    TokenRefreshResponse authResult1 = new()
+                    {
+                        Roles = new List<string>(),
+                        IsSuccess = false,
+                        Message = new List<string>(),
+                        Errors = new List<string>()
+                    };
+
+
+                    foreach (var role in roles)
+                    {
+                        authResult1.Roles.Add(role.Name);
+                    }
+                    authResult1.IsSuccess = false;
+                    authResult1.Errors.Add("Token has not yet expired");
+                    authResult1.RefreshToken = tokenRequest.RefreshToken;
+                    authResult1.Token = tokenRequest.Token;
+
+                    return authResult1;
+                }
+
+
+
+                /// Validation 4 - validate if used
+                if (storedToken.IsUsed)
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token has been used"
+                        }
+                    };
+                }
+
+                /// Validation 5 - validate if revoked
+                if (storedToken.IsRevorked)
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token has been revoked"
+                        }
+                    };
+                }
+
+                /// Validation 6 - validate the id
+                var jti = principal.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+
+                if (storedToken.JwtId != jti)
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token dosen't match"
+                        }
+                    };
+                }
+
+                /// Validation 7 - validate stored token expiry date
+                if (storedToken.ExpiryDate < DateTime.UtcNow)
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>() {
+                            "Refresh token has expired"
+                        }
+                    };
+                }
+
+                /// Validation 8 - validate email
+                var dbuser = await _userManager.FindByIdAsync(storedToken.UserId);
+
+
+                TokenResult jwtToken = new()
+                {
+                    Roles = new List<string>(),
+                    IsSuccess = false,
+                    Message = new List<string>(),
+                    Errors = new List<string>()
+                };
+
+                string ip = GetIpAddress();
+                bool firstTime = CheckIp(dbuser.Id, ip);
+
+                if (firstTime)
+                {
+                    /// Message to send
+                    string[] to = { dbuser.Email };
+                    string subject = "New login location detected";
+                    string content = "";
+                    IFormFileCollection attachments = null;
+                    string confimeEmailLink = null;
+
+                    // TODO: change email
+                    //var message = new Message(to, subject, content, attachments, confimeEmailLink);
+                    var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+
+                    /// send email to user, there is a new login location
+                    await _emailSender.FirstTimeLoggedInFromIpEmailAsync(message, dbuser, ip);
+                }
+
+
+                if (jwtToken.Errors.Count > 0)
+                {
+                    jwtToken.IsSuccess = false;
+
+                    return jwtToken;
+
+                }
+
+
+                /// update token
+                storedToken.Ip = ip;
+
+                storedToken.IsUsed = true;
+                _context.RefreshTokens.Update(storedToken);
+                await _context.SaveChangesAsync();
+
+                return await GenerateJwtToken(dbuser, ip);
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Lifetime validation failed. The token is expired."))
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>() {
+                            "Token has expired please re-login"
+                        }
+                    };
+                }
+                else
+                {
+                    return new TokenRefreshResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>() {
+                            "Something went wrong."
+                        }
+                    };
+                }
+            }
+        }
+
+        private async Task<TokenRevokeResult> RevokeToken(TokenRevokeRequest tokenRequest)
+        {
+            JwtSecurityTokenHandler jwtTokenHandler = new();
+
+            try
+            {
+
+                /// Validation 1 - Validation JWT token format
+                var tokenInVerification = jwtTokenHandler.ValidateToken(tokenRequest.Token, _tokenValidationParams, out var validatedToken);
+
+                /// Validation 2 - Validate encryption alg
+                if (validatedToken is JwtSecurityToken jwtSecurityToken)
+                {
+                    var result = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature, StringComparison.InvariantCultureIgnoreCase);
+
+                    if (!result)
+                    {
+                        return null;
+                    }
+                }
+
+                /// validation 4 - validate existence of the token
+                var storedToken = await _context.RefreshTokens.FirstOrDefaultAsync(x => x.Token == tokenRequest.RefreshToken);
+
+                if (storedToken is null)
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token does now exist"
+                        }
+                    };
+                }
+
+                /// Validation 5 - validate if used
+                if (storedToken.IsUsed)
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token has ben used"
+                        }
+                    };
+                }
+
+                /// Validation 6 - validate if revoked
+                if (storedToken.IsRevorked)
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token has benn revoked"
+                        }
+                    };
+                }
+
+                /// Validation 7 - validate the id
+                var jti = tokenInVerification.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Jti).Value;
+
+                if (storedToken.JwtId != jti)
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "Token dosen't match"
+                        }
+                    };
+                }
+
+
+
+                /// update token in database
+
+                storedToken.IsRevorked = true;
+                _context.RefreshTokens.Update(storedToken);
+                await _context.SaveChangesAsync();
+
+                TokenRevokeResult authResult = new()
+                {
+                    Errors = new List<string>(),
+                    IsSuccess = true,
+                    Message = new List<string>() { "the user is logt of" },
+                };
+
+
+
+
+                return authResult;
+            }
+            catch (Exception ex)
+            {
+                if (ex.Message.Contains("Lifetime validation failed. The token is expired."))
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>() {
+                            "Token has expired please re-login"
+                        }
+                    };
+                }
+                else
+                {
+                    return new TokenRevokeResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>() {
+                            "Something went wrong."
+                        }
+                    };
+                }
+            }
+
+        }
+
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            /// get the Security Key
+            string key = _config.GetValue<string>("Secrets:SecurityKey");
+
+            /// set validatin
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false, 
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+            };
+
+            /// token handler
+            var tokenHandler = new JwtSecurityTokenHandler();
+            /// Get principal's
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+            /// set SecurityToken to JwtSecurityToken
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            /// check SecurityAlgorithms
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256Signature, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            /// return principal
+            return principal;
+        }
+
+        private static DateTime UnixTimeStampToDateTime(long unixTimeStamp)
+        {
+            /// utc start date
+            var dateTimwVal = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            /// add "unixTimeStamp" to "dateTimwVal"
+            dateTimwVal = dateTimwVal.AddSeconds(unixTimeStamp).ToLocalTime();
+            return dateTimwVal;
+        }
+
 
         private static string GetIpAddress()
         {
+            ///get the users public ip
+
             string url = "http://checkip.dyndns.org";
             WebRequest req = WebRequest.Create(url);
             WebResponse resp = req.GetResponse();
@@ -407,26 +1206,28 @@ namespace KanbanApi.Controllers
 
         private bool CheckIp(string userId, string ip)
         {
+            /// set success to false
             bool isSuccess = false;
 
+            /// check if ip and user match
             var checkFirstTimeIp = _context.RefreshTokens.Where(r => r.UserId == userId && r.Ip == ip).FirstOrDefault();
+            /// if there is no match return true
             if (checkFirstTimeIp == null)
-            {
-                //authResult.Message.Add("first time logget in on ip: " + ip + " an email will be send");
+            {                
                 isSuccess = true;
             }
 
             return isSuccess;
         }
 
-        private static string RandomString(int length)
+        private static string RandomString(int stringLength)
         {
+
             var random = new Random();
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-                .Select(x => x[random.Next(x.Length)]).ToArray());
+
+            /// create a random string the length of int
+            return new string(Enumerable.Repeat(chars, stringLength).Select(x => x[random.Next(x.Length)]).ToArray());
         }
-
-
     }
 }

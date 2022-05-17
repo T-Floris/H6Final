@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Requests.Auth
 {
-    public class UpdateEmailRequest
+    public class ChangeUserNameRequest
     {
+        public string Id { get; set; }
         [Required]
-        [EmailAddress]
-        public string NewEmailAddress { get; set; }
+        public string UserName { get; set; }
     }
 }
