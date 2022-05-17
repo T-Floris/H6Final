@@ -35,14 +35,15 @@ namespace KanbanApi.Controllers
         [HttpGet]
         public UserModel GetById()
         {
+            /// find userl
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
+            /// return user
             return _userData.GetUserById(userId);
         }
 
         [HttpGet]
         [Route("SearchUser")]
-        public async Task<IActionResult> SearchUser([FromBody] SearchUserRequest searchUser)
+        public IActionResult SearchUser([FromBody] SearchUserRequest searchUser)
         {
             if (ModelState.IsValid)
             {
@@ -59,7 +60,7 @@ namespace KanbanApi.Controllers
                         }
                     });
                 }
-                return Ok(new SearchUserResult() 
+                return Ok(new SearchUserResult()
                 {
                     Users = users,
                     IsSuccess = true,
@@ -67,7 +68,7 @@ namespace KanbanApi.Controllers
                     {
                         "list of user found by search"
                     }
-                                    
+
                 });
             }
 
