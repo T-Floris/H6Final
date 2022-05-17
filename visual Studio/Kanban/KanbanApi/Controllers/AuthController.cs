@@ -217,7 +217,7 @@ namespace KanbanApi.Controllers
             if (ModelState.IsValid)
             {
                 /// find user by email
-                var user = await _userManager.FindByNameAsync(logIn.EmailAddress);
+                var user = await _userManager.FindByEmailAsync(logIn.EmailAddress);
                 /// return error if user not found
                 if (user == null)
                 {
@@ -808,7 +808,9 @@ namespace KanbanApi.Controllers
             LogInResult logInResult = new()
             {
                 Errors = new List<string>(),
-                Message = new List<string>()
+                Message = new List<string>(),
+                Roles = new List<string>()
+                
                 
             };
 

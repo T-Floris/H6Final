@@ -1,4 +1,5 @@
 ﻿using KanbanApi.Library.DTOs.Requests.Auth;
+using KanbanApi.Library.DTOs.Requests.User;
 using KanbanApi.Library.Models.User;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace KanbanApi.Library.DataAccess.User
     {
         void DeleteUser(DeleteUserRequest deleteUser);
         void Registration(RegistrationRequest registration);
-        List<UserModel> SearchForUser(string userName);
-        UserModel GetUser(string Id);
+        List<UserModel> SearchForUser(SearchUserRequest searchUser);
+        UserModel GetUserById(string Id);
         void UpdateEmail(ChangeEmailRequest updateEmail);
         void UpdateUserName(ChangeUserNameRequest updateUserName);
 

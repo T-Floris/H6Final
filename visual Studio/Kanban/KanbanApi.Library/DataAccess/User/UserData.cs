@@ -1,4 +1,5 @@
 ﻿using KanbanApi.Library.DTOs.Requests.Auth;
+using KanbanApi.Library.DTOs.Requests.User;
 using KanbanApi.Library.Internal.DataAccess;
 using KanbanApi.Library.Models.User;
 using System;
@@ -24,7 +25,7 @@ namespace KanbanApi.Library.DataAccess.User
             _sql.DeleteData("spUser_Delete", new { }, DatabaseName);
         }
 
-        public UserModel GetUser(string Id)
+        public UserModel GetUserById(string Id)
         {
             var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Select", new { Id }, DatabaseName).FirstOrDefault();
             return output;
@@ -36,9 +37,9 @@ namespace KanbanApi.Library.DataAccess.User
             _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, DatabaseName);
         }
 
-        public List<UserModel> SearchForUser(string userName)
+        public List<UserModel> SearchForUser(SearchUserRequest searchUser)
         {
-            var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Search", new { userName }, DatabaseName);
+            var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Search", new { searchUser.UserName }, DatabaseName);
             return output;
         }
 

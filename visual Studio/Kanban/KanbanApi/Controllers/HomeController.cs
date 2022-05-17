@@ -59,7 +59,7 @@ namespace KanbanApi.Controllers
 
             var user = await _userManager.FindByEmailAsync("tino@mail.dk");
 
-            if (user == null)
+            if (user != null)
             {
                 await _userManager.AddToRoleAsync(user, "admin");
             }

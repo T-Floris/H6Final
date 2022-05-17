@@ -13,6 +13,8 @@ namespace KanbanApi.Library.Models.User
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string UserName { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public string Avatar { get; set; }
+
+        //public DateTime CreatedDate { get; set; }
     }
 }
