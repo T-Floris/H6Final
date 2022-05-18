@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CTAButton } from "../../Assets/ButtonElements";
 
@@ -91,6 +92,9 @@ export const BtnWrap = styled.div`
   display: flex;
   justify-content: flex-start;
 `;
+export const LLink = styled(Link)`
+  text-decoration: none;
+`;
 export const LearnMoreButton = styled(CTAButton)`
   border-radius: 50px;
   background: #562bf6;
@@ -105,7 +109,6 @@ export const LearnMoreButton = styled(CTAButton)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  text-decoration: none;
 `;
 
 export const ImgWrap = styled.div`
