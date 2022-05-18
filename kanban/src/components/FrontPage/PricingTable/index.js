@@ -24,88 +24,89 @@ const PricingTable = () => {
 
   return (
     <Container>
-      <Title>Pricing</Title>
+      <Title>{t("pricingtable_title")}</Title>
       <Wrapper>
-        <PlanTitle>Choose a plan</PlanTitle>
+        <PlanTitle>{t("pricingtable_planTitle")}</PlanTitle>
         <ToggleSwitch>
-          <span>Billed annually</span>
+          <span>{t("pricingtable_toggleText1")}</span>
           <Toggler type="checkbox" />
-          <span>Billed monthly</span>
+          <span>{t("pricingtable_toggleText2")}</span>
         </ToggleSwitch>
 
         <Cards>
           <Card>
-            <CardTitle>FREE</CardTitle>
+            <CardTitle>{t("pricingtable_cardTitle1")}</CardTitle>
             <CardPrice>
               {" "}
-              $0USD <span> / month</span>{" "}
+              {t("pricingtable_cardPrice1")}{" "}
+              <span> {t("pricingtable_cardMonth")}</span>{" "}
             </CardPrice>
-            <CardDesc>
-              For individuals or teams looking to organize anything.
-            </CardDesc>
+            <CardDesc>{t("pricingtable_cardDesc1")}</CardDesc>
             <CardPlan>
-              <li>Up to 10 boards per Workspace</li>
-              <li>Unlimited cards</li>
-              <li>Email Support</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
+              <li>{t("pricingtable_cardPlan1")}</li>
+              <li>{t("pricingtable_cardPlan2")}</li>
+              <li>{t("pricingtable_cardPlan3")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
             </CardPlan>
-            <CardButton type="button">Get Started</CardButton>
+            <CardButton type="button">
+              {t("pricingtable_cardButton1")}
+            </CardButton>
           </Card>
 
           <Card>
-            <CardTitle>STANDARD</CardTitle>
+            <CardTitle>{t("pricingtable_cardTitle2")}</CardTitle>
             <CardPrice>
               {" "}
-              $5USD <span> / month</span>{" "}
+              {t("pricingtable_cardPrice2")}{" "}
+              <span> {t("pricingtable_cardMonth")}</span>{" "}
             </CardPrice>
-            <CardDesc>
-              For teams that need to manage more work and scale collaboration.
-            </CardDesc>
+            <CardDesc>{t("pricingtable_cardDesc2")}</CardDesc>
             <CardPlan>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
             </CardPlan>
-            <CardButton type="button"> Choose Plan</CardButton>
+            <CardButton type="button">
+              {t("pricingtable_cardButton2")}
+            </CardButton>
           </Card>
           <Card>
-            <CardTitle>PREMIUM</CardTitle>
+            <CardTitle>{t("pricingtable_cardTitle3")}</CardTitle>
             <CardPrice>
               {" "}
-              $10USD <span> / month</span>{" "}
+              {t("pricingtable_cardPrice3")}{" "}
+              <span> {t("pricingtable_cardMonth")}</span>{" "}
             </CardPrice>
-            <CardDesc>
-              Best for teams up to 100 that need to track multiple projects and
-              visualize work in a variety of ways.
-            </CardDesc>
+            <CardDesc>{t("pricingtable_cardDesc3")}</CardDesc>
             <CardPlan>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
             </CardPlan>
-            <CardButton type="button"> Choose Plan</CardButton>
+            <CardButton type="button">
+              {t("pricingtable_cardButton2")}
+            </CardButton>
           </Card>
 
           <Card>
-            <CardTitle>Enterprise</CardTitle>
-            <CardPrice>Let's Talk !</CardPrice>
-            <CardDesc>
-              For organizations that need to connect work across teams with more
-              security and controls.
-            </CardDesc>
+            <CardTitle>{t("pricingtable_cardTitle4")}</CardTitle>
+            <CardPrice>{t("pricingtable_cardPrice4")}</CardPrice>
+            <CardDesc>{t("pricingtable_cardDesc4")}</CardDesc>
             <CardPlan>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
-              <li>Coming soon</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
+              <li>{t("pricingtable_cardPlanComingSoon")}</li>
             </CardPlan>
-            <CardButton type="button">Contact Us</CardButton>
+            <CardButton type="button">
+              {t("pricingtable_cardButton3")}
+            </CardButton>
           </Card>
         </Cards>
       </Wrapper>
