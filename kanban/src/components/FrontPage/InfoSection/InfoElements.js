@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { CTAButton } from "../../Assets/ButtonElements";
 
-export const InfoContainer = styled.div`
+export const Container = styled.div`
   color: #fff;
   background: ${({ lightBackground }) =>
     lightBackground ? "#f9f9f9" : "#010606"};
@@ -12,7 +12,7 @@ export const InfoContainer = styled.div`
   }
 `;
 
-export const InfoWrapper = styled.div`
+export const Wrapper = styled.div`
   display: grid;
   z-index: 1;
   height: 100vh;
@@ -24,7 +24,7 @@ export const InfoWrapper = styled.div`
   justify-content: center;
 `;
 
-export const InfoRow = styled.div`
+export const Row = styled.div`
   display: grid;
   grid-auto-columns: minmax(auto, 1fr);
   align-items: center;

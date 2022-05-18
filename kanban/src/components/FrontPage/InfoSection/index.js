@@ -2,9 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
-  InfoContainer,
-  InfoWrapper,
-  InfoRow,
+  Container,
+  Wrapper,
+  Row,
   Column1,
   Column2,
   TextWrapper,
@@ -27,9 +27,9 @@ const InfoSection = () => {
 
   return (
     <>
-      <InfoContainer lightBackground={true} id="about">
-        <InfoWrapper>
-          <InfoRow imgStart={false}>
+      <Container lightBackground={true} id="about">
+        <Wrapper>
+          <Row imgStart={false}>
             <Column1>
               <TextWrapper>
                 <TopLine>{t("info_section_topLine1")}</TopLine>
@@ -51,13 +51,13 @@ const InfoSection = () => {
                 <Img src={teamworkSvg} alt="teamwork" />
               </ImgWrap>
             </Column2>
-          </InfoRow>
-        </InfoWrapper>
-      </InfoContainer>
+          </Row>
+        </Wrapper>
+      </Container>
 
-      <InfoContainer lightBackground={true} id="discover">
-        <InfoWrapper>
-          <InfoRow imgStart={true}>
+      <Container lightBackground={true} id="discover">
+        <Wrapper>
+          <Row imgStart={true}>
             <Column1>
               <TextWrapper>
                 <TopLine>{t("info_section_topLine2")}</TopLine>
@@ -79,13 +79,13 @@ const InfoSection = () => {
                 <Img src={cardsSvg} alt="cards" />
               </ImgWrap>
             </Column2>
-          </InfoRow>
-        </InfoWrapper>
-      </InfoContainer>
+          </Row>
+        </Wrapper>
+      </Container>
 
-      <InfoContainer lightBackground={true} id="">
-        <InfoWrapper>
-          <InfoRow imgStart={false}>
+      <Container lightBackground={true} id="">
+        <Wrapper>
+          <Row imgStart={false}>
             <Column1>
               <TextWrapper>
                 <TopLine>{t("info_section_topLine3")}</TopLine>
@@ -107,9 +107,9 @@ const InfoSection = () => {
                 <Img src={completeTasksSvg} alt="complete tasks" />
               </ImgWrap>
             </Column2>
-          </InfoRow>
-        </InfoWrapper>
-      </InfoContainer>
+          </Row>
+        </Wrapper>
+      </Container>
     </>
   );
 };
