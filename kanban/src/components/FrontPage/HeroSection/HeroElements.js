@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { MdKeyboardArrowRight, MdArrowForward } from "react-icons/md";
 
-export const HeroContainer = styled.div`
+export const Container = styled.div`
   background: #0c0c0c;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ export const HeroContainer = styled.div`
   }
 `;
 
-export const HeroBackground = styled.div`
+export const Background = styled.div`
   position: absolute;
   top: 0;
   right: 0;
@@ -48,7 +48,7 @@ export const VideoBackground = styled.video`
   background: #232a34;
 `;
 
-export const HeroContent = styled.div`
+export const Content = styled.div`
   z-index: 3;
   max-width: 1200px;
   position: absolute;
@@ -58,7 +58,7 @@ export const HeroContent = styled.div`
   align-items: center;
 `;
 
-export const HeroH1 = styled.h1`
+export const Title = styled.h1`
   color: #fff;
   font-size: 5rem;
   text-align: center;
@@ -71,7 +71,7 @@ export const HeroH1 = styled.h1`
     font-size: 3rem;
   }
 `;
-export const HeroP = styled.p`
+export const Text = styled.p`
   margin-top: 24px;
   color: #fff;
   font-size: 2.2rem;
@@ -87,19 +87,23 @@ export const HeroP = styled.p`
   }
 `;
 
-export const HeroBtnWrapper = styled.div`
+export const BtnWrap = styled.div`
   margin-top: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
+export const IconWrap = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 export const ArrowForward = styled(MdArrowForward)`
   margin-left: 8px;
-  font-size: 20px;
+  font-size: 15px;
 `;
 
 export const ArrowRight = styled(MdKeyboardArrowRight)`
   margin-left: 8px;
-  font-size: 20px;
+  font-size: 15px;
 `;

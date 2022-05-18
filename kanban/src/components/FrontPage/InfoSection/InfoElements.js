@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { CTAButton } from "../../Assets/ButtonElements";
 
-export const InfoContainer = styled.div`
+export const Container = styled.div`
   color: #fff;
   background: ${({ lightBackground }) =>
     lightBackground ? "#f9f9f9" : "#010606"};
@@ -10,10 +12,9 @@ export const InfoContainer = styled.div`
   }
 `;
 
-export const InfoWrapper = styled.div`
+export const Wrapper = styled.div`
   display: grid;
   z-index: 1;
-  /* height: 937px; */
   height: 100vh;
   width: 100%;
   max-width: 1100px;
@@ -23,7 +24,7 @@ export const InfoWrapper = styled.div`
   justify-content: center;
 `;
 
-export const InfoRow = styled.div`
+export const Row = styled.div`
   display: grid;
   grid-auto-columns: minmax(auto, 1fr);
   align-items: center;
@@ -33,7 +34,7 @@ export const InfoRow = styled.div`
   @media screen and (max-width: 768px) {
     grid-template-areas: ${({ imgStart }) =>
       imgStart ? `'col1' 'col2'` : `'col1 col1' 'col2 col2'`};
-      grid-template-areas: ${({ imgStart }) =>
+    grid-template-areas: ${({ imgStart }) =>
       imgStart ? `'col2' 'col1'` : `'col2 col2' 'col1 col1'`};
   }
 `;
@@ -57,7 +58,7 @@ export const TextWrapper = styled.div`
 `;
 
 export const TopLine = styled.p`
-  color: #562BF6;
+  color: #562bf6;
   font-size: 16px;
   line-height: 16px;
   font-weight: 700;
@@ -90,6 +91,24 @@ export const Subtitle = styled.p`
 export const BtnWrap = styled.div`
   display: flex;
   justify-content: flex-start;
+`;
+export const LLink = styled(Link)`
+  text-decoration: none;
+`;
+export const LearnMoreButton = styled(CTAButton)`
+  border-radius: 50px;
+  background: #562bf6;
+  white-space: nowrap;
+  padding: 12px 30px;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 `;
 
 export const ImgWrap = styled.div`
