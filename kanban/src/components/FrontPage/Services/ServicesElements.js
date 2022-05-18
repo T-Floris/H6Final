@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ServicesContainer = styled.div`
+export const Container = styled.div`
   /* height: 937px; */
   display: flex;
   height: 100vh;
@@ -38,7 +38,7 @@ export const ServicesWrapper = styled.div`
   }
 `;
 
-export const ServicesCard = styled.div`
+export const Card = styled.div`
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -58,13 +58,13 @@ export const ServicesCard = styled.div`
   }
 `;
 
-export const ServicesIcon = styled.img`
+export const Img = styled.img`
   height: 160px;
   width: 160px;
   margin-bottom: 10px;
 `;
 
-export const ServicesH1 = styled.h1`
+export const Title = styled.h1`
   font-size: 2.5rem;
   color: #010606;
   margin-bottom: 64px;
@@ -74,12 +74,12 @@ export const ServicesH1 = styled.h1`
   }
 `;
 
-export const ServicesH2 = styled.h1`
+export const SubTitle = styled.h1`
   font-size: 1rem;
   margin-bottom: 10px;
 `;
 
-export const ServicesP = styled.p`
+export const Text = styled.p`
   font-size: 1rem;
   text-align: center;
 `;
