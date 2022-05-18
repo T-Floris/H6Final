@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 //Used in Frontpage Herosection
 export const ButtonTransparent = styled(Link)`
   background-color: rgba(255, 255, 255, 0);
-  color: ${({ dark }) => (dark ? "#fff" : "#010606")};
+  color: #fff;
   white-space: nowrap;
-  font-size: ${({ fontBig }) => (fontBig ? "20px" : "16px")};
+  font-size: 16px;
   font-weight: bold;
   border: 3px solid #fff;
-  padding: ${({ big }) => (big ? "14px 48px" : "12px 30px")};
+  padding: 12px 30px;
   text-transform: uppercase;
   transition: background-color 0.5s ease-out;
   margin-top: 30px;
@@ -21,8 +21,9 @@ export const ButtonTransparent = styled(Link)`
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: ${({ primary }) => (primary ? "#fff" : "#562BF6")};
-    color: ${({ primary }) => (primary ? "#010606" : "#562BF6")};
+    background-color: #fff;
+    color: black;
+    font-weight: bold;
   }
 `;
 
