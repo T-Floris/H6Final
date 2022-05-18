@@ -7,6 +7,7 @@ import Services from "../../components/FrontPage/Services";
 import Newsletter from "../../components/FrontPage/Newsletter";
 import Footer from "../../components/FrontPage/Footer";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
+import PricingTable from "../../components/FrontPage/PricingTable";
 const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const Container = styled.div``;
@@ -22,6 +23,7 @@ const HomePage = () => {
       <HeroSection />
       <InfoSection />
       <Services />
+      <PricingTable />
       <Newsletter />
       <Footer />
     </Container>
