@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+
+import Navbar from "../../components/Layout/Navbar";
 import Announcement from "../../components/FrontPage/Announcement";
 import HeroSection from "../../components/FrontPage/HeroSection";
 import InfoSection from "../../components/FrontPage/InfoSection";
@@ -20,6 +22,7 @@ const HomePage = () => {
         description={MetaData.homePageDesc}
       />
       <Announcement />
+      <Navbar />
       <HeroSection />
       <InfoSection />
       <Services />
