@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import Navbar from "../../components/Layout/Navbar";
+import BurgerMenu from "../../components/Layout/BurgerMenu";
 import Announcement from "../../components/FrontPage/Announcement";
 import HeroSection from "../../components/FrontPage/HeroSection";
 import InfoSection from "../../components/FrontPage/InfoSection";
@@ -15,6 +16,13 @@ const MetaData = require("../../components/Utils/Meta/MetaData.json");
 const Container = styled.div``;
 
 const HomePage = () => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+  
   return (
     <Container>
       <MetaDecorator
@@ -22,7 +30,8 @@ const HomePage = () => {
         description={MetaData.homePageDesc}
       />
       <Announcement />
-      <Navbar />
+      <BurgerMenu isOpen={isOpen} toggle={toggle} />
+      <Navbar toggle={toggle}/> {/* toggle is for burgermenu icon */}
       <HeroSection />
       <InfoSection />
       <Services />
