@@ -27,7 +27,7 @@ const InfoSection = () => {
 
   return (
     <>
-      <Container lightBackground={true} id="about">
+      <Container lightBackground={true} id="discover">
         <Wrapper>
           <Row imgStart={false}>
             <Column1>
@@ -55,7 +55,7 @@ const InfoSection = () => {
         </Wrapper>
       </Container>
 
-      <Container lightBackground={true} id="discover">
+      <Container lightBackground={true}>
         <Wrapper>
           <Row imgStart={true}>
             <Column1>
@@ -83,7 +83,7 @@ const InfoSection = () => {
         </Wrapper>
       </Container>
 
-      <Container lightBackground={true} id="">
+      <Container lightBackground={true}>
         <Wrapper>
           <Row imgStart={false}>
             <Column1>

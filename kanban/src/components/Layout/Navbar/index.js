@@ -82,10 +82,6 @@ const Navbar = ({ toggle }) => {
 
 const LinkArray = [
   {
-    label: "About",
-    to: "about",
-  },
-  {
     label: "Discover",
     to: "discover",
   },
