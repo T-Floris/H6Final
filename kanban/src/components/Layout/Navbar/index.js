@@ -26,7 +26,7 @@ const Navbar = ({ toggle }) => {
       setScrollNav(false);
     }
   };
-  
+
   useEffect(() => {
     window.addEventListener("scroll", changeNav);
   }, []);
@@ -92,6 +92,10 @@ const LinkArray = [
   {
     label: "Services",
     to: "services",
+  },
+  {
+    label: "Pricing",
+    to: "pricing",
   },
 ];
 const secondaryLinksArray = [
