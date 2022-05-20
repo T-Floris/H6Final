@@ -42,7 +42,7 @@ const HeroSection = () => {
             onMouseLeave={onHover}
           >
             {t("hero_section_button_text")}{" "}
-            <IconWrap>{hover ? <ArrowRight /> : <ArrowForward />}</IconWrap>
+            <IconWrap>{hover ? <ArrowForward /> : <ArrowRight />}</IconWrap>
           </ButtonTransparent>
         </BtnWrap>
       </Content>

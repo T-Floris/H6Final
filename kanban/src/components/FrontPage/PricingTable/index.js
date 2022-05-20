@@ -23,7 +23,7 @@ const PricingTable = () => {
   const { t } = useTranslation();
 
   return (
-    <Container>
+    <Container id="pricing">
       <Title>{t("pricingtable_title")}</Title>
       <Wrapper>
         <PlanTitle>{t("pricingtable_planTitle")}</PlanTitle>

@@ -109,6 +109,7 @@ export const LearnMoreButton = styled(CTAButton)`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  width: 150px;
 `;
 
 export const ImgWrap = styled.div`

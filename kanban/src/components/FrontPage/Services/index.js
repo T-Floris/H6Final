@@ -7,7 +7,7 @@ import Image3 from "../../../images/svg-6.svg";
 import {
   Container,
   Title,
-  ServicesWrapper,
+  Wrapper,
   Card,
   Img,
   SubTitle,
@@ -15,12 +15,14 @@ import {
 } from "./ServicesElements";
 
 const Services = () => {
+  
   //i18next
   const { t } = useTranslation();
+  
   return (
     <Container id="services">
       <Title>{t("services_title")}</Title>
-      <ServicesWrapper>
+      <Wrapper>
         <Card>
           <Img src={Image1} />
           <SubTitle>{t("services_sub_title1")}</SubTitle>
@@ -36,7 +38,7 @@ const Services = () => {
           <SubTitle>{t("services_sub_title3")}</SubTitle>
           <Text>{t("services_text3")}</Text>
         </Card>
-      </ServicesWrapper>
+      </Wrapper>
     </Container>
   );
 };

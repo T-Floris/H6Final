@@ -19,7 +19,7 @@ export const Container = styled.div`
   }
 `;
 
-export const ServicesWrapper = styled.div`
+export const Wrapper = styled.div`
   max-width: 1100px; //Box width
   margin: 0 auto;
   display: grid;
