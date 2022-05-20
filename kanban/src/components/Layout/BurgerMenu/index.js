@@ -1,4 +1,6 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
+
 import { BurgerMenuButton } from "../../Assets/ButtonElements";
 import {
   BurgerMenuContainer,
@@ -11,6 +13,13 @@ import {
 } from "./BurgerMenuElements";
 
 const BurgerMenu = ({ isOpen, toggle }) => {
+
+  //i18next
+  const { t } = useTranslation();
+
+  const burgerMenuArray1 = t("menu_array1", { returnObjects: true })
+  const burgerMenuArray2 = t("menu_array2", { returnObjects: true })
+
   return (
     <BurgerMenuContainer isOpen={isOpen} onClick={toggle}>
       <Icon onClick={toggle}>
@@ -18,7 +27,7 @@ const BurgerMenu = ({ isOpen, toggle }) => {
       </Icon>
       <BurgerMenuWrapper>
         <BurgerMenuMenu>
-          <BurgerMenuLink //smooth scroll below
+          {/* <BurgerMenuLink //smooth scroll below
             smooth={true}
             duration={500}
             spy={true}
@@ -28,9 +37,9 @@ const BurgerMenu = ({ isOpen, toggle }) => {
             onClick={toggle}
           >
             Home
-          </BurgerMenuLink>
+          </BurgerMenuLink> */}
 
-          {LinkArray.map(({ label, to }) => (
+          {burgerMenuArray1.map(({ label, to }) => (
             <BurgerMenuLink //smooth scroll below
               smooth={true}
               duration={500}
@@ -47,7 +56,7 @@ const BurgerMenu = ({ isOpen, toggle }) => {
           ))}
         </BurgerMenuMenu>
         <BurgerMenuBtnWrap>
-          {secondaryLinksArray.map(({ label, to }) => (
+          {burgerMenuArray2.map(({ label, to }) => (
             // unique key for array children
             <BurgerMenuButton key={label} to={to}>{label}</BurgerMenuButton>
           ))}
