@@ -20,8 +20,8 @@ const Navbar = ({ toggle }) => {
   //i18next
   const { t } = useTranslation();
 
-  const navbarMenuArray1 = t("navbar_menu_array1", { returnObjects: true })
-  const navbarMenuArray2 = t("navbar_menu_array2", { returnObjects: true })
+  const navbarMenuArray1 = t("menu_array1", { returnObjects: true })
+  const navbarMenuArray2 = t("menu_array2", { returnObjects: true })
 
   //Navbar's background changes color when scrolled
   const [scrollNav, setScrollNav] = useState(false);
