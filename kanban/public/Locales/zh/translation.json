@@ -4,13 +4,14 @@
   "welcome_message": "欢迎",
   "kanban": "看板",
 
-  "comment": "NAVBAR STARTS HERE",
-  "navbar_menu_array1": [
+  "comment": "NAVBAR & BURGERMENU STARTS HERE",
+  "menu_array1": [
+    { "label": "首页", "to": "home" },
     { "label": "探索", "to": "discover" },
     { "label": "服务", "to": "services" },
     { "label": "价格", "to": "pricing" }
   ],
-  "navbar_menu_array2": [
+  "menu_array2": [
     { "label": "登入", "to": "/signin" },
     { "label": "注册", "to": "/signup" },
     { "label": "Userstart", "to": "/userstart" }
