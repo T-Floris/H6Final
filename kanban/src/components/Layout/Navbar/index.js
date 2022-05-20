@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { animateScroll as scroll } from "react-scroll";
+import { useTranslation } from "react-i18next";
 
 import { FaBars } from "react-icons/fa";
 import {
@@ -15,6 +16,12 @@ import {
 } from "./NavbarElements";
 
 const Navbar = ({ toggle }) => {
+
+  //i18next
+  const { t } = useTranslation();
+
+  const navbarMenuArray1 = t("navbar_menu_array1", { returnObjects: true })
+  const navbarMenuArray2 = t("navbar_menu_array2", { returnObjects: true })
 
   //Navbar's background changes color when scrolled
   const [scrollNav, setScrollNav] = useState(false);
@@ -49,7 +56,7 @@ const Navbar = ({ toggle }) => {
             <FaBars />
           </MobileIcon>
           <NavMenu>
-            {LinkArray.map(({ label, to }) => (
+            {navbarMenuArray1.map(({ label, to }) => (
               // unique key for array children
               <NavItem key={label}>
                 <NavLinks
@@ -67,7 +74,7 @@ const Navbar = ({ toggle }) => {
             ))}
           </NavMenu>
           <NavBtn>
-            {secondaryLinksArray.map(({ label, to }) => (
+            {navbarMenuArray2.map(({ label, to }) => (
               // unique key for array children
               <NavBtnLink key={label} to={to}>
                 {label}
@@ -80,37 +87,37 @@ const Navbar = ({ toggle }) => {
   );
 };
 
-const LinkArray = [
-  {
-    label: "Discover",
-    to: "discover",
-  },
-  {
-    label: "Services",
-    to: "services",
-  },
-  {
-    label: "Pricing",
-    to: "pricing",
-  },
-];
-const secondaryLinksArray = [
-  {
-    label: "Sign In",
-    to: "/signin",
-  },
-  {
-    label: "Sign Up",
-    to: "/signup",
-  },
-  {
-    label: "Board",
-    to: "/board",
-  },
-  {
-    label: "Dashboard",
-    to: "/userstart",
-  },
-];
+// const LinkArray = [
+//   {
+//     label: "Discover",
+//     to: "discover",
+//   },
+//   {
+//     label: "Services",
+//     to: "services",
+//   },
+//   {
+//     label: "Pricing",
+//     to: "pricing",
+//   },
+// ];
+// const secondaryLinksArray = [
+//   {
+//     label: "Sign In",
+//     to: "/signin",
+//   },
+//   {
+//     label: "Sign Up",
+//     to: "/signup",
+//   },
+//   {
+//     label: "Board",
+//     to: "/board",
+//   },
+//   {
+//     label: "Dashboard",
+//     to: "/userstart",
+//   },
+// ];
 
 export default Navbar;
