@@ -4,6 +4,18 @@
   "welcome_message": "Velkommen",
   "kanban": "Kanban",
 
+  "comment": "NAVBAR STARTS HERE",
+  "navbar_menu_array1": [
+    { "label": "Opdage", "to": "discover" },
+    { "label": "Tjenester", "to": "services" },
+    { "label": "Pris", "to": "pricing" }
+  ],
+  "navbar_menu_array2": [
+    { "label": "Log på", "to": "/signin" },
+    { "label": "Tilmelde", "to": "/signup" },
+    { "label": "Userstart", "to": "/userstart" }
+  ],
+
   "comment": "HEROSECTION STARTS HERE",
   "hero_section_text": "Kanban hjælper teams med at arbejde bedre.",
   "hero_section_button_text": "Kom igang",

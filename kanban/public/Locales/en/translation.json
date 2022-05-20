@@ -4,6 +4,18 @@
   "welcome_message": "Welcome",
   "kanban": "Kanban",
 
+  "comment": "NAVBAR STARTS HERE",
+  "navbar_menu_array1": [
+    { "label": "Discover", "to": "discover" },
+    { "label": "Services", "to": "services" },
+    { "label": "Pricing", "to": "pricing" }
+  ],
+  "navbar_menu_array2": [
+    { "label": "Sign In", "to": "/signin" },
+    { "label": "Sign Up", "to": "/signup" },
+    { "label": "Userstart", "to": "/userstart" }
+  ],
+
   "comment": "HEROSECTION STARTS HERE",
   "hero_section_text": "Kanban helps teams work better.",
   "hero_section_button_text": "Get started",

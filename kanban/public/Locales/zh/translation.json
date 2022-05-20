@@ -4,6 +4,18 @@
   "welcome_message": "欢迎",
   "kanban": "看板",
 
+  "comment": "NAVBAR STARTS HERE",
+  "navbar_menu_array1": [
+    { "label": "探索", "to": "discover" },
+    { "label": "服务", "to": "services" },
+    { "label": "价格", "to": "pricing" }
+  ],
+  "navbar_menu_array2": [
+    { "label": "登入", "to": "/signin" },
+    { "label": "注册", "to": "/signup" },
+    { "label": "Userstart", "to": "/userstart" }
+  ],
+
   "comment": "HEROSECTION STARTS HERE",
   "hero_section_text": "看板帮助团队更好地工作。",
   "hero_section_button_text": "开始使用",
