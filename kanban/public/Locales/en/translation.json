@@ -124,5 +124,10 @@
   "sidebar_message": "Message",
   "sidebar_setting": "Setting",
   "sidebar_logout": "Log Out",
-  "sidebar_darkmode": "Dark Mode"
+  "sidebar_darkmode": "Dark Mode",
+
+  "comment": "USERSTART STARTS HERE",
+  "userstart_morning": "Good Morning",
+  "userstart_afternoon": "Good Afternoon",
+  "userstart_evening": "Good Evening"
 }
