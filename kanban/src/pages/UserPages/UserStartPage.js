@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Start from "../../components/UserInterface/UserStart";
+import UserStart from "../../components/UserInterface/UserStart";
 import Sidebar from "../../components/Layout/Sidebar";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
 import { backgroundTheme } from "../../components/Assets/variables";
@@ -10,7 +10,8 @@ const Container = styled.div`
   ${backgroundTheme}
 `;
 
-const DashboardPage = () => {
+const UserStartPage = () => {
+
   return (
     <Container>
       <MetaDecorator
@@ -20,9 +21,9 @@ const DashboardPage = () => {
       <Sidebar />
       
 
-      <Start />
+      <UserStart />
     </Container>
   );
 };
 
-export default DashboardPage;
+export default UserStartPage;
