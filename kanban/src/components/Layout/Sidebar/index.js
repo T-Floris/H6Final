@@ -1,4 +1,14 @@
 import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { AiOutlineHome } from "react-icons/ai";
+
+import {
+  MdOutlineDashboard,
+  MdOutlineCalendarToday,
+  MdOutlineMessage,
+  MdOutlineGroup,
+  MdWorkspacesOutline,
+} from "react-icons/md";
 import {
   Container,
   SDivider,
@@ -21,20 +31,58 @@ import {
   BurgerMenuIcon,
   CloseIcon,
 } from "./SidebarElements";
-
 import {
   AiOutlineLeft,
   AiOutlineSearch,
   AiOutlineSetting,
 } from "react-icons/ai";
-
 import { MdLogout } from "react-icons/md";
-
-import { LinksArray } from "./Data";
+// import { LinksArray } from "./Data";
 import profile from "../../../images/catForTesting.jpg";
 import Darkmode from "../../Assets/Darkmode";
 
-const Sidebar = () => {
+const Sidebar = ({ links }) => {
+  //i18next
+  const { t } = useTranslation();
+  const LinksArray = [
+    {
+      label: t("sidebar_start"),
+      icon: <AiOutlineHome />,
+      to: "/userstart",
+      notification: 0,
+    },
+    {
+      label: t("sidebar_workspace"),
+      icon: <MdWorkspacesOutline />,
+      to: "/workspace",
+      notification: 0,
+    },
+    {
+      label: t("sidebar_board"),
+      icon: <MdOutlineDashboard />,
+      to: "/board",
+      notification: 0,
+    },
+    {
+      label: t("sidebar_group"),
+      icon: <MdOutlineGroup />,
+      to: "/group",
+      notification: 0,
+    },
+    {
+      label: t("sidebar_calendar"),
+      icon: <MdOutlineCalendarToday />,
+      to: "/calendar",
+      notification: 0,
+    },
+    {
+      label: t("sidebar_message"),
+      icon: <MdOutlineMessage />,
+      to: "/message",
+      notification: 5,
+    },
+  ];
+
   const searchRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); //false: sidebar is closed
 
@@ -139,7 +187,7 @@ const Sidebar = () => {
                   <SLinkIcon>
                     <AiOutlineSetting />
                   </SLinkIcon>
-                  <SLinkLabel>Settings</SLinkLabel>
+                  <SLinkLabel>{t("sidebar_setting")}</SLinkLabel>
                 </>
               )}
             </SLink>
@@ -159,7 +207,7 @@ const Sidebar = () => {
                   <SLinkIcon>
                     <MdLogout />
                   </SLinkIcon>
-                  <SLinkLabel>Logout</SLinkLabel>
+                  <SLinkLabel>{t("sidebar_logout")}</SLinkLabel>
                 </>
               )}
             </SLink>
@@ -167,7 +215,7 @@ const Sidebar = () => {
 
           <SDivider />
           <STheme>
-            {sidebarOpen && <SThemeLabel>Dark Mode</SThemeLabel>}
+            {sidebarOpen && <SThemeLabel>{t("sidebar_darkmode")}</SThemeLabel>}
             <Darkmode />
           </STheme>
 
