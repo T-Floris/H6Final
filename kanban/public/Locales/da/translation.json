@@ -113,5 +113,21 @@
   "contact_us_placeholder1": "Dit Navn",
   "contact_us_placeholder2": "Din Email",
   "contact_us_placeholder3": "Din Besked...",
-  "contact_us_button": "Send Besked"
+  "contact_us_button": "Send Besked",
+
+  "comment": "SIDEBAR STARTS HERE",
+  "sidebar_start": "Start",
+  "sidebar_workspace": "Arbejdsplads",
+  "sidebar_board": "Tavle",
+  "sidebar_group": "Gruppe",
+  "sidebar_calendar": "Kalender",
+  "sidebar_message": "Besked",
+  "sidebar_setting": "Indstilling",
+  "sidebar_logout": "Log ud",
+  "sidebar_darkmode": "Mørk tilstand",
+
+  "comment": "USERSTART STARTS HERE",
+  "userstart_morning": "God Morgen",
+  "userstart_afternoon": "God Eftermiddag",
+  "userstart_evening": "God Aften"
 }

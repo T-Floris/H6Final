@@ -113,5 +113,21 @@
   "contact_us_placeholder1": "Your Name",
   "contact_us_placeholder2": "Your Email",
   "contact_us_placeholder3": "Your Message...",
-  "contact_us_button": "Send Message"
+  "contact_us_button": "Send Message",
+
+  "comment": "SIDEBAR STARTS HERE",
+  "sidebar_start": "Start",
+  "sidebar_workspace": "Workspace",
+  "sidebar_board": "Board",
+  "sidebar_group": "Group",
+  "sidebar_calendar": "Calendar",
+  "sidebar_message": "Message",
+  "sidebar_setting": "Setting",
+  "sidebar_logout": "Log Out",
+  "sidebar_darkmode": "Dark Mode",
+
+  "comment": "USERSTART STARTS HERE",
+  "userstart_morning": "Good Morning",
+  "userstart_afternoon": "Good Afternoon",
+  "userstart_evening": "Good Evening"
 }
