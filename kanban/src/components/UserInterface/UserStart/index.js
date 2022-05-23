@@ -1,8 +1,12 @@
 import React from "react";
 import { Container, Title, Text, Wrapper } from "./StartElements";
 import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+
+//i18next
+const { t } = useTranslation();
 
   //Welcome message for user
   const date = new Date();
@@ -10,11 +14,11 @@ const Home = () => {
   let message;
 
   if (hours < 12) {
-    message = "Good Morning";
+    message = t("userstart_morning");
   } else if (hours < 18) {
-    message = "Good Afternoon";
+    message = t("userstart_afternoon");
   } else {
-    message = "Good Evening";
+    message = t("userstart_evening");
   }
   
   return (
