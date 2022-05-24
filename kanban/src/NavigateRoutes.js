@@ -10,7 +10,7 @@ import LearnMorePage from "./pages/FrontPages/LearnMorePage";
 //Auth pages
 
 //User pages
-// import UserStartPage from "./pages/UserPages/UserStartPage";
+import UserStartPage from "./pages/UserPages/UserStartPage";
 
 //Admin pages
 
@@ -33,7 +33,7 @@ const NavigateRoutes = () => {
         
 
         {/* User pages */}
-        {/* <Route path="/userstart" element={<UserStartPage />} /> */}
+        <Route path="/userstart" element={<UserStartPage />} />
 
 
         {/* Admin pages */}
