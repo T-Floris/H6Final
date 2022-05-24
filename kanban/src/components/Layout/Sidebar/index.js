@@ -32,11 +32,11 @@ import { MdLogout } from "react-icons/md";
 // import { LinksArray } from "./Data";
 import profile from "../../../images/catForTesting.jpg";
 import Darkmode from "../../Assets/Darkmode";
+import Modal from "../../Assets/Modals/LogoutModal";
 
 const Sidebar = ({ links }) => {
   //i18next
   const { t } = useTranslation();
-  
 
   const searchRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); //false: sidebar is closed
@@ -51,8 +51,15 @@ const Sidebar = ({ links }) => {
     }
   };
 
+  //Modal
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
   return (
     <>
+      <Modal showModal={showModal} setShowModal={openModal} />
       <Container>
         <BurgerMenuContainer>
           <BurgerMenuIcon
@@ -138,7 +145,7 @@ const Sidebar = ({ links }) => {
                     <SLinkIcon>{icon}</SLinkIcon>
                     <SLinkLabel>{label}</SLinkLabel>
                     {/* if notifications are at 0 or null, do not display */}
-                    {/* {!!notification && (
+          {/* {!!notification && (
                       <SLinkNotification>{notification}</SLinkNotification>
                     )}
                   </>
@@ -172,7 +179,14 @@ const Sidebar = ({ links }) => {
           </SLinkContainer>
 
           <SLinkContainer>
-            <SLink to="/" style={!sidebarOpen ? { width: `fit-content` } : {}}>
+            <SLink
+              to="/"
+              onClick={(event) => {
+                event.preventDefault();
+                setShowModal(true);
+              }}
+              style={!sidebarOpen ? { width: `fit-content` } : {}}
+            >
               {/* short-circuit evaluation */}
               {sidebarOpen || (
                 <SLinkIcon>
