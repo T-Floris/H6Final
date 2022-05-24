@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useCallback } from "react";
-import {CTAButton} from "../../ButtonElements"
+import { CTAButton } from "../../ButtonElements";
 import {
   Container,
   Background,
@@ -16,9 +16,9 @@ import {
   ModalOption,
   ModalTextarea,
   ModalButtonContainer,
-} from "./CreateWorkspaceModalElementals";
+} from "./CreateGroupModalElementals";
 
-const CreateWorkspaceModal = ({ showModal, setShowModal }) => {
+const CreateGroupModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -54,22 +54,26 @@ const CreateWorkspaceModal = ({ showModal, setShowModal }) => {
               />
               <ModalContent>
                 <ModalForm>
-                  <ModalTitle>Create workspace</ModalTitle>
+                  <ModalTitle>Create Group</ModalTitle>
                   <ModalLabel>
-                    Workspace title<span style={{ color: "red" }}>*</span>
+                    Group title<span style={{ color: "red" }}>*</span>
                   </ModalLabel>
-                  <ModalInputField type="text" autoFocus required></ModalInputField>
+                  <ModalInputField
+                    type="text"
+                    autoFocus
+                    required
+                  ></ModalInputField>
 
-                  <ModalLabel>
-                    Workspace type<span style={{ color: "red" }}>*</span>
+                  {/* <ModalLabel>
+                  Group type<span style={{ color: "red" }}>*</span>
                   </ModalLabel>
                   <ModalSelect>
                     {Type.map(({ label }) => (
                       <ModalOption key={label}>{label}</ModalOption>
                     ))}
-                  </ModalSelect>
+                  </ModalSelect> */}
 
-                  <ModalLabel>Workspace description</ModalLabel>
+                  <ModalLabel>Group description</ModalLabel>
                   <ModalTextarea placeholder=""></ModalTextarea>
 
                   <ModalButtonContainer>
@@ -130,4 +134,4 @@ const Type = [
   },
 ];
 
-export default CreateWorkspaceModal;
+export default CreateGroupModal;
