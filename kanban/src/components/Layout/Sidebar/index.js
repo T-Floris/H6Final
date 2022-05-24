@@ -1,14 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { AiOutlineHome } from "react-icons/ai";
 
-import {
-  MdOutlineDashboard,
-  MdOutlineCalendarToday,
-  MdOutlineMessage,
-  MdOutlineGroup,
-  MdWorkspacesOutline,
-} from "react-icons/md";
 import {
   Container,
   SDivider,
@@ -44,44 +36,7 @@ import Darkmode from "../../Assets/Darkmode";
 const Sidebar = ({ links }) => {
   //i18next
   const { t } = useTranslation();
-  const LinksArray = [
-    {
-      label: t("sidebar_start"),
-      icon: <AiOutlineHome />,
-      to: "/userstart",
-      notification: 0,
-    },
-    {
-      label: t("sidebar_workspace"),
-      icon: <MdWorkspacesOutline />,
-      to: "/workspace",
-      notification: 0,
-    },
-    {
-      label: t("sidebar_board"),
-      icon: <MdOutlineDashboard />,
-      to: "/board",
-      notification: 0,
-    },
-    {
-      label: t("sidebar_group"),
-      icon: <MdOutlineGroup />,
-      to: "/group",
-      notification: 0,
-    },
-    {
-      label: t("sidebar_calendar"),
-      icon: <MdOutlineCalendarToday />,
-      to: "/calendar",
-      notification: 0,
-    },
-    {
-      label: t("sidebar_message"),
-      icon: <MdOutlineMessage />,
-      to: "/message",
-      notification: 5,
-    },
-  ];
+  
 
   const searchRef = useRef(null);
   const [sidebarOpen, setSidebarOpen] = useState(false); //false: sidebar is closed
@@ -146,7 +101,8 @@ const Sidebar = ({ links }) => {
             />
           </SSearch>
           <SDivider />
-          {LinksArray.map(({ icon, label, notification, to }) => (
+          {/* ? asking if the array existed */}
+          {links?.map(({ icon, label, notification, to }) => (
             // unique key for array children
             <SLinkContainer key={label}>
               <SLink
@@ -168,6 +124,28 @@ const Sidebar = ({ links }) => {
               </SLink>
             </SLinkContainer>
           ))}
+          {/* {LinksArray.map(({ icon, label, notification, to }) => (
+            // unique key for array children
+            <SLinkContainer key={label}>
+              <SLink
+                to={to}
+                style={!sidebarOpen ? { width: `fit-content` } : {}}
+              >
+                {sidebarOpen || <SLinkIcon>{icon}</SLinkIcon>}
+
+                {sidebarOpen && (
+                  <>
+                    <SLinkIcon>{icon}</SLinkIcon>
+                    <SLinkLabel>{label}</SLinkLabel>
+                    {/* if notifications are at 0 or null, do not display */}
+                    {/* {!!notification && (
+                      <SLinkNotification>{notification}</SLinkNotification>
+                    )}
+                  </>
+                )}
+              </SLink>
+            </SLinkContainer>
+          ))} */}
           <SDivider />
 
           <SLinkContainer>
