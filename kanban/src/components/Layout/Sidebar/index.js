@@ -33,6 +33,7 @@ import { MdLogout } from "react-icons/md";
 import profile from "../../../images/catForTesting.jpg";
 import Darkmode from "../../Assets/Darkmode";
 import Modal from "../../Assets/Modals/LogoutModal";
+import Tooltip from "../../Assets/Tooltip";
 
 const Sidebar = ({ links }) => {
   //i18next
@@ -90,9 +91,15 @@ const Sidebar = ({ links }) => {
             style={!sidebarOpen ? { width: `fit-content` } : {}}
           >
             {sidebarOpen || (
-              <SSearchIcon>
-                <AiOutlineSearch />
-              </SSearchIcon>
+              <Tooltip
+                text="Click to search"
+                position="right"
+                background="222831"
+              >
+                <SSearchIcon>
+                  <AiOutlineSearch />
+                </SSearchIcon>
+              </Tooltip>
             )}
 
             {sidebarOpen && (
@@ -116,8 +123,9 @@ const Sidebar = ({ links }) => {
                 to={to}
                 style={!sidebarOpen ? { width: `fit-content` } : {}}
               >
-                {sidebarOpen || <SLinkIcon>{icon}</SLinkIcon>}
-
+                <Tooltip text={label} position="right" background="222831">
+                  {sidebarOpen || <SLinkIcon>{icon}</SLinkIcon>}
+                </Tooltip>
                 {sidebarOpen && (
                   <>
                     <SLinkIcon>{icon}</SLinkIcon>
@@ -162,9 +170,11 @@ const Sidebar = ({ links }) => {
             >
               {/* short-circuit evaluation */}
               {sidebarOpen || (
-                <SLinkIcon>
-                  <AiOutlineSetting />
-                </SLinkIcon>
+                <Tooltip text="Settings" position="right" background="222831">
+                  <SLinkIcon>
+                    <AiOutlineSetting />
+                  </SLinkIcon>
+                </Tooltip>
               )}
 
               {sidebarOpen && (
@@ -189,9 +199,11 @@ const Sidebar = ({ links }) => {
             >
               {/* short-circuit evaluation */}
               {sidebarOpen || (
-                <SLinkIcon>
-                  <MdLogout />
-                </SLinkIcon>
+                <Tooltip text="Logout" position="right" background="222831">
+                  <SLinkIcon>
+                    <MdLogout />
+                  </SLinkIcon>
+                </Tooltip>
               )}
 
               {sidebarOpen && (
