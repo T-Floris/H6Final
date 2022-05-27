@@ -12,8 +12,8 @@
     { "label": "Pris", "to": "pricing" }
   ],
   "menu_array2": [
-    { "label": "Log på", "to": "/signin" },
-    { "label": "Tilmelde", "to": "/signup" },
+    { "label": "Log på", "to": "/login" },
+    { "label": "Tilmelde", "to": "/register" },
     { "label": "Userstart", "to": "/userstart" }
   ],
 

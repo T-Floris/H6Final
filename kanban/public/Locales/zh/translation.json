@@ -12,8 +12,8 @@
     { "label": "价格", "to": "pricing" }
   ],
   "menu_array2": [
-    { "label": "登入", "to": "/signin" },
-    { "label": "注册", "to": "/signup" },
+    { "label": "登入", "to": "/login" },
+    { "label": "注册", "to": "/register" },
     { "label": "Userstart", "to": "/userstart" }
   ],
 

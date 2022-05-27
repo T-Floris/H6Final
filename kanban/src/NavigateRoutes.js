@@ -20,10 +20,12 @@ import SettingsPage from "./pages/UserPages/SettingsPage";
 import UserProfilePage from "./pages/UserPages/UserProfilePage";
 
 //Admin pages
-import AdminDashboardPage from "./pages/Admin/AdminDashboardPage"
+import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage"
 
 // 404
-import NotFoundPage from "./pages/404/NotFoundPage";
+import NotFoundPage from "./pages/404Pages/NotFoundPage";
+import RegisterPage from "./pages/AuthPages/RegisterPage";
+import LoginPage from "./pages/AuthPages/LoginPage";
 
 
 const NavigateRoutes = () => {
@@ -39,7 +41,8 @@ const NavigateRoutes = () => {
         <Route path="/learnmore" element={<LearnMorePage />} />
 
         {/* Auth pages */}
-        
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
 
         {/* User pages */}
         <Route path="/userstart" element={<UserStartPage />} />
