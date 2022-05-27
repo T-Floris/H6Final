@@ -12,8 +12,8 @@
     { "label": "Pricing", "to": "pricing" }
   ],
   "menu_array2": [
-    { "label": "Sign In", "to": "/signin" },
-    { "label": "Sign Up", "to": "/signup" },
+    { "label": "Sign In", "to": "/login" },
+    { "label": "Sign Up", "to": "/register" },
     { "label": "Userstart", "to": "/userstart" }
   ],
 
