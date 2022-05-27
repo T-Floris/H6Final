@@ -8,7 +8,8 @@ import TermsAndConditionsPage from "./pages/FrontPages/TermsAndConditionsPage";
 import ContactFormPage from "./pages/FrontPages/ContactFormPage";
 import LearnMorePage from "./pages/FrontPages/LearnMorePage";
 //Auth pages
-
+import RegisterPage from "./pages/AuthPages/RegisterPage";
+import LoginPage from "./pages/AuthPages/LoginPage";
 //User pages
 import UserStartPage from "./pages/UserPages/UserStartPage";
 import WorkspacePage from "./pages/UserPages/WorkspacePage";
@@ -24,8 +25,7 @@ import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage"
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
-import RegisterPage from "./pages/AuthPages/RegisterPage";
-import LoginPage from "./pages/AuthPages/LoginPage";
+
 
 
 const NavigateRoutes = () => {
