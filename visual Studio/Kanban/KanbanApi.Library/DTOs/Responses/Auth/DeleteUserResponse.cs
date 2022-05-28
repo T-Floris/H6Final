@@ -7,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Responses.Auth
 {
-    public class DeleteUserResponse : DeleteUserResult
+    public class DeleteUserResponse
     {
+        public bool IsSuccess { get; set; }
+        public List<string> Errors { get; set; }
+
     }
 }

@@ -95,6 +95,17 @@ namespace KanbanApi.Library.Internal.DataAccess
                 commandType: CommandType.StoredProcedure);
         }
 
+        public List<T> SaveData<T, U>(string storedProcedure, U parameters, string connectionStringName)
+        {
+            string connectionString = GetConnectionString(connectionStringName);
+
+            using IDbConnection conn = new SqlConnection(connectionString);
+            List<T> rows = conn.Query<T>(storedProcedure, parameters,
+                commandType: CommandType.StoredProcedure).ToList();
+
+            return rows;
+        }
+
         /// <summary>
         /// execute stored procedure to update data in database
         /// </summary>

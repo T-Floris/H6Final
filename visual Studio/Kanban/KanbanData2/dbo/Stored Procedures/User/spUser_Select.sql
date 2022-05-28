@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spUser_Select]
-	@Id nvarchar(450)
+	@Id UNIQUEIDENTIFIER
 AS
 BEGIN
 	SET NOCOUNT ON;

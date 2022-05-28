@@ -1,5 +1,5 @@
 ﻿using KanbanApi.Library.DTOs.Requests.Auth;
-using KanbanApi.Library.DTOs.Requests.User;
+using KanbanApi.Library.DTOs.Requests.Search;
 using KanbanApi.Library.Internal.DataAccess;
 using KanbanApi.Library.Models.User;
 using System;
@@ -37,15 +37,10 @@ namespace KanbanApi.Library.DataAccess.User
             _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, DatabaseName);
         }
 
-        public List<UserModel> SearchForUser(SearchUserRequest searchUser)
-        {
-            var output = _sql.LoadData<UserModel, dynamic>("dbo.spUser_Search", new { searchUser.UserName }, DatabaseName);
-            return output;
-        }
 
         public void UpdateEmail(ChangeEmailRequest updateEmail)
         {
-            _sql.UpdateData("spUser_UpdateEmail", new { updateEmail.NewEmailAddress }, DatabaseName);
+            _sql.UpdateData("spUser_UpdateEmail", new { updateEmail.UserId, updateEmail.NewEmailAddress }, DatabaseName);
         }
 
         public void UpdateUserName(ChangeUserNameRequest updateUserName)

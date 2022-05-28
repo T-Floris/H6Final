@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spUser_Registration]
-	@Id nvarchar(450),
+	@Id UNIQUEIDENTIFIER,
 	@FirstName nvarchar(50),
 	@LastName nvarchar(50),
 	@EmailAddress nvarchar(256),

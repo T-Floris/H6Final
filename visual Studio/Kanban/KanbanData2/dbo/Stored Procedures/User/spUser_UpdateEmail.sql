@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spUser_UpdateEmail]
-	@Id nvarchar(450),
+	@Id UNIQUEIDENTIFIER,
 	@NewEmailAddress nvarchar(256)	
 AS
 BEGIN

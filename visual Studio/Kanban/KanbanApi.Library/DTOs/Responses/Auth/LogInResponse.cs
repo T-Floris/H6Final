@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace KanbanApi.Library.DTOs.Responses.Auth
 {
-    public class LogInResponse : LogInResult
+    public class LogInResponse
     {
+        public bool IsSuccess { get; set; }
+        public List<string> Errors { get; set; }
+
+
     }
 }

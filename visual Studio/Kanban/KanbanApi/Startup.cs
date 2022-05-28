@@ -3,11 +3,18 @@ using KanbanApi.Configuration.TokenLifespan;
 using KanbanApi.Data;
 using KanbanApi.EmailService.Configuration;
 using KanbanApi.EmailService.Models.EmailSender;
+using KanbanApi.Library.DataAccess.Admin;
+using KanbanApi.Library.DataAccess.Board;
+using KanbanApi.Library.DataAccess.Card;
+using KanbanApi.Library.DataAccess.Group;
+using KanbanApi.Library.DataAccess.Search;
+using KanbanApi.Library.DataAccess.Table;
 using KanbanApi.Library.DataAccess.User;
 using KanbanApi.Library.Internal.DataAccess;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy; 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -16,6 +23,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,21 +140,30 @@ namespace KanbanApi
             /// add Razor Pages to the service
             services.AddRazorPages();
 
-            /// configure the liftime of a token
+            /// configure the liftime of a cookie
             services.ConfigureApplicationCookie(cookie =>
             {
                 cookie.ExpireTimeSpan = TimeSpan.FromSeconds(30);
                 cookie.SlidingExpiration = true;
             });
 
-            /// database actions
-            ///     post
-            ///     put
-            ///     get
-            ///     delete
+            /// Database function (post, put, get, delete)
             services.AddTransient<ISqlDataAccess, SqlDataAccess>();
-            /// Stored Procedures calls for user
+            /// Stored Procedures calls for Admin
+            services.AddTransient<IAdmin, Admin>();
+            /// Stored Procedures calls for Board
+            services.AddTransient<IBoard, Board>();
+            /// Stored Procedures calls for Card
+            services.AddTransient<ICard, Card>();
+            /// Stored Procedures calls for Group
+            services.AddTransient<IGroup, Group>();
+            /// Stored Procedures calls for Search
+            services.AddTransient<ISearch, Search>();
+            /// Stored Procedures calls for Table
+            services.AddTransient<ITable, Table>();
+            /// Stored Procedures calls for UserData
             services.AddTransient<IUserData, UserData>();
+
 
 
             /// setting the Authentication to JwtBearer
@@ -190,7 +207,23 @@ namespace KanbanApi
 
             services.AddScoped<IEmailSender, EmailSender>();
 
+            services.Configure<FormOptions>(o => {
+                o.ValueLengthLimit = int.MaxValue;
+                o.MultipartBodyLengthLimit = int.MaxValue;
+                o.MemoryBufferThreshold = int.MaxValue;
+            });
+            /// end email
 
+            services.AddSwaggerGen(setup =>
+            {
+                setup.SwaggerDoc(
+                    "v1",
+                    new OpenApiInfo
+                    {
+                        Title = "KNBN Api",
+                        Version = "v1"
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -214,6 +247,12 @@ namespace KanbanApi
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "KNBN API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

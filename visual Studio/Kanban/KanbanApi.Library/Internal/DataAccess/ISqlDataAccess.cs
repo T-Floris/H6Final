@@ -38,6 +38,10 @@ namespace KanbanApi.Library.Internal.DataAccess
         /// <param name="connectionStringName">the name of the connection to execute stored procedure on</param>
         /// <exception cref="NotImplementedException"></exception>
         void SaveData<T>(string storedProcedure, T parameters, string connectionStringName);
+
+        List<T> SaveData<T, U>(string storedProcedure, U parameters, string connectionStringName);
+
+
         /// <summary>
         /// execute stored procedure to delete data from database
         /// </summary>

@@ -62,8 +62,19 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new RegistrationResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 /// sett up error 
-                RegistrationResponse registrationResponse = new()
+                RegistrationResult registrationResponse = new()
                 {
                     Message = new List<string>(), /// the Message there will show the action there have ben taken
                     Errors = new List<string>(), /// all the errors that happened 
@@ -216,6 +227,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new LogInResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 /// find user by email
                 var user = await _userManager.FindByEmailAsync(logIn.EmailAddress);
                 /// return error if user not found
@@ -299,6 +321,7 @@ namespace KanbanApi.Controllers
         [Route("LogOff")]
         public async Task<IActionResult> Logoff()
         {
+
             /// store token's
             TokenRevokeRequest revokeToken = new();
 
@@ -309,6 +332,17 @@ namespace KanbanApi.Controllers
             /// make sure the model is validate
             if (TryValidateModel(revokeToken))
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new TokenRevokeResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 /// Revoke Token and make it unusebale
                 TokenRevokeResult tokenRevoke = await RevokeToken(revokeToken);
 
@@ -353,28 +387,44 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new DeleteUserResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "can't reach the server"
+                        }
+                    });
+                }
                 /// find logged in user
-                string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                deleteUser.UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 /// make sure the user wont to delet thery acount
-                if (deleteUser.DeleteUser)
+                if (deleteUser.ToDelete)
                 {
                     /// find user by id
-                    IdentityUser user = await _userManager.FindByIdAsync(loggedInUserId);
+                    IdentityUser user = await _userManager.FindByIdAsync(deleteUser.UserId);
 
                     /// null check
                     if (user is null)
                     {
                         return NotFound(new DeleteUserResponse 
                         {
-                            Error = $"user whit id: {loggedInUserId} no found",
+                            Errors = new List<string>()
+                            {
+                                $"user whit id: { deleteUser.UserId } no found"
+                            },
                             IsSuccess = false
                         });
 
                     }
 
-                    /// delet user
+                    /// Delete user
                     await _userManager.DeleteAsync(user);
+                    /// Delete user
+                    _userData.DeleteUser(deleteUser);
 
                     /// return Success message
                     return Ok(new DeleteUserResult()
@@ -387,7 +437,10 @@ namespace KanbanApi.Controllers
                 /// return if the user did not accept to delete thery
                 return Ok(new DeleteUserResponse()
                 {
-                    Error = "user did not accept to have thery account deleted",
+                    Errors= new List<string>()
+                    {
+                        "user did not accept to have thery account deleted"
+                    },
                     IsSuccess = false
                 });
 
@@ -395,7 +448,10 @@ namespace KanbanApi.Controllers
             /// return an error if the paylode is Invalid
             return BadRequest(new DeleteUserResponse()
             {
-                Error = "Invalid payload",
+                Errors = new List<string>()
+                {
+                    "Invalid payload",
+                }, 
                 IsSuccess = false
             });
 
@@ -409,6 +465,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new ForgotPasswordResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "can't reach the server"
+                        }
+                    });
+                }
                 /// check if email is in use
                 var existingUser = await _userManager.FindByEmailAsync(email.EmailAddress);
 
@@ -417,8 +484,10 @@ namespace KanbanApi.Controllers
                 {
                     return BadRequest(new ForgotPasswordResponse()
                     {
-                        EmailAddress = email.EmailAddress,
-                        Errors = "email not found",
+                        Errors = new List<string>()
+                        {
+                            $"email not found { email.EmailAddress }",
+                        }, 
                         IsSuccess = false
 
                     });
@@ -433,10 +502,11 @@ namespace KanbanApi.Controllers
                 {
                     return NotFound(new ForgotPasswordResponse()
                     {
-
-                        EmailAddress = email.EmailAddress,
                         IsSuccess = false,
-                        Errors = "token not created"
+                        Errors = new List<string>()
+                        {
+                            "token not created"
+                        } 
                     });
                 }
 
@@ -462,7 +532,7 @@ namespace KanbanApi.Controllers
                 return Ok(new ForgotPasswordResult()
                 {
                     EmailAddress = existingUser.Email,
-                    UserId = existingUser.Id,
+                    UserId = Guid.Parse(existingUser.Id),
                     Token = token,
                     IsSuccess = true,
                     Message = "email send"
@@ -471,7 +541,10 @@ namespace KanbanApi.Controllers
             /// return an error if the paylode is Invalid
             return BadRequest(new ForgotPasswordResponse()
             {
-                Errors = "Invalid payload",
+                Errors = new List<string>()
+                {
+                    "Invalid payload",
+                }, 
                 IsSuccess = false
             });
         }
@@ -482,6 +555,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new ChangePasswordResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "can't reach the server"
+                        }
+                    });
+                }
                 /// find logt in user by id
                 string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -493,7 +577,10 @@ namespace KanbanApi.Controllers
                     return NotFound(new ChangePasswordResponse()
                     {
                         IsSuccess = false,
-                        Errors = "User not foundt"
+                        Errors = new List<string>()
+                        {
+                            "User not foundt"
+                        } 
                     });
 
                 /// check the password is valid
@@ -505,7 +592,10 @@ namespace KanbanApi.Controllers
                     return BadRequest(new ChangePasswordResponse()
                     {
                         IsSuccess = false,
-                        Errors = "The password is invalid"
+                        Errors = new List<string>()
+                        {
+                            "The password is invalid"
+                        } 
                     });
                 }
                 /// change the password
@@ -521,7 +611,10 @@ namespace KanbanApi.Controllers
             /// return an error if the paylode is Invalid
             return BadRequest(new ChangePasswordResponse()
             {
-                Errors = "Invalid payload",
+                Errors = new List<string>()
+                {
+                    "Invalid payload",
+                },
                 IsSuccess = false
             });
         }
@@ -532,6 +625,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new ChangeEmailResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 /// find logt in user by id
                 string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -544,7 +648,10 @@ namespace KanbanApi.Controllers
                     return NotFound(new ChangeEmailResponse()
                     {
                         IsSuccess = false,
-                        Message = "Can not findt the user"
+                        Errors = new List<string>()
+                        {
+                            "Can not findt the user"
+                        } 
                     });
                 }
 
@@ -604,6 +711,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new ChangeUserNameResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 /// find logt in user by id
                 string loggedInUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -677,6 +795,17 @@ namespace KanbanApi.Controllers
             /// make sure the model is validate
             if (TryValidateModel(tokenRequest))
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new TokenRefreshResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "can't reach the server"
+                        }
+                    });
+                }
                 /// Verify and generate
                 var result = await VerifyAndGenerateToken(tokenRequest);
 
@@ -736,6 +865,7 @@ namespace KanbanApi.Controllers
                             r.Name
                         };
 
+            /// minutes to live
             int timetolive = 15;
 
             /// create a claim 
@@ -848,6 +978,8 @@ namespace KanbanApi.Controllers
 
                 if (storedToken is null)
                 {
+
+
                     return new TokenRefreshResponse()
                     {
                         IsSuccess = false,
@@ -1187,7 +1319,6 @@ namespace KanbanApi.Controllers
             dateTimwVal = dateTimwVal.AddSeconds(unixTimeStamp).ToLocalTime();
             return dateTimwVal;
         }
-
 
         private static string GetIpAddress()
         {
