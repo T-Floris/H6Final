@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>KanbanData2</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{6d53f673-5300-4e55-a467-81fa4c1b3106}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath />
+    <RootNamespace>KanbanData2</RootNamespace>
+    <AssemblyName>KanbanData2</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo" />
+    <Folder Include="PublishLocations" />
+    <Folder Include="dbo\Table" />
+    <Folder Include="dbo\Stored Procedures" />
+    <Folder Include="dbo\Stored Procedures\User" />
+    <Folder Include="dbo\Stored Procedures\Search" />
+    <Folder Include="dbo\Stored Procedures\Board" />
+    <Folder Include="dbo\Stored Procedures\BoardGroup" />
+    <Folder Include="dbo\Stored Procedures\Group" />
+    <Folder Include="dbo\Stored Procedures\GroupUser" />
+    <Folder Include="dbo\Stored Procedures\GroupAccess" />
+    <Folder Include="dbo\Stored Procedures\Card" />
+    <Folder Include="dbo\Stored Procedures\BoardAccess" />
+    <Folder Include="dbo\Stored Procedures\BoardTable" />
+    <Folder Include="dbo\Stored Procedures\TableCard" />
+    <Folder Include="dbo\Stored Procedures\Table" />
+    <Folder Include="Snapshots" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PublishLocations\KanbanData2.publish.xml" />
+    <None Include="Snapshots\KanbanData2_20220523_16-00-15.dacpac" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Table\User.sql" />
+    <Build Include="dbo\Table\TableCard.sql" />
+    <Build Include="dbo\Table\Table.sql" />
+    <Build Include="dbo\Table\GroupUser.sql" />
+    <Build Include="dbo\Table\GroupAccess.sql" />
+    <Build Include="dbo\Table\Group.sql" />
+    <Build Include="dbo\Table\Card.sql" />
+    <Build Include="dbo\Table\BoardTable.sql" />
+    <Build Include="dbo\Table\BoardGroup.sql" />
+    <Build Include="dbo\Table\Board.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Registration.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_Select.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_UpdateEmail.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_UpdateUserName.sql" />
+    <Build Include="dbo\Stored Procedures\Search\spSearch_Board.sql" />
+    <Build Include="dbo\Stored Procedures\Search\spSearch_Group.sql" />
+    <Build Include="dbo\Stored Procedures\Search\spSearch_User.sql" />
+    <Build Include="dbo\Stored Procedures\Board\spBoard_Create.sql" />
+    <Build Include="dbo\Stored Procedures\Board\spBoard_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Board\spBoard_Update.sql" />
+    <Build Include="dbo\Stored Procedures\BoardGroup\spBoardGroup_AddGroup.sql" />
+    <Build Include="dbo\Stored Procedures\BoardGroup\spBoardGroup_RemoveGroup.sql" />
+    <Build Include="dbo\Stored Procedures\BoardGroup\spBoardGroup_ChangeRole.sql" />
+    <Build Include="dbo\Stored Procedures\Board\spBoard_Select.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_Create.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_Select.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_AddUser.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_RemoveUser.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_ChangeRole.sql" />
+    <Build Include="dbo\Stored Procedures\Search\spSearch_GroupUser.sql" />
+    <Build Include="dbo\Table\BoardAccess.sql" />
+    <Build Include="dbo\Stored Procedures\GroupAccess\spGroupAccess_Create.sql" />
+    <Build Include="dbo\Stored Procedures\GroupAccess\spGroupAccess_Update.sql" />
+    <Build Include="dbo\Stored Procedures\GroupAccess\spGroupAccess_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BoardAccess\spBoardAccess_Create.sql" />
+    <Build Include="dbo\Stored Procedures\BoardAccess\spBoardAccess_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\BoardAccess\spBoardAccess_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_Move.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_Delete.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_Update.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_Add.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_Edit.sql" />
+    <Build Include="dbo\Stored Procedures\BoardTable\spBoardTable_AddTable.sql" />
+    <Build Include="dbo\Stored Procedures\BoardTable\spBoardTable_MoveTable.sql" />
+    <Build Include="dbo\Stored Procedures\TableCard\spTableCard_AddCard.sql" />
+    <Build Include="dbo\Stored Procedures\TableCard\spTableCard_MoveCard.sql" />
+    <Build Include="dbo\Stored Procedures\User\spUser_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\GroupAccess\spGroupAccess_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\BoardAccess\spBoardAccess_Get.sql" />
+    <Build Include="dbo\Stored Procedures\GroupAccess\spGroupAccess_Get.sql" />
+    <Build Include="dbo\Stored Procedures\BoardAccess\spBoardAccess_GetById.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\Board\spBoard_GetAll.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_GetInGroup.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_HasAccess.sql" />
+    <Build Include="dbo\Stored Procedures\Group\spGroup_GetAllByOwner.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_MemberOff.sql" />
+    <Build Include="dbo\Stored Procedures\BoardGroup\spBoardGroup_HasAccess.sql" />
+    <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_IsMemberOff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="KanbanData2.refactorlog" />
+  </ItemGroup>
+</Project>

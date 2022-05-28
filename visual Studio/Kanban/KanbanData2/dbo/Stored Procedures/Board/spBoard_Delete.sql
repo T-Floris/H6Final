@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE [dbo].[spBoard_Delete]
+	@Id UNIQUEIDENTIFIER
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	DELETE [Board]
+	WHERE [Board].[Id] = @Id
+END
