@@ -21,8 +21,8 @@ namespace KanbanApi.Library.DTOs.Requests.Auth
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
-        //[Required]
-        //public string Avatar { get; set; }
+        [Required]
+        public string Avatar { get; set; }
         [Required]
         public DateTime CreatedDate
         {
