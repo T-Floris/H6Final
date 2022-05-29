@@ -154,7 +154,7 @@ namespace KanbanApi.Controllers
 
             if (!groupAccess)
             {
-                return Unauthorized(new AddUserToGroupResponse()
+                return Unauthorized(new UpdateUserRoleOnGroupResponse()
                 {
                     IsSuccess = false,
                     Errors = new List<string>()

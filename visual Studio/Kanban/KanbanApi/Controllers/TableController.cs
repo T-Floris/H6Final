@@ -34,7 +34,7 @@ namespace KanbanApi.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Create")]
         public IActionResult CreateTable(Guid boardId, [FromBody] CreateTableRequest createTable)
         {
@@ -77,7 +77,12 @@ namespace KanbanApi.Controllers
             });
         }
 
+        [HttpPost]
+        [Route("Create")]
+        public IActionResult DeleteTable()
+        {
 
+        }
 
     }
 }

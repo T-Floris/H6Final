@@ -8,5 +8,8 @@ namespace KanbanApi.Library.DTOs.Responses.Group
 {
     public class UpdateUserRoleOnGroupResponse
     {
+        public bool IsSuccess { get; set; }
+        public List<string> Errors { get; set; }
+
     }
 }
