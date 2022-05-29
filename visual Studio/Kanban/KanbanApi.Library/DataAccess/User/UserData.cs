@@ -34,7 +34,7 @@ namespace KanbanApi.Library.DataAccess.User
         public void Registration(RegistrationRequest registration)
         {
             /// save data in database
-            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, DatabaseName, registration.CreatedDate}, DatabaseName);
+            _sql.SaveData("spUser_Registration", new { registration.Id, registration.FirstName, registration.LastName, registration.EmailAddress, registration.UserName, registration.Avatar, registration.CreatedDate}, DatabaseName);
         }
 
 
