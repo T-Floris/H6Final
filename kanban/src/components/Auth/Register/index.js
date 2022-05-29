@@ -21,6 +21,7 @@ import {
 } from "./RegisterElements";
 import { defaultvalue } from "../../../api/axios";
 
+const Avatar = "";
 const FIRSTNAME_REGEX = /^[A-z][A-z]{0,99}/;
 const LASTNAME_REGEX = /^[A-z][A-z]{0,99}/;
 const USER_REGEX = /^[A-z0-9-_]{4,24}$/;
@@ -140,6 +141,7 @@ const Register = () => {
           userName,
           emailAddress,
           password,
+          
         }),
         {
           headers: { "Content-Type": "application/json" },

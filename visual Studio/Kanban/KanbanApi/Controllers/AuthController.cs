@@ -131,6 +131,7 @@ namespace KanbanApi.Controllers
                     userToCreate.Id = existingUser.Id;
                     /// set the time of creation to now
                     userToCreate.CreatedDate = DateTime.UtcNow;
+                    userToCreate.Avatar = "";
 
                     /// adding user to databes "KanbanData" on table "User"
                     _userData.Registration(userToCreate);
