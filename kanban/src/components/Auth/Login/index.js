@@ -129,7 +129,7 @@ const Login = () => {
               required
             />
             <LoginButton>Login</LoginButton>
-            <CheckBoxContainer className="persistCheck">
+            <CheckBoxContainer>
               <CheckBox
                 type="checkbox"
                 id="persist"
@@ -141,7 +141,7 @@ const Login = () => {
           </Form>
           <Text>
             Need an Account?
-            <Span className="line">
+            <Span>
               <LLink to="/register">Register</LLink>
             </Span>
           </Text>
