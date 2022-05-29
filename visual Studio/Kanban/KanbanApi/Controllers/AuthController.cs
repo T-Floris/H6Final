@@ -240,7 +240,7 @@ namespace KanbanApi.Controllers
                     });
                 }
                 /// find user by email
-                var user = await _userManager.FindByEmailAsync(logIn.EmailAddress);
+                var user = await _userManager.FindByNameAsync(logIn.EmailAddress);
                 /// return error if user not found
                 if (user == null)
                 {
