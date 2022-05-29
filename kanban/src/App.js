@@ -4,6 +4,7 @@ import { GlobalStyle } from "./components/Assets/GlobalStyles";
 import NavigateRoutes from "./NavigateRoutes";
 import { darkTheme, lightTheme } from "../src/components/Assets/theme";
 import { ThemeProvider } from "styled-components";
+import { AuthProvider } from "./context/AuthProvider";
 
 export const ThemeContext = React.createContext(null);
 
@@ -17,7 +18,9 @@ function App() {
       <ThemeContext.Provider value={{ setTheme, theme }}>
         <ThemeProvider theme={themeStyle}>
           <GlobalStyle />
-          <NavigateRoutes />
+          <AuthProvider>
+            <NavigateRoutes />
+          </AuthProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
     </>
