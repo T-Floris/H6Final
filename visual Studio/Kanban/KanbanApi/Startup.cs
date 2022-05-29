@@ -254,6 +254,14 @@ namespace KanbanApi
                 x.SwaggerEndpoint("/swagger/v1/swagger.json", "KNBN API V1");
             });
 
+            app.UseCors(options => options
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                //.AllowAnyOrigin()
+                .SetIsOriginAllowed(origin => true) // allow any origin
+                .AllowCredentials() // allow credentials
+            );
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
