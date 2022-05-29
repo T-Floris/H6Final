@@ -321,6 +321,17 @@ namespace KanbanApi.Controllers
         [Route("LogOff")]
         public async Task<IActionResult> Logoff()
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new TokenRevokeResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
 
             /// store token's
             TokenRevokeRequest revokeToken = new();
@@ -332,17 +343,7 @@ namespace KanbanApi.Controllers
             /// make sure the model is validate
             if (TryValidateModel(revokeToken))
             {
-                var canConnect = _context.Database.CanConnect();
-                if (!canConnect)
-                {
-                    return BadRequest(new TokenRevokeResponse()
-                    {
-                        Errors = new List<string>()
-                    {
-                        "can't reach the server"
-                    }
-                    });
-                }
+
                 /// Revoke Token and make it unusebale
                 TokenRevokeResult tokenRevoke = await RevokeToken(revokeToken);
 

@@ -34,6 +34,17 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new CreateGroupResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
                 createGroup.UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
 
@@ -65,6 +76,18 @@ namespace KanbanApi.Controllers
         [Route("AddUser/group/{groupId}/user/{selectUserId}/GroupAccess/{groupAccessId}")]
         public IActionResult AddUserToGroup(Guid groupId, Guid selectUserId, Guid groupAccessId)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new AddUserToGroupResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var groupAccess = _group.CheckUserAccess(groupId, UserId);
             
@@ -115,6 +138,18 @@ namespace KanbanApi.Controllers
         [Route("UpdateAccess/group/{groupId}/user/{selectUserId}/GroupAccess/{groupAccessId}")]
         public IActionResult UpdateUserAccess(Guid groupId, Guid selectUserId, Guid groupAccessId)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new UpdateUserRoleOnGroupResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             var groupAccess = CheckUserAccess(groupId);
 
             if (!groupAccess)
@@ -129,16 +164,40 @@ namespace KanbanApi.Controllers
                 });
             }
 
-            var dd = _group.GetAllGroupUserIsMemberOff(selectUserId);
-            ;
+            UpdateUserRoleOnGroupRequist updateUserRoleOnGroup = new()
+            {
+                GroupId = groupId,
+                GroupAccessId = groupAccessId,
+                UserId = selectUserId
+            };
 
-            return Ok();
+            _group.UpdateUserInGroup(updateUserRoleOnGroup);
+
+
+            return Ok(new UpdateUserRoleOnGroupResult()
+            {
+                Message = new List<string>()
+                {
+                    "Group access has ben updated"
+                }                
+            });
         }
 
         [HttpDelete]
         [Route("DeleteUser/group/{groupId}/user/{userId}")]
         public IActionResult DeleteUserFromGroup(Guid groupId, Guid userId)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new DeleteUserFromGroupResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
 
             var user = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var groupAccess = _group.CheckUserAccess(groupId, user);
@@ -194,6 +253,18 @@ namespace KanbanApi.Controllers
         [Route("Get/{groupId}")]
         public IActionResult GetGroups(Guid groupId)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new GetGroupByIdResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             var group = _group.GetGroupById(groupId);
             
 
@@ -213,6 +284,18 @@ namespace KanbanApi.Controllers
         [Route("Get")]
         public IActionResult GetGroupById()
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new GetGroupsResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             var group = _group.GetAllGroups();
 
 
@@ -233,6 +316,18 @@ namespace KanbanApi.Controllers
         [Route("Get/Owner/{userId}")]
         public IActionResult GetGroupsByOwner(Guid userId)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new GetGroupsResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             var GroupsByOwner = _group.GetAllGroupsByOwner(userId);
 
             return Ok(new GetGroupsResult()

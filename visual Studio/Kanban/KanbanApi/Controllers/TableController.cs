@@ -1,4 +1,5 @@
-﻿using KanbanApi.Library.DataAccess.Board;
+﻿using KanbanApi.Data;
+using KanbanApi.Library.DataAccess.Board;
 using KanbanApi.Library.DataAccess.Card;
 using KanbanApi.Library.DataAccess.Group;
 using KanbanApi.Library.DataAccess.Table;
@@ -22,12 +23,15 @@ namespace KanbanApi.Controllers
         private readonly ITable _table;
         private readonly IGroup _group;
         private readonly IBoard _board;
+        private readonly ApplicationDbContext _context;
+
         //private readonly ICard _Card;
-        public TableController(ITable table, IGroup group, IBoard board)
+        public TableController(ITable table, IGroup group, IBoard board, ApplicationDbContext context)
         {
             _table = table;
             _group = group;
             _board = board;
+            _context = context;
         }
 
         [HttpGet]
@@ -36,15 +40,25 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new CreateTableResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
 
                 var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
                 var groups = _group.GetAllGroupUserIsMemberOff(UserId);
-
-                List<BoardModel> dds = new List<BoardModel>();
+                List<BoardModel> boardGroupIsMemberOff = new();
 
                 foreach (var group in groups)
                 {
-                    dds.Add(_board.GetBoardGroupIsMemberOff(group.GroupId, boardId));
+                    boardGroupIsMemberOff.Add(_board.GetBoardGroupIsMemberOff(group.GroupId, boardId));
                 }
                 var d = _board.GetBoardById(boardId);
                 createTable.BoardId = boardId;

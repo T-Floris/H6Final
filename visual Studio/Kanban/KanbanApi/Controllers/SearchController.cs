@@ -1,4 +1,5 @@
-﻿using KanbanApi.Library.DataAccess.Search;
+﻿using KanbanApi.Data;
+using KanbanApi.Library.DataAccess.Search;
 using KanbanApi.Library.DTOs.Requests.Search;
 using KanbanApi.Library.DTOs.Responses.Search;
 using KanbanApi.Library.DTOs.Results.Search;
@@ -16,9 +17,12 @@ namespace KanbanApi.Controllers
     public class SearchController : ControllerBase
     {
         private readonly ISearch _search;
-        public SearchController(ISearch search)
+        private readonly ApplicationDbContext _context;
+
+        public SearchController(ISearch search, ApplicationDbContext context)
         {
             _search = search;
+            _context = context;
         }
 
         [HttpGet]
@@ -27,6 +31,18 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new SearchUserResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
+
                 var users = _search.SearchForUser(searchUser);
 
                 if (users.Count <= 0)
@@ -68,6 +84,18 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new SearchBoardResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
+
                 var board = _search.SearchForBoard(searchBoard);
 
                 if (board.Count <= 0)
@@ -110,21 +138,40 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new SearchGroupResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
+
                 var group = _search.SearchForGroup(searchGroup);
 
                 if (group.Count <= 0)
                 {
                     return NotFound(new SearchGroupResponse()
                     {
-
+                        Errors= new List<string>()
+                        {
+                            ""
+                        }
                     });
                 }
 
-                return Ok(group);
+                return Ok(new SearchGroupResult()
+                {
+                    Groups = group,
+                    IsSuccess = true
+                });
 
             }
 
-            return BadRequest(new SearchGroupResponse
+            return BadRequest(new SearchGroupResponse()
             {
 
             });
@@ -137,6 +184,18 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new SearchGroupUserResponse()
+                    {
+                        Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                    });
+                }
+
                 searchGroupUser.GroupId = GroupId;
                 var groupUser = _search.SearchGroupUser(searchGroupUser);
 
@@ -144,7 +203,10 @@ namespace KanbanApi.Controllers
                 {
                     return NotFound(new SearchGroupUserResponse()
                     {
-
+                        Errors = new List<string>()
+                        {
+                            ""
+                        }
                     });
                 }
 
@@ -152,9 +214,12 @@ namespace KanbanApi.Controllers
 
             }
 
-            return BadRequest(new SearchGroupUserResponse
+            return BadRequest(new SearchGroupUserResponse()
             {
-
+                Errors = new List<string>()
+                {
+                    ""
+                }
             });
         }
     }

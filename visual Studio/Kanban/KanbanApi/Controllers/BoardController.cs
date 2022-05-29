@@ -216,13 +216,25 @@ namespace KanbanApi.Controllers
 
 
         [HttpGet]
-        [Route("AddGroup/{boardId}/Group/{selectGroupId}")]
-        public IActionResult AddGroupToBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId/*, [FromBody] AddGroupToBoardRequest addGroupToBoard*/)
+        [Route("AddGroup/{boardId}/Group/{selectGroupId}/BoardAccess/{boardAccessId}")]
+        public IActionResult AddGroupToBoard(Guid boardId, Guid selectGroupId, Guid boardAccessId/*, [FromBody] AddGroupToBoardRequest addGroupToBoard*/)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new AddGroupToBoardResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             AddGroupToBoardRequest addGroupToBoard = new()
             {
                 BoardId = boardId,
-                BoardAccessId = BoardAccessId,
+                BoardAccessId = boardAccessId,
                 GroupId = selectGroupId,
             };
             if (TryValidateModel(addGroupToBoard))
@@ -254,8 +266,20 @@ namespace KanbanApi.Controllers
 
         [HttpDelete]
         [Route("RemoveGroup/{boardId}/Group/{selectGroupId}")]
-        public IActionResult RemoveGroupFromBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId/*, [FromBody] RemoveGroupFromBoardRequest removeGroupFromBoard*/)
+        public IActionResult RemoveGroupFromBoard(Guid boardId, Guid selectGroupId/*, [FromBody] RemoveGroupFromBoardRequest removeGroupFromBoard*/)
         {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new RemoveGroupFromBoardResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
             RemoveGroupFromBoardRequest removeGroupFromBoard = new()
             {
                 BoardId = boardId,
@@ -287,10 +311,30 @@ namespace KanbanApi.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateGroup/{boardId}/Group/{selectGroupId}")]
-        public IActionResult UpdateGroupRoleOnBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId, [FromBody] UpdateGroupRoleOnBoardRequest updateGroupRoleOnBoard)
+        [Route("UpdateGroup/{boardId}/Group/{selectGroupId}/BoardAccess/{boardAccessId}")]
+        public IActionResult UpdateGroupRoleOnBoard(Guid boardId, Guid selectGroupId, Guid boardAccessId/*, [FromBody] UpdateGroupRoleOnBoardRequest updateGroupRoleOnBoard*/)
         {
-            if (ModelState.IsValid)
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new UpdateGroupRoleOnBoardResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+
+            UpdateGroupRoleOnBoardRequest updateGroupRoleOnBoard = new()
+            {
+                BoardId = boardId,
+                GroupId = selectGroupId,
+                BoardAccessId = boardAccessId
+            };
+
+
+            if (TryValidateModel(updateGroupRoleOnBoard))
             {
                 _board.UpdateGroupRoleOnBoard(updateGroupRoleOnBoard);
 

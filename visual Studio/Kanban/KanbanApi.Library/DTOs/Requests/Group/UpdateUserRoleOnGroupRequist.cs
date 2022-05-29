@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Requests.Board
+namespace KanbanApi.Library.DTOs.Requests.Group
 {
-    public class UpdateGroupRoleOnBoardRequest
+    public class UpdateUserRoleOnGroupRequist
     {
         [Required]
         public Guid GroupId { get; set; }
         [Required]
-        public Guid BoardId { get; set; }
+        public Guid UserId { get; set; }
         [Required]
-        public Guid BoardAccessId { get; set; }
+        public Guid GroupAccessId { get; set; }
     }
 }
