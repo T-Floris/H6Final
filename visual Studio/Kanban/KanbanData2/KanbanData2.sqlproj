@@ -140,6 +140,8 @@
     <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_MemberOff.sql" />
     <Build Include="dbo\Stored Procedures\BoardGroup\spBoardGroup_HasAccess.sql" />
     <Build Include="dbo\Stored Procedures\GroupUser\spGroupUser_IsMemberOff.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_Move.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_Delete.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="KanbanData2.refactorlog" />
