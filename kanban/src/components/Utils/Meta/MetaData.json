@@ -1,0 +1,66 @@
+{
+  "still missing for": "signin, signout etc...",
+
+
+  "FrontPage": "everything belongs to front page below:",
+
+  "homePageTitle": "Kanban - Home Page",
+  "homePageDesc": "Kanban allows you to keep track of your created projects and more...",
+
+  "pageNotFoundTitle": "Kanban - 404",
+  "pageNotFoundDesc": "This is the 404 page. You've been redicected here because the page you requested does not exist!",
+
+  "privacyPolicyPageTitle": "Kanban - Privacy & Policy",
+  "privacyPolicyPageDesc": "Here can you read everything about our privacy & policy",
+
+  "TermsAndConditionsPageTitle": "Kanban - Terms & Conditions",
+  "TermsAndConditionsPageDesc": "Here can you read everything about our terms & conditions",
+
+  "contactFormPageTitle": "Kanban - Contact",
+  "contactFormPageDesc": "If you have any questions please contact us!",
+
+  "learnMorePageTitle": "Kanban - Learn More",
+  "learnMorePageDesc": "Here can you read things in details.",
+
+
+  "User": "everything belongs to user below:",
+
+  "dashboardPageTitle": "Kanban - Dashboard",
+  "dashboardPageDesc": "Overview over everything you need...",
+
+  "workspacePageTitle": "Kanban - Workspace",
+  "workspacePageDesc": "Overview over Workspace...",
+
+  "profilePageTitle": "Kanban - Profile",
+  "profilePageDesc": "Overview over your profile",
+
+  "groupPageTitle": "Kanban - Group",
+  "groupPageDesc": "Overview over your groups",
+
+  "calendarPageTitle": "Kanban - Calendar",
+  "calendarPageDesc": "Overview over your calendar",
+
+  "messagePageTitle": "Kanban - Message",
+  "messagePageDesc": "Overview over your messages",
+
+  "boardPageTitle": "Kanban - Board",
+  "boardPageDesc": "Here can you read, create, update & delete list(s) or card(s)...",
+
+  "templateboardPageTitle": "Kanban - Template Board",
+  "templateboardPageDesc": "Template board...",
+
+  "settingsPageTitle": "Kanban - Settings",
+  "settingsPageDesc": "Here can change different settings",
+
+  "signinPageTitle" : "Kanban - Sign in",
+  "signinPageDesc" : "Sign in here",
+
+
+  
+  "Admin": "everything belongs to admin below:",
+
+  "admindashboardPageTitle" : "Kanban - Admin Dashboard",
+  "admindashboardPageDesc" : "Only admins allowed..."
+
+
+}

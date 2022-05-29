@@ -1,0 +1,133 @@
+{
+  "app_title": "Title",
+  "language": "Language",
+  "welcome_message": "Welcome",
+  "kanban": "Kanban",
+
+  "comment": "NAVBAR & BURGERMENU STARTS HERE",
+  "menu_array1": [
+    { "label": "Home", "to": "home" },
+    { "label": "Discover", "to": "discover" },
+    { "label": "Services", "to": "services" },
+    { "label": "Pricing", "to": "pricing" }
+  ],
+  "menu_array2": [
+    { "label": "Sign In", "to": "/login" },
+    { "label": "Sign Up", "to": "/register" },
+    { "label": "Userstart", "to": "/userstart" }
+  ],
+
+  "comment": "HEROSECTION STARTS HERE",
+  "hero_section_text": "Kanban helps teams work better.",
+  "hero_section_button_text": "Get started",
+
+  "comment": "ANNOUNCEMENT STARTS HERE",
+  "announcement_text": "Sign up for free!",
+
+  "comment": "INFOSECTION STARTS HERE",
+  "info_section_buttonLabel": "Learn more",
+
+  "info_section_topLine1": "Teamwork makes the dream work",
+  "info_section_headLine1": "It’s a way of working together.",
+  "info_section_desc1": "Manage projects, organize tasks, and build team spirit — all gathered in one place.",
+
+  "info_section_topLine2": "dive into the details",
+  "info_section_headLine2": "Cards contain everything you need.",
+  "info_section_desc2": "Cards are your portal to more organized work—where every single part of your task can be managed, tracked, and shared with teammates.",
+
+  "info_section_topLine3": "on time",
+  "info_section_headLine3": "Complete project before deadline.",
+  "info_section_desc3": "With our features give any team the overview of the project & ability to quickly set up and complete tasks before deadline.",
+
+  "comment": "SERVICES STARTS HERE",
+  "services_title": "Our Services",
+  "services_sub_title1": "Time saving",
+  "services_sub_title2": "Online planning",
+  "services_sub_title3": "All platforms",
+  "services_text1": "We reduce time waste & increase your efficiency at work.",
+  "services_text2": "Cooperate from anywhere & anytime.",
+  "services_text3": "You can access our platform online on any devices & anywhere.",
+
+  "comment": "PRICING TABLE STARTS HERE",
+  "pricingtable_title": "Pricing",
+  "pricingtable_planTitle": "Choose a plan",
+  "pricingtable_toggleText1": "Billed annually",
+  "pricingtable_toggleText2": "Billed monthly",
+  "pricingtable_cardTitle1": "FREE",
+  "pricingtable_cardTitle2": "STANDARD",
+  "pricingtable_cardTitle3": "PREMIUM",
+  "pricingtable_cardTitle4": "ENTERPRISE",
+  "pricingtable_cardPrice1": "$0USD",
+  "pricingtable_cardPrice2": "$5USD",
+  "pricingtable_cardPrice3": "$10USD",
+  "pricingtable_cardPrice4": "Let's Talk !",
+  "pricingtable_cardMonth": "/ Month",
+  "pricingtable_cardDesc1": "For individuals or teams looking to organize anything.",
+  "pricingtable_cardDesc2": "For teams that need to manage more work and scale collaboration.",
+  "pricingtable_cardDesc3": "Best for teams up to 100 that need to track multiple projects and visualize work in a variety of ways.",
+  "pricingtable_cardDesc4": "For organizations that need to connect work across teams with more security and controls.",
+  "pricingtable_cardPlan1": "Up to 10 boards per Workspace",
+  "pricingtable_cardPlan2": "Unlimited cards",
+  "pricingtable_cardPlan3": "Email Support",
+  "pricingtable_cardPlanComingSoon": "Coming soon",
+  "pricingtable_cardButton1": "Get Started",
+  "pricingtable_cardButton2": "Choose Plan",
+  "pricingtable_cardButton3": "Contact Us",
+
+  "comment": "NEWSLETTER STARTS HERE",
+  "newsletter": "NewsLetter",
+  "newsletter_decs": "Subscribe to receive the newest updates and features about Kanban",
+  "placeholder": "Please enter your email here",
+
+  "comment": "FOOTER STARTS HERE",
+  "about_us_title": "About Us",
+  "about_us_array": [
+    { "label": "Contact Us", "to": "/contact" },
+    { "label": "Terms & Conditions", "to": "/terms" },
+    { "label": "Privacy Policy", "to": "/privacy" }
+  ],
+  "explore_title": "Explore",
+  "explore_array": [
+    { "label": "Home", "to": "/" },
+    { "label": "Learn More", "to": "/learnmore" },
+    { "label": "Sign In", "to": "/signin" },
+    { "label": "Sign Up", "to": "/signup" }
+  ],
+  "follow_us_at_title": "Follow Us At",
+  "follow_us_at_array": [
+    { "label": "Facebook", "to": "//www.facebook.com/" },
+    { "label": "Youtube", "to": "//www.youtube.com/" },
+    { "label": "Twitter", "to": "//twitter.com/" },
+    { "label": "Instagram", "to": "//www.instagram.com/" },
+    { "label": "Linkedin", "to": "//www.linkedin.com/" }
+  ],
+  "help_title": "Help",
+  "help_array": [{ "label": "Getting Started", "to": "/" }],
+  "rights": "All rights reserved.",
+
+  "comment": "CONTACTFORM STARTS HERE",
+  "contact_us_title": "Contact Us",
+  "contact_us_subtitle1": "Contact Information",
+  "contact_us_text": "Connect with us:",
+  "contact_us_subtitle2": "Send Us A Message",
+  "contact_us_placeholder1": "Your Name",
+  "contact_us_placeholder2": "Your Email",
+  "contact_us_placeholder3": "Your Message...",
+  "contact_us_button": "Send Message",
+
+  "comment": "SIDEBAR STARTS HERE",
+  "sidebar_start": "Start",
+  "sidebar_workspace": "Workspace",
+  "sidebar_board": "Board",
+  "sidebar_group": "Group",
+  "sidebar_calendar": "Calendar",
+  "sidebar_message": "Message",
+  "sidebar_setting": "Setting",
+  "sidebar_logout": "Log Out",
+  "sidebar_darkmode": "Dark Mode",
+
+  "comment": "USERSTART STARTS HERE",
+  "userstart_morning": "Good Morning",
+  "userstart_afternoon": "Good Afternoon",
+  "userstart_evening": "Good Evening"
+}
