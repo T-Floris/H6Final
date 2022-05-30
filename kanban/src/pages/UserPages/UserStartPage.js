@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import UserStart from "../../components/UserInterface/UserStart";
-import Sidebar from "../../components/Layout/Sidebar";
+import Sidebar from "../../components/Menus/Sidebar";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
 import { backgroundTheme } from "../../components/Assets/variables";
 import { useTranslation } from "react-i18next";

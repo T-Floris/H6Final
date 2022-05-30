@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-import Navbar from "../../components/Layout/Navbar";
-import BurgerMenu from "../../components/Layout/BurgerMenu";
+import Navbar from "../../components/Menus/Navbar";
+import BurgerMenu from "../../components/Menus/BurgerMenu";
 import Announcement from "../../components/FrontPage/Announcement";
 import HeroSection from "../../components/FrontPage/HeroSection";
 import InfoSection from "../../components/FrontPage/InfoSection";

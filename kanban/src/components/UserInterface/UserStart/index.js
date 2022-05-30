@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Title, Text, Wrapper } from "./StartElements";
-import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 import { useTranslation } from "react-i18next";
 
 const Home = () => {

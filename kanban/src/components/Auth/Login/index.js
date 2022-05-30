@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 import useAuth from "../../../hooks/useAuth";
 import {
@@ -38,6 +38,7 @@ const Login = () => {
 
   const [EmailAddress, setUser] = useState("");
   const [Password, setPwd] = useState("");
+
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
@@ -69,11 +70,12 @@ const Login = () => {
       console.log(Password);
       console.log(roles);
       console.log(token);
-
+      
       setAuth({ EmailAddress, Password, roles, token });
       setUser("");
       setPwd("");
-      //navigate(from, { replace: true });
+
+      navigate("/userstart", { replace: true });
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
@@ -103,49 +105,50 @@ const Login = () => {
     <Container>
       <Wrapper>
         <Img src={require("../../../images/sign_in.svg").default} alt="Login" />
-        <Section>
-          <ErrorMsg ref={errRef} errorMsg={errMsg} aria-live="assertive">
-            {errMsg}
-          </ErrorMsg>
-          <Title>Login</Title>
-          <Form onSubmit={handleSubmit}>
-            <Label htmlFor="username">Username or Email:</Label>
-            <InputField
-              type="text"
-              id="username"
-              ref={userRef}
-              autoComplete="off"
-              onChange={(e) => setUser(e.target.value)}
-              value={EmailAddress}
-              required
-            />
-
-            <Label htmlFor="password">Password:</Label>
-            <InputField
-              type="password"
-              id="password"
-              onChange={(e) => setPwd(e.target.value)}
-              value={Password}
-              required
-            />
-            <LoginButton>Login</LoginButton>
-            <CheckBoxContainer>
-              <CheckBox
-                type="checkbox"
-                id="persist"
-                onChange={togglePersist}
-                checked={persist}
+          <Section>
+            {/* assertive: should only be used for time-sensitive/critical notifications that absolutely require the user's immediate attention. */}
+            <ErrorMsg ref={errRef} errorMsg={errMsg} aria-live="assertive">
+              {errMsg}
+            </ErrorMsg>
+            <Title>Login</Title>
+            <Form onSubmit={handleSubmit}>
+              <Label htmlFor="username">Username or Email:</Label>
+              <InputField
+                type="text"
+                id="username"
+                ref={userRef}
+                autoComplete="off"
+                onChange={(e) => setUser(e.target.value)}
+                value={EmailAddress}
+                required
               />
-              <Label htmlFor="persist">Remember me?</Label>
-            </CheckBoxContainer>
-          </Form>
-          <Text>
-            Need an Account?
-            <Span>
-              <LLink to="/register">Register</LLink>
-            </Span>
-          </Text>
-        </Section>
+
+              <Label htmlFor="password">Password:</Label>
+              <InputField
+                type="password"
+                id="password"
+                onChange={(e) => setPwd(e.target.value)}
+                value={Password}
+                required
+              />
+              <LoginButton>Login</LoginButton>
+              <CheckBoxContainer>
+                <CheckBox
+                  type="checkbox"
+                  id="persist"
+                  onChange={togglePersist}
+                  checked={persist}
+                />
+                <Label htmlFor="persist">Remember me?</Label>
+              </CheckBoxContainer>
+            </Form>
+            <Text>
+              Need an Account?
+              <Span>
+                <LLink to="/register">Register</LLink>
+              </Span>
+            </Text>
+          </Section>
       </Wrapper>
     </Container>
   );

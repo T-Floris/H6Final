@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Title, Text, Wrapper } from "./CalendarElements";
-import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 
 const Calendar = () => {
   return (

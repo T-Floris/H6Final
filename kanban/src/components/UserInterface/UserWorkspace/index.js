@@ -8,7 +8,7 @@ import {
   BoxButton,
 } from "./WorkspaceElements";
 import Modal from "../../Assets/Modals/CreateGroupModal";
-import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 
 const UserWorkspace = () => {
   const [showModal, setShowModal] = useState(false);

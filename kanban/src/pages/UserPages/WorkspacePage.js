@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import Sidebar from '../../components/Layout/Sidebar'
+import Sidebar from '../../components/Menus/Sidebar'
 import UserWorkspace from "../../components/UserInterface/UserWorkspace"
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
 import { backgroundTheme } from "../../components/Assets/variables";

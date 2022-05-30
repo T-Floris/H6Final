@@ -8,7 +8,7 @@ import {
   BoxButton,
 } from "./BoardElements";
 import Modal from "../../Assets/Modals/CreateBoardModal";
-import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 
 const UserBoard = () => {
   const [showModal, setShowModal] = useState(false);

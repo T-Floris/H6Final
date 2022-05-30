@@ -41,15 +41,6 @@ export const Img = styled.img`
 `;
 
 export const Section = styled.section`
-  /* width: 100%;
-  border-radius: 25px;
-  max-width: 420px;
-  min-height: 400px;
-  display: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,7 +80,7 @@ export const Form = styled.form`
 `;
 
 export const Label = styled.label`
-  margin-top: 16px;
+  /* margin-top: 16px; */
 `;
 
 export const InputField = styled.input`
@@ -119,8 +110,8 @@ export const LoginButton = styled.button`
 `;
 
 export const CheckBoxContainer = styled.div`
-  font-size: 0.75rem;
-  margin-top: 10px;
+  font-size: 1rem;
+  margin-top: 5px;
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
@@ -128,7 +119,7 @@ export const CheckBoxContainer = styled.div`
 export const CheckBox = styled.input`
   height: 20px;
   width: 20px;
-  margin: 0 5px 2px 2px;
+  margin: 0 5px 4px 2px;
 `;
 
 export const LLink = styled(Link)`
