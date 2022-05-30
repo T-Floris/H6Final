@@ -30,7 +30,7 @@ namespace KanbanApi.Controllers
             _board = board;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("Create")]
         public IActionResult CreateTable(Guid boardId, [FromBody] CreateTableRequest createTable)
         {
@@ -59,11 +59,65 @@ namespace KanbanApi.Controllers
 
             return BadRequest(new CreateTableResponse()
             {
-
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
             });
         }
 
+        [HttpPut]
+        [Route("update/{tableId}")]
+        public IActionResult UpdateTable(Guid boardId, Guid tableId)
+        {
+            return Ok();
 
+            return BadRequest(new UpdateTableResponse()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
+            });
+        }
+
+        [HttpPut]
+        [Route("Move/{tableId}")]
+        public IActionResult MoveTable(Guid boardId, Guid tableId)
+        {
+            return Ok();
+
+            return BadRequest(new MoveTableResponse()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
+            });
+        }
+
+        [HttpDelete]
+        [Route("Delete/{tableId}")]
+        public IActionResult CreateTable(Guid boardId, Guid tableId)
+        {
+            DeleteTableRequest deleteTable = new DeleteTableRequest();
+
+            deleteTable.BoardId = boardId;
+            deleteTable.TableId = tableId;
+            
+            if(TryValidateModel(deleteTable))
+            {
+                _table.DeleteTable(deleteTable);
+            }
+
+            return BadRequest(new DeleteTableResponse()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
+            });
+        }
 
     }
 }

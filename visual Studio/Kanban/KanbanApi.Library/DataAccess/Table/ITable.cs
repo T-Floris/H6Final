@@ -11,8 +11,8 @@ namespace KanbanApi.Library.DataAccess.Table
     public interface ITable
     {
         void AddTable(CreateTableRequest createTable);
-        void UpdateTable();
-        void DeleteTable();
-        void MoveTable();
+        void UpdateTable(UpdateTableRequest updateTable);
+        void DeleteTable(DeleteTableRequest deleteTable);
+        void MoveTable(MoveTableRequest moveTable);
     }
 }

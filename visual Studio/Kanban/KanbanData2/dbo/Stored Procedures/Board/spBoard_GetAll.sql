@@ -2,7 +2,10 @@
 AS
 BEGIN
 	SELECT
-		*
+		[Board].[Id],
+		[User].[UserName],
+		[Board].[Name]
+
 	FROM
 		[dbo].[Board] ,[dbo].[User] --, [dbo].[BoardGroup]
 	WHERE

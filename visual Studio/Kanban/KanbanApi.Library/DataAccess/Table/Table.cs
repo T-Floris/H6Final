@@ -18,23 +18,22 @@ namespace KanbanApi.Library.DataAccess.Table
         }
         public void AddTable(CreateTableRequest createTable)
         {
-            _sql.SaveData("", new { }, DatabaseName);
-            throw new NotImplementedException();
+            _sql.SaveData("spTable_Add", new { createTable.BoardId, createTable.Name }, DatabaseName);
         }
 
-        public void DeleteTable()
+        public void DeleteTable(DeleteTableRequest deleteTable)
         {
-            throw new NotImplementedException();
+            _sql.DeleteData("spTable_Delete", new { deleteTable.BoardId, deleteTable.TableId }, DatabaseName);
         }
 
-        public void MoveTable()
+        public void MoveTable(MoveTableRequest moveTable)
         {
-            throw new NotImplementedException();
+            _sql.UpdateData("spTable_Move", new { moveTable.BoardId, moveTable.TableId }, DatabaseName);
         }
 
-        public void UpdateTable()
+        public void UpdateTable(UpdateTableRequest updateTable)
         {
-            throw new NotImplementedException();
+            _sql.UpdateData("spTable_Edit", new { updateTable.BoardId, updateTable.TableId, updateTable.Name }, DatabaseName);
         }
     }
 }
