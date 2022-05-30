@@ -43,16 +43,6 @@ export const Img = styled.img`
 `;
 
 export const Section = styled.section`
-  /* width: 100%;
-  border-radius: 25px;
-  max-width: 420px;
-  min-height: 400px;
-  display: center;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.4);
-  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.2); */
   display: flex;
   flex-direction: column;
   justify-content: center;
