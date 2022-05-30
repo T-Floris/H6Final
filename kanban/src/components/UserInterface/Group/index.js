@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Title, Text, Wrapper } from "./GroupElements";
-import { PageBar } from "../../Layout/CurrentPageBar/CurrentPageBarElements";
+import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 const Group = () => {
   return (
     <Container>
