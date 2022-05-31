@@ -164,7 +164,8 @@ const Register = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
-      } else if (err.response?.status === 409) {
+      } 
+      else if (err.response?.status === 409) {
         if (err.response.data.errors.length === 2) {
           setErrMsg([err.response.data.errors[0], err.response.data.errors[1]]);
         } else {

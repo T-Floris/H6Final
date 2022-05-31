@@ -19,6 +19,11 @@ import MessagePage from "./pages/UserPages/MessagePage";
 import SettingsPage from "./pages/UserPages/SettingsPage";
 import UserProfilePage from "./pages/UserPages/UserProfilePage";
 
+//Email page
+import ChangeEmailPage from "./pages/EmailPages/ChangeEmailPage";
+import ConfirmEmailPage from "./pages/EmailPages/ConfirmEmailPage";
+import ForgotPasswordPage from "./pages/EmailPages/ForgotPasswordPage";
+
 //Admin pages
 import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage"
 
@@ -40,6 +45,7 @@ const NavigateRoutes = () => {
         <Route path="/terms" element={<TermsAndConditionsPage />} />
         <Route path="/learnmore" element={<LearnMorePage />} />
 
+
         {/* Auth pages */}
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -53,6 +59,13 @@ const NavigateRoutes = () => {
         <Route path="/message" element={<MessagePage />} />
         <Route path="/userprofile" element={<UserProfilePage />} />
         <Route path="/settings" element={<SettingsPage />} />
+
+        {/* Email page */}
+        <Routes path="/email">
+          <Route path="/ChangeEmail" element={<ChangeEmailPage/>}/>          
+          <Route path="/ChangeEmail" element={<ConfirmEmailPage/>}/>          
+          <Route path="/ChangeEmail" element={<ForgotPasswordPage/>}/>          
+        </Routes>
 
         {/* Admin pages */}
         <Route path="/admin" element={<AdminDashboardPage />} />

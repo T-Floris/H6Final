@@ -518,7 +518,7 @@ namespace KanbanApi.Controllers
                 string[] to = { existingUser.Email };
                 string content = "";
                 IFormFileCollection attachments = null;
-                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?userid={existingUser.Id}&token={token}";
+                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?userId={existingUser.Id}&token={token}";
 
 
                 // TODO: change email
