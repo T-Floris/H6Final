@@ -9,8 +9,9 @@ export const Container = styled.div`
   align-items: center;
   padding: 8px 8px;
   color: #fff;
-  background-color: #562bf6;
-  height: 100vh;
+  margin-top: 10px;
+  /* background-color: #562bf6;
+  height: 100vh; */
 `;
 
 export const Wrapper = styled.div`
