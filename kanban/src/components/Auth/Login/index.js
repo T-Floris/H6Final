@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import useAuth from "../../../hooks/useAuth";
 import {
@@ -30,8 +30,8 @@ const Login = () => {
   // console.log(setPersist);
 
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef();
   const errRef = useRef();
@@ -61,9 +61,9 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log("test");
-      //console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
+      console.log("login");
+      console.log(JSON.stringify(response?.data));
+      // console.log(JSON.stringify(response));
       const token = response?.data?.token;
       const roles = response?.data?.roles;
       console.log(EmailAddress);
@@ -76,6 +76,8 @@ const Login = () => {
       setPwd("");
 
       navigate("/userstart", { replace: true });
+      //  navigate(from, { replace: true });
+    
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
