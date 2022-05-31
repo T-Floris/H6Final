@@ -1,4 +1,6 @@
-import React, { useRef, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useCallback, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../../context/AuthProvider";
 
 import {
   Container,
@@ -8,7 +10,7 @@ import {
   ModalTitle,
   ModalButtonContainer,
   ModalButton,
-  ModalLink,
+  // ModalLink,
 } from "./LogoutModalElementals";
 
 const LogoutModal = ({ showModal, setShowModal }) => {
@@ -35,6 +37,17 @@ const LogoutModal = ({ showModal, setShowModal }) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  const { setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  const logout = async () => {
+    // if used in more components, this should be in context
+    // axios to /logout endpoint
+    setAuth({});
+    navigate("/");
+    console.log("logout");
+  };
+
   return (
     <>
       {showModal ? (
@@ -45,11 +58,11 @@ const LogoutModal = ({ showModal, setShowModal }) => {
                 <ModalTitle>Logout?</ModalTitle>
 
                 <ModalButtonContainer>
-                  <ModalLink to="/">
-                    <ModalButton type="submit" value="Submit">
+                  {/* <ModalLink to="/"> */}
+                    <ModalButton onClick={logout}>
                       Yes
                     </ModalButton>
-                  </ModalLink>
+                  {/* </ModalLink> */}
                   <ModalButton onClick={() => setShowModal((prev) => !prev)}>
                     No
                   </ModalButton>
