@@ -24,13 +24,15 @@ import SettingsPage from "./pages/UserPages/SettingsPage";
 import UserProfilePage from "./pages/UserPages/UserProfilePage";
 
 //Admin pages
-import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage";
+import DashboardPage from "./pages/AdminPages/DashboardPage";
+import UserListPage from "./pages/AdminPages/UserListPage";
 
 //Outlet
 import Layout from "./components/Layout";
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
+
 
 
 const NavigateRoutes = () => {
@@ -73,7 +75,8 @@ const NavigateRoutes = () => {
 
           <Route element={<RequireAuth roles={["Admin"]} />}>
             {/* Admin pages */}
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/userlist" element={<UserListPage />} />
           </Route>
         </Route>
       </Routes>
