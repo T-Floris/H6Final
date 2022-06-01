@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import UserStart from "../../components/UserInterface/UserStart";
 import Sidebar from "../../components/Menus/Sidebar";
-import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
 import { backgroundTheme } from "../../components/Assets/variables";
 import { useTranslation } from "react-i18next";
 
@@ -14,6 +13,7 @@ import {
   MdOutlineGroup,
   MdWorkspacesOutline,
 } from "react-icons/md";
+import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
 const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const Container = styled.div`
@@ -21,8 +21,8 @@ const Container = styled.div`
 `;
 
 const UserStartPage = () => {
-//i18next
-const { t } = useTranslation();
+  //i18next
+  const { t } = useTranslation();
   const LinksArray = [
     {
       label: t("sidebar_start"),
@@ -67,8 +67,7 @@ const { t } = useTranslation();
         title={MetaData.dashboardPageTitle}
         description={MetaData.dashboardPageDesc}
       />
-      <Sidebar links={LinksArray}/>
-      
+      <Sidebar links={LinksArray} />
 
       <UserStart />
     </Container>
