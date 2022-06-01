@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
-import Login from "../../components/Auth/Login";
-import NavbarLite from "../../components/Menus/NavbarLite";
+import Register from "../../../components/Auth/User/Register";
+import NavbarLite from "../../../components/Menus/NavbarLite";
 
 const Container = styled.div`
   background-color: #562bf6;
   height: 100vh;
 `;
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <Container>
       <NavbarLite />
-      <Login />
+      <Register />
     </Container>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

@@ -19,9 +19,9 @@ import {
   Span,
   Attention,
 } from "./RegisterElements";
-import { defaultvalue } from "../../../api/axios";
+import { defaultvalue } from "../../../../api/axios";
 
-const Avatar = "";
+// const Avatar = "";
 const FIRSTNAME_REGEX = /^[A-z][A-z]{0,99}/;
 const LASTNAME_REGEX = /^[A-z][A-z]{0,99}/;
 const USER_REGEX = /^[A-z0-9-_]{4,24}$/;
@@ -35,6 +35,7 @@ const REGISTER_URL = "Auth/Register";
 const sendErrMsg = (errMsg) => {
   return (
     <>
+    {/* Getting the error from api depends on email or username is taken or not */}
       {errMsg[0]}
       <br />
       {errMsg[1]}
@@ -180,7 +181,7 @@ const Register = () => {
     <Container>
       <Wrapper>
         <Img
-          src={require("../../../images/welcome_cats.svg").default}
+          src={require("../../../../images/welcome_cats.svg").default}
           alt="Welcome cats"
         />
         {success ? (
@@ -197,7 +198,8 @@ const Register = () => {
                 ? errMsg
                 : errMsg.length === 2
                 ? sendErrMsg(errMsg)
-                : errMsg}
+                : errMsg
+                }
             </ErrorMsg>
 
             <Title>Register</Title>
