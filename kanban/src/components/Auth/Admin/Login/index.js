@@ -17,7 +17,7 @@ import {
   CheckBox,
 } from "./AdminLoginElements";
 
-import { defaultvalue } from "../../../../api/axios";
+import axios from "../../../../api/axios";
 const LOGIN_URL = "Auth/Login";
 
 const AdminLogin = () => {
@@ -50,7 +50,7 @@ const AdminLogin = () => {
     e.preventDefault();
 
     try {
-      const response = await defaultvalue.post(
+      const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ EmailAddress, Password }),
         {
@@ -72,7 +72,7 @@ const AdminLogin = () => {
       setUser("");
       setPwd("");
 
-      navigate("/admin", { replace: true });
+      navigate("/dashboard", { replace: true });
       //  navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {

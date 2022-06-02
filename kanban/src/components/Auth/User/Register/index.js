@@ -19,7 +19,7 @@ import {
   Span,
   Attention,
 } from "./RegisterElements";
-import { defaultvalue } from "../../../../api/axios";
+import axios from "../../../../api/axios";
 
 // const Avatar = "";
 const FIRSTNAME_REGEX = /^[A-z][A-z]{0,99}/;
@@ -134,7 +134,7 @@ const Register = () => {
       return;
     }
     try {
-      await defaultvalue.post(
+      await axios.post(
         REGISTER_URL,
         JSON.stringify({
           firstName,

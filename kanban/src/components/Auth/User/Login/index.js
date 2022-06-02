@@ -20,7 +20,7 @@ import {
   Span,
 } from "./LoginElements";
 
-import { defaultvalue } from "../../../../api/axios";
+import axios from "../../../../api/axios";
 const LOGIN_URL = "Auth/Login";
 
 const Login = () => {
@@ -53,7 +53,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await defaultvalue.post(
+      const response = await axios.post(
         LOGIN_URL,
         JSON.stringify({ EmailAddress, Password }),
         {
