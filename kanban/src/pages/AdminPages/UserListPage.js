@@ -21,13 +21,13 @@ const AdminUserListPage = () => {
     {
       label: t("sidebar_start"),
       icon: <AiOutlineHome />,
-      to: "/admindashboard",
+      to: "/dashboard",
       notification: 0,
     },
     {
       label: t("sidebar_workspace"),
       icon: <FaUsers />,
-      to: "/adminusers",
+      to: "/userlist",
       notification: 0,
     }
   ];
