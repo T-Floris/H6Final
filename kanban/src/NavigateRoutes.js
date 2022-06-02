@@ -33,6 +33,11 @@ import Layout from "./components/Layout";
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
 
+const ROLES = {
+  'User': "User",
+  'Admin': "Admin",
+  'Superuser' : "Superuser"
+}
 
 
 const NavigateRoutes = () => {
@@ -60,7 +65,7 @@ const NavigateRoutes = () => {
 
           {/* Protected routes */}
           {/* User pages */}
-          <Route element={<RequireAuth roles={["User"]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             {" "}
             {/* redirect to login page if not login */}
             <Route path="/userstart" element={<UserStartPage />} />
@@ -73,7 +78,7 @@ const NavigateRoutes = () => {
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
 
-          <Route element={<RequireAuth roles={["Admin"]} />}>
+          <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
             {/* Admin pages */}
             <Route path="/dashboard" element={<DashboardPage />} />
             <Route path="/userlist" element={<UserListPage />} />
