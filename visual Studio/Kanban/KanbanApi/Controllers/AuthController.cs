@@ -131,7 +131,7 @@ namespace KanbanApi.Controllers
                     userToCreate.Id = existingUser.Id;
                     /// set the time of creation to now
                     userToCreate.CreatedDate = DateTime.UtcNow;
-                    userToCreate.Avatar = "";
+                    userToCreate.Avatar = userToCreate.Avatar;
 
                     /// adding user to databes "KanbanData" on table "User"
                     _userData.Registration(userToCreate);
@@ -319,6 +319,7 @@ namespace KanbanApi.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [Route("LogOff")]
         public async Task<IActionResult> Logoff()
         {
@@ -518,7 +519,7 @@ namespace KanbanApi.Controllers
                 string[] to = { existingUser.Email };
                 string content = "";
                 IFormFileCollection attachments = null;
-                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?userid={existingUser.Id}&token={token}";
+                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?UserId={existingUser.Id}&Token={token}";
 
 
                 // TODO: change email
@@ -790,6 +791,8 @@ namespace KanbanApi.Controllers
             TokenRefreshRequest tokenRequest = new();
 
             /// get tokens from cookies 
+            var CookieValue = Request.Cookies;
+
             tokenRequest.Token = Request.Cookies["Token"];
             tokenRequest.RefreshToken = Request.Cookies["RefreshToken"];
 
@@ -851,7 +854,7 @@ namespace KanbanApi.Controllers
             CookieOptions cookieOptions = new()
             {
                 HttpOnly = true,
-                Secure = true,
+                Secure = false,
                 SameSite = SameSiteMode.None
             };
 

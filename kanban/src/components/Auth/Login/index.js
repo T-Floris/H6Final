@@ -75,6 +75,7 @@ const Login = () => {
       setUser("");
       setPwd("");
 
+      console.log(response);
       navigate("/userstart", { replace: true });
     } catch (err) {
       if (!err?.response) {

@@ -42,7 +42,7 @@ namespace KanbanApi.Controllers
                 string findUser = User.FindFirstValue(tokenConfirmEmail.UserId);
 
                 /// find user by id
-                IdentityUser user = await _userManager.FindByIdAsync(findUser);
+                IdentityUser user = await _userManager.FindByIdAsync(tokenConfirmEmail.UserId);
 
                 if (user == null)
                 {
@@ -57,7 +57,21 @@ namespace KanbanApi.Controllers
 
                 }
                 
-                await _userManager.ConfirmEmailAsync(user, tokenConfirmEmail.Token);
+                //await _userManager.ConfirmEmailAsync(user, tokenConfirmEmail.Token);
+
+                bool isConfimd = await _userManager.IsEmailConfirmedAsync(user);
+
+                if (isConfimd)
+                {
+                    return BadRequest(new TokenConfirmEmailResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "the email can not be confirmed"
+                        },
+                        IsSuccess = false
+                    });
+                }
 
                 return Ok(new TokenConfirmEmailResult()
                 {
@@ -90,10 +104,11 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                string findUser = User.FindFirstValue(tokenForgotPassword.UserId);
+                IdentityUser user = await _userManager.FindByIdAsync(tokenForgotPassword.UserId);
+                //string findUser = User.FindFirstValue(tokenForgotPassword.UserId);
 
                 /// find user by id
-                IdentityUser user = await _userManager.FindByIdAsync(findUser);
+               // IdentityUser user = await _userManager.FindByIdAsync(findUser);
 
                 if (user == null)
                 {
@@ -108,6 +123,20 @@ namespace KanbanApi.Controllers
                 }
 
                 await _userManager.ResetPasswordAsync(user, tokenForgotPassword.Token, tokenForgotPassword.NewPassword);
+                
+                bool cp = await _userManager.CheckPasswordAsync(user, tokenForgotPassword.NewPassword);
+                if (!cp)
+                {
+                    return Ok(new TokenForgotPasswordResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                        {
+                            "no change"
+                        }
+                    });
+                }
+
                 return Ok(new TokenForgotPasswordResult()
                 {
                     IsSuccess = true,
@@ -154,6 +183,8 @@ namespace KanbanApi.Controllers
                 }
 
                 await _userManager.ChangeEmailAsync(user, tokenChangeEmail.NewEmail, tokenChangeEmail.Token);
+
+                bool c = _userManager.FindByEmailAsync(tokenChangeEmail.NewEmail).Result.EmailConfirmed;
                 ChangeEmailRequest changeEmail = new()
                 {
                     NewEmailAddress = tokenChangeEmail.NewEmail,

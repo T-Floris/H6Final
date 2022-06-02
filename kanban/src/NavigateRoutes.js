@@ -22,6 +22,11 @@ import UserProfilePage from "./pages/UserPages/UserProfilePage";
 //Admin pages
 import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage"
 
+//Email pages
+import ChangeEmailPage from "./pages/EmailPages/ChangeEmailPage"
+import ConfirmEmailPage from "./pages/EmailPages/ConfirmEmailPage"
+import ForgotPasswordPage from "./pages/EmailPages/ForgotPasswordPage"
+
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
 import RegisterPage from "./pages/AuthPages/RegisterPage";
@@ -56,6 +61,11 @@ const NavigateRoutes = () => {
 
         {/* Admin pages */}
         <Route path="/admin" element={<AdminDashboardPage />} />
+
+        {/* Eamil */}
+        <Route path="changeemail" element={<ChangeEmailPage />}/>
+        <Route path="confirmemail"element={<ConfirmEmailPage />}/>
+        <Route path="forgotpassword" element={<ForgotPasswordPage />}/>
         
         {/* 404 */}
         <Route path="*" element={<NotFoundPage />} />
