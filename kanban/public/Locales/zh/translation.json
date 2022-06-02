@@ -14,7 +14,7 @@
   "menu_array2": [
     { "label": "登入", "to": "/login" },
     { "label": "注册", "to": "/register" },
-    { "label": "Userstart", "to": "/userstart" }
+    { "label": "管理员", "to": "/adminlogin" }
   ],
 
   "comment": "HEROSECTION STARTS HERE",

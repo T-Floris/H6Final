@@ -8,10 +8,11 @@ import TermsAndConditionsPage from "./pages/FrontPages/TermsAndConditionsPage";
 import ContactFormPage from "./pages/FrontPages/ContactFormPage";
 import LearnMorePage from "./pages/FrontPages/LearnMorePage";
 //Auth pages
-import RegisterPage from "./pages/AuthPages/RegisterPage";
-import LoginPage from "./pages/AuthPages/LoginPage";
+import RegisterPage from "./pages/AuthPages/User/RegisterPage";
+import LoginPage from "./pages/AuthPages/User/LoginPage";
 import RequireAuth from "./components/Auth/RequireAuth";
 import Unauthorized from "./components/Auth/Unauthorized";
+import AdminLoginPage from "./pages/AuthPages/Admin/AdminLoginPage";
 //User pages
 import UserStartPage from "./pages/UserPages/UserStartPage";
 import WorkspacePage from "./pages/UserPages/WorkspacePage";
@@ -23,18 +24,16 @@ import SettingsPage from "./pages/UserPages/SettingsPage";
 import UserProfilePage from "./pages/UserPages/UserProfilePage";
 
 //Admin pages
-import AdminDashboardPage from "./pages/AdminPages/AdminDashboardPage";
+import DashboardPage from "./pages/AdminPages/DashboardPage";
+import UserListPage from "./pages/AdminPages/UserListPage";
 
-//Layout
+//Outlet
 import Layout from "./components/Layout";
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
 
-// const ROLES = {
-//   'User': "User",
-//   'Admin': "Admin"
-// };
+
 
 const NavigateRoutes = () => {
   return (
@@ -57,6 +56,7 @@ const NavigateRoutes = () => {
           {/* Auth pages */}
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/adminlogin" element={<AdminLoginPage />} />
 
           {/* Protected routes */}
           {/* User pages */}
@@ -75,7 +75,8 @@ const NavigateRoutes = () => {
 
           <Route element={<RequireAuth roles={["Admin"]} />}>
             {/* Admin pages */}
-            <Route path="/admin" element={<AdminDashboardPage />} />
+            <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/userlist" element={<UserListPage />} />
           </Route>
         </Route>
       </Routes>
