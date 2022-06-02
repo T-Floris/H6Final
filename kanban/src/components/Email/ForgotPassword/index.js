@@ -20,6 +20,8 @@ import {
 
 import { defaultvalue } from "../../../api/axios";
 
+
+
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,}$/;
 
 const REGISTER_URL = "TokenConfirmation/ForgotPassword";

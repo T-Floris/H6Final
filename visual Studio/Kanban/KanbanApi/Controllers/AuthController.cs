@@ -791,15 +791,19 @@ namespace KanbanApi.Controllers
             TokenRefreshRequest tokenRequest = new();
 
             /// get tokens from cookies 
-            var CookieValue = Request.Cookies;
+            //var CookieValue = Request.Cookies;
+            if (Request.Cookies["key"] != null)
+            {
+                var value = Request.Cookies["key"];
+            }
 
             tokenRequest.Token = Request.Cookies["Token"];
             tokenRequest.RefreshToken = Request.Cookies["RefreshToken"];
 
-            /// make sure the model is validate
-            if (TryValidateModel(tokenRequest))
-            {
-                var canConnect = _context.Database.CanConnect();
+            ///// make sure the model is validate
+            //if (TryValidateModel(tokenRequest))
+            //{
+            var canConnect = _context.Database.CanConnect();
                 if (!canConnect)
                 {
                     return BadRequest(new TokenRefreshResponse()
@@ -834,7 +838,7 @@ namespace KanbanApi.Controllers
 
 
                 return Ok(result);
-            }
+            //}
             /// return an error if the paylode is Invalid
             return BadRequest(new TokenRefreshResult()
             {
@@ -853,7 +857,7 @@ namespace KanbanApi.Controllers
             /// Set the rules for the cookie
             CookieOptions cookieOptions = new()
             {
-                HttpOnly = true,
+                HttpOnly = false,
                 Secure = false,
                 SameSite = SameSiteMode.None
             };
