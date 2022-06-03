@@ -857,8 +857,8 @@ namespace KanbanApi.Controllers
             /// Set the rules for the cookie
             CookieOptions cookieOptions = new()
             {
-                HttpOnly = false,
-                Secure = false,
+                HttpOnly = true,
+                Secure = true,
                 SameSite = SameSiteMode.None
             };
 
