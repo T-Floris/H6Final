@@ -1,4 +1,4 @@
-import axios, { axiosPrivate } from "../api/axios";
+import { axiosPrivate as axios } from "../api/axios";
 import useAuth from "./useAuth";
 
 const useRefreshToken = () => {

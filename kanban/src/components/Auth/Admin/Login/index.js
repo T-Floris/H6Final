@@ -17,7 +17,7 @@ import {
   CheckBox,
 } from "./AdminLoginElements";
 
-import axios from "../../../../api/axios";
+import { defaultvalue as axios}  from "../../../../api/axios";
 const LOGIN_URL = "Auth/Login";
 
 const AdminLogin = () => {
