@@ -39,6 +39,7 @@ const UserList = () => {
     };
   }, []);
 
+  //ignore this error, it works
   const columns: GridColDef[] = [
     { field: "userName", headerName: "userName", width: 150, editable: true },
     {
