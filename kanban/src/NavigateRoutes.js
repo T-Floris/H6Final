@@ -30,6 +30,11 @@ import UserListPage from "./pages/AdminPages/UserListPage";
 //Outlet
 import Layout from "./components/Layout";
 
+//Email pages
+import ChangeEmailPage from "./pages/EmailPages/ChangeEmailPage"
+import ConfirmEmailPage from "./pages/EmailPages/ConfirmEmailPage"
+import ForgotPasswordPage from "./pages/EmailPages/ForgotPasswordPage"
+
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
 

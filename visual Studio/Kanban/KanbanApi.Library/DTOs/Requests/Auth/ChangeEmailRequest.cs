@@ -9,7 +9,7 @@ namespace KanbanApi.Library.DTOs.Requests.Auth
 {
     public class ChangeEmailRequest
     {
-        [Required]
+        //[Required]
         public string UserId { get; set; }
         [Required]
         [EmailAddress]

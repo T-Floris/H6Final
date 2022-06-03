@@ -32,6 +32,20 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,}$/;
 
 const REGISTER_URL = "Auth/Register";
 
+const AvatarArray = 
+  [
+    "../../../images/Profile/profil-1.svg",
+    "../../../images/Profile/profil-2.svg",
+    "../../../images/Profile/profil-3.svg",
+    "../../../images/Profile/profil-4.svg",
+    "../../../images/Profile/profil-5.svg",
+    "../../../images/Profile/profil-6.svg",
+    "../../../images/Profile/profil-7.svg",
+    "../../../images/Profile/profil-8.svg",
+    "../../../images/Profile/profil-9.svg",
+    "../../../images/Profile/profil-10.svg"
+  ]
+
 const sendErrMsg = (errMsg) => {
   return (
     <>
@@ -129,6 +143,8 @@ const Register = () => {
     const v3 = USER_REGEX.test(userName);
     const v4 = EMAIL_REGEX.test(emailAddress);
     const v5 = PWD_REGEX.test(password);
+    const Avatar = AvatarArray[Math.floor(Math.random()*AvatarArray.length)];
+    
     if (!v1 || !v2 || !v3 || !v4 || !v5) {
       setErrMsg("Invalid Entry");
       return;
@@ -142,6 +158,7 @@ const Register = () => {
           userName,
           emailAddress,
           password,
+          Avatar
           
         }),
         {
