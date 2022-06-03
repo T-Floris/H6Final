@@ -44,7 +44,7 @@ namespace KanbanApi.EmailService.Models.EmailSender
         /// <summary>
         /// name of the Organisation
         /// </summary>
-        private readonly string organisationName = "KNBN";
+        private readonly string organisationName = "Kanban";
 
         /// <summary>
         /// path to unsubscribe on the webside
