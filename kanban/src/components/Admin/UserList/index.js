@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Container } from "./UserListElements";
-import useRefreshToken from "../../../hooks/useRefreshToken";
+
 
 const UserList = () => {
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-  const refresh = useRefreshToken();
 
   useEffect(() => {
     let isMounted = true;
@@ -21,10 +21,13 @@ const UserList = () => {
           signal: controller.signal,
         });
         console.log(response.data);
-        isMounted && setUsers(response.data);
+        isMounted && setUsers(response.data.user);
       } catch (err) {
-        // console.error(err);
-        // navigate("/adminlogin", { state: { from: location }, replace: true });
+        console.error(err);
+
+        //state send the user back where they were before, instead of getting dumped back to home page
+        //instead of getting sent to the login, it will replaced with the location where they were
+        navigate("/adminlogin", { state: { from: location }, replace: true }); 
       }
     };
 
@@ -35,21 +38,47 @@ const UserList = () => {
       controller.abort();
     };
   }, []);
+
+  const columns: GridColDef[] = [
+    { field: "userName", headerName: "userName", width: 150, editable: true },
+    {
+      field: "emailAddress",
+      headerName: "emailAddress",
+      width: 150,
+      editable: true,
+    },
+    { field: "firstName", headerName: "firstName", width: 150, editable: true },
+    { field: "lastName", headerName: "lastName", width: 150, editable: true },
+    { field: "id", headerName: "id", width: 150 },
+    { field: "avatar", headerName: "avatar", width: 150 },
+  ];
   return (
     <Container>
-      <article>
-        <h2>Users List</h2>
-        {users?.length ? (
+      <h2>Users List</h2>
+      <div style={{ height: 1000, width: "100%" }}>
+        <DataGrid
+          experimentalFeatures={{ newEditingApi: true }}
+          rows={users}
+          columns={columns}
+          
+        />
+      </div>
+      {/* {user.length ? (
           <ul>
-            {users.map((user, index) => (
-              <li key={index}>{user?.id}</li>
+            {user.map((user, index) => (
+              <li key={index}>
+                {user.userName}
+                {user.emailAddress}
+                {user.firstName}
+                {user.id}
+                {user.lastName}
+                {user.avatar}
+              </li>
             ))}
           </ul>
         ) : (
           <p>No users to display</p>
-        )}
-        <button onClick={() => refresh()}>Refresh</button>
-      </article>
+        )} */}
     </Container>
   );
 };
