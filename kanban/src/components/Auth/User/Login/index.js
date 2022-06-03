@@ -66,16 +66,18 @@ const Login = () => {
       // console.log(JSON.stringify(response));
       const token = response?.data?.token;
       const roles = response?.data?.roles;
+      const refreshToken = response?.data?.refreshToken;
+      setAuth({ EmailAddress, Password, roles, refreshToken, token });
       console.log(EmailAddress);
       console.log(Password);
       console.log(roles);
       console.log(token);
 
-      setAuth({ EmailAddress, Password, roles, token });
+
       setUser("");
       setPwd("");
 
-      navigate("/userstart", { replace: true });
+      navigate("/userlist", { replace: true });
       //  navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {

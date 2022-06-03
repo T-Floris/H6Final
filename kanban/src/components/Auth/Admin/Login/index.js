@@ -63,6 +63,8 @@ const AdminLogin = () => {
       // console.log(JSON.stringify(response));
       const token = response?.data?.token;
       const roles = response?.data?.roles;
+      const refreshToken = response?.data?.refreshToken;
+      setAuth({ EmailAddress, Password, roles, refreshToken, token });
       console.log(EmailAddress);
       console.log(Password);
       console.log(roles);
