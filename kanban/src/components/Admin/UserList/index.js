@@ -27,7 +27,7 @@ const UserList = () => {
 
         //state send the user back where they were before, instead of getting dumped back to home page
         //instead of getting sent to the login, it will replaced with the location where they were
-        navigate("/adminlogin", { state: { from: location }, replace: true }); 
+        //navigate("/adminlogin", { state: { from: location }, replace: true }); 
       }
     };
 
