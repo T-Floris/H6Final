@@ -19,7 +19,7 @@ import {
   Span,
   Attention,
 } from "./RegisterElements";
-import { defaultvalue as axios} from "../../../../api/axios";
+import axios from "../../../../api/axios";
 
 // const Avatar = "";
 const FIRSTNAME_REGEX = /^[A-z][A-z]{0,99}/;
