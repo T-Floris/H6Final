@@ -89,7 +89,7 @@ const AdminLogin = () => {
         setErrMsg("Login Failed");
         console.log(err);
       }
-      errRef.current.focus();
+      // errRef.current.focus();
     }
   };
 
