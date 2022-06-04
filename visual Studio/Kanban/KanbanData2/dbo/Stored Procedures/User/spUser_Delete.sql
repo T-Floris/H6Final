@@ -1,18 +1,18 @@
 ﻿CREATE PROCEDURE [dbo].[spUser_Delete]
-	@Id UNIQUEIDENTIFIER
+	@UserId UNIQUEIDENTIFIER
 AS
 BEGIN
 	SET NOCOUNT ON;
 
 	DELETE [GroupUser]
-	WHERE [GroupUser].[UserId] = @Id
+	WHERE [GroupUser].[UserId] = @UserId
 
 	DELETE [Group]
-	WHERE [Group].[UserId] = @Id
+	WHERE [Group].[UserId] = @UserId
 
 	DELETE [Board]
-	WHERE [Board].[UserId] = @Id
+	WHERE [Board].[UserId] = @UserId
 
 	DELETE [User]
-	WHERE [User].[Id] = @Id
+	WHERE [User].[Id] = @UserId
 END

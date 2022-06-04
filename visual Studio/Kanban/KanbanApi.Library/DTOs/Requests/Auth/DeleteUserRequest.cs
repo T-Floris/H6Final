@@ -10,7 +10,7 @@ namespace KanbanApi.Library.DTOs.Requests.Auth
     public class DeleteUserRequest
     {
         [Required]
-        [Range(typeof(bool), "true", "true", ErrorMessage = "User not deleted")]
+        //[Range(typeof(bool), "true", "true", ErrorMessage = "User not deleted")]
         public bool ToDelete { get; set; }
 
         public string UserId { get; set; }

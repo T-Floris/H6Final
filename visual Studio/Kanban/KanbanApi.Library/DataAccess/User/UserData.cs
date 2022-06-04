@@ -22,7 +22,7 @@ namespace KanbanApi.Library.DataAccess.User
 
         public void DeleteUser(DeleteUserRequest deleteUser)
         {
-            _sql.DeleteData("spUser_Delete", new { }, DatabaseName);
+            _sql.DeleteData("spUser_Delete", new { deleteUser.UserId }, DatabaseName);
         }
 
         public UserModel GetUserById(string Id)

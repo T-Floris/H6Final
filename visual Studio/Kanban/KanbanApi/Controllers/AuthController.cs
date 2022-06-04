@@ -319,10 +319,10 @@ namespace KanbanApi.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [Route("LogOff")]
         public async Task<IActionResult> Logoff()
         {
+            var user = await _userManager.FindByEmailAsync(ClaimTypes.NameIdentifier);
 
             /// store token's
             TokenRevokeRequest revokeToken = new();
@@ -424,10 +424,18 @@ namespace KanbanApi.Controllers
                     }
 
                     /// Delete user
-                    await _userManager.DeleteAsync(user);
+                    var f = await _userManager.DeleteAsync(user);
                     /// Delete user
-                    _userData.DeleteUser(deleteUser);
+                    try
+                    {
+                        _userData.DeleteUser(deleteUser);
 
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
                     /// return Success message
                     return Ok(new DeleteUserResult()
                     {
@@ -785,7 +793,7 @@ namespace KanbanApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("RefreshToken")]
-        public async Task<IActionResult> RefreshToken()
+        public async Task<IActionResult> RefreshToken(string token, string refreshToken)
         {
             /// store token's
             TokenRefreshRequest tokenRequest = new();
