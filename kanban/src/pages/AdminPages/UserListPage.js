@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import UserList from "../../components/Admin/UserList";
+import UserList from "../../components/Admin/UserList-v2";
 import { backgroundTheme } from "../../components/Assets/variables";
 import Sidebar from "../../components/Menus/Sidebar";
 import { useTranslation } from "react-i18next";
