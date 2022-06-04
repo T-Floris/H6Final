@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Avatar from 'react-avatar';
 import { btnReset, v } from "../../Assets/variables";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 import { FaTimes } from "react-icons/fa";
@@ -230,12 +231,12 @@ export const SToggleThumb = styled.div`
 `;
 
 export const ProfileContainer = styled.div``;
-export const Profile = styled.img`
-  width: 50px;
+export const Profile = styled(Avatar)`
+  /* width: 50px;
   height: 50px;
-  border: 1px solid ${({ theme }) => theme.bg3};
+  border: 1px solid ${({ theme }) => theme.bg3}; */
   border-radius: 50%;
-  margin-right: 0.5rem;
+  margin-right: 16px;
   cursor: pointer;
 `;
 export const ProfileName = styled.p``;

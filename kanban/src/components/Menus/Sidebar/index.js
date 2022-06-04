@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
 import {
   Container,
@@ -34,8 +35,10 @@ import profile from "../../../images/catForTesting.jpg";
 import Darkmode from "../../Assets/Darkmode";
 import Modal from "../../Assets/Modals/LogoutModal";
 import Tooltip from "../../Assets/Tooltip";
+import { useEffect } from "react";
 
 const Sidebar = ({ links }) => {
+  
   //i18next
   const { t } = useTranslation();
 
@@ -58,6 +61,41 @@ const Sidebar = ({ links }) => {
     setShowModal((prev) => !prev);
   };
 
+  //axios private hook
+  const axiosPrivate = useAxiosPrivate();
+
+  const [userName, setUserName] = useState({
+    userName: "",
+    emailAddress: "",
+    firstName: "",
+    lastName: "",
+    id: "",
+  });
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUserName = async () => {
+      try {
+        const response = await axiosPrivate.get("user", {
+          signal: controller.signal,
+        });
+        console.log(response.data);
+        isMounted && setUserName(response.data);
+      } catch (err) {
+        // console.error(err);
+        // navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUserName();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
+
   return (
     <>
       <Modal showModal={showModal} setShowModal={openModal} />
@@ -72,6 +110,7 @@ const Sidebar = ({ links }) => {
           <SSidebarToggleButton
             isopen={sidebarOpen}
             onClick={() => setSidebarOpen((p) => !p)}
+            type="button"
           >
             <AiOutlineLeft />
           </SSidebarToggleButton>
@@ -230,8 +269,8 @@ const Sidebar = ({ links }) => {
               to="/userprofile"
               style={!sidebarOpen ? { width: `fit-content` } : {}}
             >
-              <Profile src={profile} />
-              {sidebarOpen && <ProfileName>Username</ProfileName>}
+              <Profile size="50" name={userName.userName } />
+              {sidebarOpen && <ProfileName>{userName.userName}</ProfileName>}
             </SLink>
           </ProfileContainer>
         </SSidebar>
