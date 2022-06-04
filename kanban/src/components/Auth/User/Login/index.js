@@ -77,7 +77,7 @@ const Login = () => {
       setUser("");
       setPwd("");
 
-      navigate("/userlist", { replace: true });
+      navigate("/userstart", { replace: true });
       //  navigate(from, { replace: true });
     } catch (err) {
       if (!err?.response) {
