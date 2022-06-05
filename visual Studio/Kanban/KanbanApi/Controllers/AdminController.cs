@@ -239,13 +239,13 @@ namespace KanbanApi.Controllers
                 };
 
                 var checkUsername = await _userManager.FindByNameAsync(updateUser.UserName);
-                if (checkUsername != null)
+                if (checkUsername == null)
                 {
                     await _userManager.SetUserNameAsync(user, updateUser.UserName);
                     ChangeUserNameRequest changeUserName = new()
                     {
                         Id = user.Id,
-                        UserName = checkUsername.UserName
+                        UserName = updateUser.UserName
                     };
                     _userData.UpdateUserName(changeUserName);
                 }
@@ -253,7 +253,7 @@ namespace KanbanApi.Controllers
                     updateUserResponse.Errors.Add("the username is in use");
 
                 var checkEmail = await _userManager.FindByEmailAsync(updateUser.EmailAddress);
-                if (checkEmail != null)
+                if (checkEmail == null)
                 {
                     string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     await _userManager.ChangeEmailAsync(user, updateUser.EmailAddress, token);
