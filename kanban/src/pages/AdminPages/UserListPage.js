@@ -19,13 +19,13 @@ const AdminUserListPage = () => {
   const { t } = useTranslation();
   const LinksArray = [
     {
-      label: t("sidebar_start"),
+      label: t("sidebar_admindashboard"),
       icon: <AiOutlineHome />,
       to: "/dashboard",
       notification: 0,
     },
     {
-      label: t("sidebar_workspace"),
+      label: t("sidebar_userlist"),
       icon: <FaUsers />,
       to: "/userlist",
       notification: 0,

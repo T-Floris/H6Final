@@ -126,6 +126,9 @@
   "sidebar_logout": "登出",
   "sidebar_darkmode": "深色模式",
 
+  "sidebar_admindashboard": "仪表板",
+  "sidebar_userlist": "用户列表",
+
   "comment": "USERSTART STARTS HERE",
   "userstart_morning": "早上好",
   "userstart_afternoon": "下午好",

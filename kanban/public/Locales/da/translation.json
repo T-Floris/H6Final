@@ -126,6 +126,9 @@
   "sidebar_logout": "Log ud",
   "sidebar_darkmode": "Mørk tilstand",
 
+  "sidebar_admindashboard": "Dashboard",
+  "sidebar_userlist": "Brugerliste",
+
   "comment": "USERSTART STARTS HERE",
   "userstart_morning": "God Morgen",
   "userstart_afternoon": "God Eftermiddag",

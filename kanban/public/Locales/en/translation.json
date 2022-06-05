@@ -126,8 +126,13 @@
   "sidebar_logout": "Log Out",
   "sidebar_darkmode": "Dark Mode",
 
-  "comment": "USERSTART STARTS HERE",
+  "sidebar_admindashboard": "Dashboard",
+  "sidebar_userlist": "User List",
+
+
+  "comment": "WELCOME MSG STARTS HERE",
   "userstart_morning": "Good Morning",
   "userstart_afternoon": "Good Afternoon",
   "userstart_evening": "Good Evening"
+
 }
