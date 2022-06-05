@@ -9,6 +9,9 @@ export const Title = styled.h1`
 export const Text = styled.p`
   margin: 40px 0 40px 0;
 `;
+export const Span = styled.span`
+  font-weight: bold;
+`;
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
