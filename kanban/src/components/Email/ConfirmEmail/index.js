@@ -11,7 +11,7 @@ import {
     CreateButton,
   } from "./ConfirmEmailElements";
 
-import axios from "../../../api/axios";
+import defaultvalue from "../../../api/axios";
 
 const REGISTER_URL = "TokenConfirmation/ConfirmEmail";
 
@@ -63,7 +63,7 @@ const ConfirmEmail = () => {
       return;
     }
     try {
-      await axios.post(
+      await defaultvalue.post(
         REGISTER_URL,
         JSON.stringify({
           UserId,

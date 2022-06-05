@@ -69,6 +69,12 @@ const NavigateRoutes = () => {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/adminlogin" element={<AdminLoginPage />} />
 
+          {/* Email */}
+          <Route path="/changeemail" element={<ChangeEmailPage />} />
+          <Route path="/confirmemail" element={<ConfirmEmailPage />} />
+          <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+
+
           {/* Protected routes */}
           {/* User pages */}
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>

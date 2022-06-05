@@ -18,7 +18,7 @@ import {
     Attention,
   } from "./ForgotPasswordElements";
 
-import axios from "../../../api/axios";
+import defaultvalue  from "../../../api/axios";
 
 
 
@@ -84,7 +84,7 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      await axios.post(
+      await defaultvalue.post(
         REGISTER_URL,
         JSON.stringify({
           UserId,
