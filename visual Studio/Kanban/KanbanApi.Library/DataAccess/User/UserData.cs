@@ -43,6 +43,11 @@ namespace KanbanApi.Library.DataAccess.User
             _sql.UpdateData("spUser_UpdateEmail", new { updateEmail.UserId, updateEmail.NewEmailAddress }, DatabaseName);
         }
 
+        public void UpdateUser(string id, string fristName, string lastName)
+        {
+            _sql.UpdateData("spUser_UpdateInfo", new { id, fristName, lastName }, DatabaseName);
+        }
+
         public void UpdateUserName(ChangeUserNameRequest updateUserName)
         {
             _sql.UpdateData("spUser_UpdateUserName", new {updateUserName.Id, updateUserName.UserName }, DatabaseName);

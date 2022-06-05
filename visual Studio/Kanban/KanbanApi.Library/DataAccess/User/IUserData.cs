@@ -18,6 +18,7 @@ namespace KanbanApi.Library.DataAccess.User
         void UpdateEmail(ChangeEmailRequest updateEmail);
         void UpdateUserName(ChangeUserNameRequest updateUserName);
 
+        void UpdateUser(string id, string fristName, string lastName);
 
         //void ForgotPassword(ForgotPasswordRequest forgotPassword);
 

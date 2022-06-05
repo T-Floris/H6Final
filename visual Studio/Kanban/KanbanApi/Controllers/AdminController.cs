@@ -154,7 +154,7 @@ namespace KanbanApi.Controllers
         }
 
         [HttpDelete]
-        [Route("delete/user/{UserId}")]
+        [Route("delete/user/{userId}")]
         public async Task<IActionResult> Delete(string userId, [FromBody] DeleteUserRequest deleteUser)
         {
                 var canConnect = _context.Database.CanConnect();
@@ -178,7 +178,7 @@ namespace KanbanApi.Controllers
                     IdentityUser user = await _userManager.FindByIdAsync(userId);
 
                     /// null check
-                if (user is null)
+                    if (user is null)
                     {
                         return NotFound(new DeleteUserResponse
                         {
@@ -214,7 +214,82 @@ namespace KanbanApi.Controllers
 
             }
 
-        
+        [HttpPut]
+        [Route("update/user/{userId}")]
+        public async Task<IActionResult> UpdateUser(string userId, [FromBody] UpdateUserRequest updateUser)
+        {
+            if (ModelState.IsValid)
+            {
+
+                IdentityUser user = await _userManager.FindByIdAsync(userId);
+
+                if (user == null)
+                return NotFound(new ChangeUserNameResponse()
+                {
+                    IsSuccess = false,
+                    Errors = { "User not foundt" }
+                });
+
+
+
+                UpdateUserResponse updateUserResponse = new()
+                {
+                    Errors = new List<string>(),
+                    IsSuccess = true,
+                };
+
+                var checkUsername = await _userManager.FindByNameAsync(updateUser.UserName);
+                if (checkUsername != null)
+                {
+                    await _userManager.SetUserNameAsync(user, updateUser.UserName);
+                    ChangeUserNameRequest changeUserName = new()
+                    {
+                        Id = user.Id,
+                        UserName = checkUsername.UserName
+                    };
+                    _userData.UpdateUserName(changeUserName);
+                }
+                else
+                    updateUserResponse.Errors.Add("the username is in use");
+
+                var checkEmail = await _userManager.FindByEmailAsync(updateUser.EmailAddress);
+                if (checkEmail != null)
+                {
+                    string token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    await _userManager.ChangeEmailAsync(user, updateUser.EmailAddress, token);
+                    ChangeEmailRequest changeEmail = new()
+                    {
+                        UserId = user.Id,
+                        NewEmailAddress = updateUser.EmailAddress
+                    };
+                    _userData.UpdateEmail(changeEmail);
+                }
+                else
+                    updateUserResponse.Errors.Add("the email is in use");
+
+                _userData.UpdateUser(userId, updateUser.FirstName, updateUser.LastName);
+
+                return Ok(new UpdateUserResult()
+                {
+                    Errors = updateUserResponse.Errors,
+                    IsSuccess = true,
+                    Message = new List<string>()
+                    {
+                        "alle info there can bu updated has ben updated"
+                    }
+                });
+            }
+
+            return BadRequest(new UpdateUserResponse()
+            {
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                },
+                IsSuccess = false
+            });
+
+        }
 
         [HttpGet]
         [Route("Users/Get/{roleName}")]
