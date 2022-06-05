@@ -140,7 +140,7 @@ namespace KanbanApi.Controllers
 
                     /// add user to role
                     await _userManager.AddToRoleAsync(existingUser, "User");
-                    await _userManager.AddToRoleAsync(existingUser, "Admin");
+                    //await _userManager.AddToRoleAsync(existingUser, "Admin");
                     /// log message
                     registrationResponse.Message.Add("Role addit to user");
 
