@@ -11,11 +11,13 @@ import Modal from "../../Assets/Modals/CreateGroupModal";
 import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 
 const UserWorkspace = () => {
-  const [showModal, setShowModal] = useState(false);
 
+  const [showModal, setShowModal] = useState(false);
   const openModal = () => {
     setShowModal((prev) => !prev);
   };
+
+  
   return (
     <>
       <Modal showModal={showModal} setShowModal={setShowModal} />

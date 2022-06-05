@@ -1,6 +1,5 @@
-import React, { useRef, useEffect, useCallback, useContext } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-// import AuthContext from "../../../../context/AuthProvider";
 import useLogout from "../../../../hooks/useLogout";
 
 import {
@@ -38,7 +37,7 @@ const LogoutModal = ({ showModal, setShowModal }) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
-  // const { setAuth } = useContext(AuthContext);
+
   const navigate = useNavigate();
     const logout = useLogout();
 
@@ -57,14 +56,15 @@ const LogoutModal = ({ showModal, setShowModal }) => {
                 <ModalTitle>Logout?</ModalTitle>
 
                 <ModalButtonContainer>
-                  {/* <ModalLink to="/"> */}
+
                     <ModalButton onClick={signOut}>
                       Yes
                     </ModalButton>
-                  {/* </ModalLink> */}
+
                   <ModalButton onClick={() => setShowModal((prev) => !prev)}>
                     No
                   </ModalButton>
+                  
                 </ModalButtonContainer>
               </ModalContent>
             </ModalWrapper>

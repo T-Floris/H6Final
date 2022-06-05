@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 
@@ -31,11 +32,11 @@ import {
 } from "react-icons/ai";
 import { MdLogout } from "react-icons/md";
 // import { LinksArray } from "./Data";
-import profile from "../../../images/catForTesting.jpg";
+// import profile from "../../../images/catForTesting.jpg";
 import Darkmode from "../../Assets/Darkmode";
 import Modal from "../../Assets/Modals/LogoutModal";
 import Tooltip from "../../Assets/Tooltip";
-import { useEffect } from "react";
+
 
 const Sidebar = ({ links }) => {
   
@@ -71,6 +72,7 @@ const Sidebar = ({ links }) => {
     lastName: "",
     id: "",
   });
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();

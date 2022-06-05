@@ -21,7 +21,6 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Alert from "@material-ui/lab/Alert";
-import axios from "../../../api/axios";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -101,7 +100,7 @@ const UserListV2 = () => {
       isMounted = false;
       controller.abort();
     };
-  }, []);
+  });
 
   const UPDATE_URL = "admin/update/user/";
   const handleRowUpdate = (newData, oldData, resolve) => {
