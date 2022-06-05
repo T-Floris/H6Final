@@ -2,8 +2,11 @@
 using KanbanApi.Library.DataAccess.Admin;
 using KanbanApi.Library.DataAccess.User;
 using KanbanApi.Library.DTOs.Requests.Admin;
+using KanbanApi.Library.DTOs.Requests.Auth;
 using KanbanApi.Library.DTOs.Responses.Admin;
+using KanbanApi.Library.DTOs.Responses.Auth;
 using KanbanApi.Library.DTOs.Results.Admin;
+using KanbanApi.Library.DTOs.Results.Auth;
 using KanbanApi.Library.Models.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -149,6 +152,69 @@ namespace KanbanApi.Controllers
                 Premium = premiumlist
             });;
         }
+
+        [HttpDelete]
+        [Route("delete/user/{UserId}")]
+        public async Task<IActionResult> Delete(string userId, [FromBody] DeleteUserRequest deleteUser)
+        {
+                var canConnect = _context.Database.CanConnect();
+                if (!canConnect)
+                {
+                    return BadRequest(new DeleteUserResponse()
+                    {
+                        Errors = new List<string>()
+                        {
+                            "can't reach the server"
+                        }
+                    });
+                }
+                /// find logged in user
+
+                /// make sure the user wont to delet thery acount
+                if (true)
+                {
+                    /// find user by id
+                    deleteUser.UserId = userId;
+                    IdentityUser user = await _userManager.FindByIdAsync(userId);
+
+                    /// null check
+                if (user is null)
+                    {
+                        return NotFound(new DeleteUserResponse
+                        {
+                            Errors = new List<string>()
+                            {
+                                $"user whit id: { userId } no found"
+                            },
+                            IsSuccess = false
+                        });
+
+                    }
+
+                    /// Delete user
+                    var f = await _userManager.DeleteAsync(user);
+                    /// Delete user
+                    try
+                    {
+                        //_userData.DeleteUser(deleteUser);
+
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
+                    /// return Success message
+                    return Ok(new DeleteUserResult()
+                    {
+                        IsSuccess = true,
+                        Message = $"the user is deletet"
+                    });
+                }
+
+            }
+
+        
 
         [HttpGet]
         [Route("Users/Get/{roleName}")]
