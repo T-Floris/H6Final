@@ -21,7 +21,7 @@ import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
 import Alert from "@material-ui/lab/Alert";
-
+import axios from "../../../api/axios";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -47,18 +47,12 @@ const tableIcons = {
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
 };
 
-function validateEmail(email) {
-  const reg =
-    /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i;
-  return reg.test(String(email).toLowerCase());
-}
 
 const UserListV2 = () => {
-
-    const axiosPrivate = useAxiosPrivate();
+  const axiosPrivate = useAxiosPrivate();
 
   var columns = [
-    { title: "id", field: "id" },
+    { title: "id", field: "id", hidden: true },
     {
       title: "Avatar",
       render: (rowData) => (
@@ -73,7 +67,7 @@ const UserListV2 = () => {
     { title: "First name", field: "firstName" },
     { title: "Last name", field: "lastName" },
     { title: "Email", field: "emailAddress" },
-    { title: "Username", field: "userName" },
+    // { title: "Username", field: "userName" },
   ];
   const [data, setData] = useState([]); //table data
 
@@ -97,7 +91,7 @@ const UserListV2 = () => {
 
         //state send the user back where they were before, instead of getting dumped back to home page
         //instead of getting sent to the login, it will replaced with the location where they were
-        //navigate("/adminlogin", { state: { from: location }, replace: true }); 
+        //navigate("/adminlogin", { state: { from: location }, replace: true });
       }
     };
 
@@ -109,6 +103,7 @@ const UserListV2 = () => {
     };
   }, []);
 
+  const UPDATE_URL = "admin/update/user/";
   const handleRowUpdate = (newData, oldData, resolve) => {
     //validation
     let errorList = [];
@@ -118,13 +113,13 @@ const UserListV2 = () => {
     if (newData.last_name === "") {
       errorList.push("Please enter last name");
     }
-    if (newData.email === "" || validateEmail(newData.email) === false) {
+    if (newData.email === "") {
       errorList.push("Please enter a valid email");
     }
 
     if (errorList.length < 1) {
-        axiosPrivate
-        .patch("admin/users/get/" + newData.id, newData)
+      axiosPrivate
+        .put(UPDATE_URL + newData.id, newData)
         .then((res) => {
           const dataUpdate = [...data];
           const index = oldData.tableData.id;
@@ -146,92 +141,100 @@ const UserListV2 = () => {
     }
   };
 
-  const handleRowAdd = (newData, resolve) => {
-    //validation
-    let errorList = [];
-    if (newData.first_name === undefined) {
-      errorList.push("Please enter first name");
-    }
-    if (newData.last_name === undefined) {
-      errorList.push("Please enter last name");
-    }
-    if (newData.email === undefined || validateEmail(newData.email) === false) {
-      errorList.push("Please enter a valid email");
-    }
+  // const handleRowAdd = (newData, resolve) => {
+  //   //validation
+  //   let errorList = [];
+  //   if (newData.first_name === undefined) {
+  //     errorList.push("Please enter first name");
+  //   }
+  //   if (newData.last_name === undefined) {
+  //     errorList.push("Please enter last name");
+  //   }
+  //   if (newData.email === undefined) {
+  //     errorList.push("Please enter a valid email");
+  //   }
 
-    if (errorList.length < 1) {
-      //no error
-      axiosPrivate
-        .post("admin/users/get/", newData)
-        .then((res) => {
-          let dataToAdd = [...data];
-          dataToAdd.push(newData);
-          setData(dataToAdd);
-          resolve();
-          setErrorMessages([]);
-          setIserror(false);
-        })
-        .catch((error) => {
-          setErrorMessages(["Cannot add data. Server error!"]);
-          setIserror(true);
-          resolve();
-        });
-    } else {
-      setErrorMessages(errorList);
-      setIserror(true);
-      resolve();
-    }
-  };
-
-  const handleRowDelete = (oldData, resolve) => {
+  //   if (errorList.length < 1) {
+  //     //no error
+  //     axios
+  //       .post("auth/register", newData)
+  //       .then((res) => {
+  //         let dataToAdd = [...data];
+  //         dataToAdd.push(newData);
+  //         setData(dataToAdd);
+  //         resolve();
+  //         setErrorMessages([]);
+  //         setIserror(false);
+  //       })
+  //       .catch((error) => {
+  //         setErrorMessages(["Cannot add data. Server error!"]);
+  //         setIserror(true);
+  //         resolve();
+  //       });
+  //   } else {
+  //     setErrorMessages(errorList);
+  //     setIserror(true);
+  //     resolve();
+  //   }
+  // };
+  
+  const DELETE_URL = "admin/delete/user/";
+  const ToDelete = true;
+  const handleRowDelete = async (oldData, resolve) => {
     axiosPrivate
-      .delete("admin/users/get/" + oldData.id)
+      .delete(DELETE_URL + oldData.id, {
+        data: {
+          ToDelete: ToDelete,
+        },
+      })
       .then((res) => {
         const dataDelete = [...data];
         const index = oldData.tableData.id;
         dataDelete.splice(index, 1);
         setData([...dataDelete]);
         resolve();
+        console.log(res);
       })
       .catch((error) => {
         setErrorMessages(["Delete failed! Server error"]);
         setIserror(true);
+
         resolve();
+        console.log(error);
       });
   };
+
   return (
     <Container>
-
-          <div>
-            {iserror && (
-              <Alert severity="error">
-                {errorMessages.map((msg, i) => {
-                  return <div key={i}>{msg}</div>;
-                })}
-              </Alert>
-            )}
-          </div>
-          <MaterialTable
-            title="User data"
-            columns={columns}
-            data={data}
-            icons={tableIcons}
-            editable={{
-              onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                  handleRowUpdate(newData, oldData, resolve);
-                }),
-              onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                  handleRowAdd(newData, resolve);
-                }),
-              onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                  handleRowDelete(oldData, resolve);
-                }),
-            }}
-          />
-
+      <div>
+        {iserror && (
+          <Alert severity="error">
+            {errorMessages.map((msg, i) => {
+              return <div key={i}>{msg}</div>;
+            })}
+          </Alert>
+        )}
+      </div>
+      <MaterialTable
+        title="User data"
+        columns={columns}
+        data={data}
+        icons={tableIcons}
+        editable={{
+          onRowUpdate: (newData, oldData) =>
+            new Promise((resolve) => {
+              handleRowUpdate(newData, oldData, resolve);
+            }),
+          // onRowAdd: (newData) =>
+          //   new Promise((resolve) => {
+          //     handleRowAdd(newData, resolve);
+          //   }),
+          onRowDelete: (oldData) =>
+            new Promise((resolve) => {
+              handleRowDelete(oldData, resolve);
+            }),
+        }}
+      />
     </Container>
   );
 };
