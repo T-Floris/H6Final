@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
+import useAxiosPrivate from "../../../../../hooks/useAxiosPrivate";
 import {
   Container,
   Form,
@@ -31,23 +33,54 @@ const EditableInput = (e) => {
 };
 
 const Profile = () => {
+  const [user, setUser] = useState({
+    userName: "",
+    emailAddress: "",
+    firstName: "",
+    lastName: "",
+    id: "",
+  });
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  const axiosPrivate = useAxiosPrivate();
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const getUser = async () => {
+      try {
+        const response = await axiosPrivate.get("user", {
+          signal: controller.signal,
+        });
+        console.log(response.data);
+        isMounted && setUser(response.data);
+      } catch (err) {
+        // console.error(err);
+        // navigate("/login", { state: { from: location }, replace: true });
+      }
+    };
+
+    getUser();
+
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, []);
   return (
     <Container>
       <Title>About you</Title>
       <Form>
-        <TextLabel>Full name</TextLabel>
+        <TextLabel>Firstname</TextLabel>
+        <p>{user.firstName}</p>
+        <EditableInput />
+        <TextLabel>Lastname</TextLabel>
+        <p>{user.lastName}</p>
         <EditableInput />
 
-        <TextLabel>Public name</TextLabel>
-        <EditableInput />
-
-        <TextLabel>Job title</TextLabel>
-        <EditableInput />
-
-        <TextLabel>Department</TextLabel>
-        <EditableInput />
-
-        <TextLabel>Organization</TextLabel>
+        <TextLabel>Username</TextLabel>
+        <p>{user.userName}</p>
         <EditableInput />
       </Form>
     </Container>
