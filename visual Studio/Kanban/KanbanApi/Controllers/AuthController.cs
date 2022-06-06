@@ -536,7 +536,7 @@ namespace KanbanApi.Controllers
 
                 // TODO: change email
                 /// create email to send
-                var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com", "haoyechen@hotmail.com" }, subject, content, attachments, confimeEmailLink);
                 //var message = new Message(to, subject, content, attachments, confimeEmailLink);
 
                 ///send reset password email
