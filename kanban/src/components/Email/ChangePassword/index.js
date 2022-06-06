@@ -16,7 +16,7 @@ import {
     InputField,
     Span,
     Attention,
-  } from "./ForgotPasswordElements";
+  } from "./ChangePasswordElements";
 
 import defaultvalue  from "../../../api/axios";
 

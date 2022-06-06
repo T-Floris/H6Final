@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import ForgotPassword from '../../components/Email/ForgotPassword';
+import ForgotPassword from '../../components/Email/ChangePassword';
 
 const Container = styled.div``;
 

@@ -10,6 +10,7 @@ import LearnMorePage from "./pages/FrontPages/LearnMorePage";
 //Auth pages
 import RegisterPage from "./pages/AuthPages/User/RegisterPage";
 import LoginPage from "./pages/AuthPages/User/LoginPage";
+import ForgotPasswordPage from "./pages/AuthPages/User/ForgotPasswordPage"
 import AdminLoginPage from "./pages/AuthPages/Admin/AdminLoginPage";
 import RequireAuth from "./components/Auth/RequireAuth";
 import Unauthorized from "./components/Auth/Unauthorized";
@@ -35,7 +36,7 @@ import Layout from "./components/Layout";
 //Email pages
 import ChangeEmailPage from "./pages/EmailPages/ChangeEmailPage";
 import ConfirmEmailPage from "./pages/EmailPages/ConfirmEmailPage";
-import ForgotPasswordPage from "./pages/EmailPages/ChangePasswordPage";
+import ChangePasswordPage from "./pages/EmailPages/ChangePasswordPage";
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
@@ -67,12 +68,13 @@ const NavigateRoutes = () => {
           {/* Auth pages */}
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
           <Route path="/adminlogin" element={<AdminLoginPage />} />
 
           {/* Email */}
           <Route path="/changeemail" element={<ChangeEmailPage />} />
           <Route path="/confirmemail" element={<ConfirmEmailPage />} />
-          <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+          <Route path="/changePassword" element={<ChangePasswordPage />} />
 
 
           {/* Protected routes */}

@@ -362,6 +362,8 @@ namespace KanbanApi.Controllers
                     });
                 }
 
+                
+
                 /// Delete all cokies from login
                 foreach (var cookie in Request.Cookies.Keys)
                 {

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
@@ -8,13 +9,13 @@ export const Container = styled.div`
   align-items: center;
   padding: 8px 8px;
   color: #fff;
-  margin-top: 100px;
-  /* background-color: #562bf6;
-  height: 100vh; */
+  background-color: #562bf6;
+  height: 100vh;
 `;
+
 export const Wrapper = styled.div`
   width: 900px;
-  height: 600px;
+  height: 450px;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.8);
   background: #fff;
   color: #000;
@@ -28,7 +29,7 @@ export const Wrapper = styled.div`
   @media only screen and (max-width: 1200px) {
     grid-template-columns: 1fr;
     width: 450px;
-    height: 600px;
+    height: 450px;
   }
 `;
 export const Img = styled.img`
@@ -42,6 +43,16 @@ export const Img = styled.img`
 `;
 
 export const Section = styled.section`
+  /* width: 100%;
+  border-radius: 25px;
+  max-width: 420px;
+  min-height: 400px;
+  display: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 1px 1px 5px 3px rgba(0, 0, 0, 0.2); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,6 +79,7 @@ export const ErrorMsg = styled.p`
           left: -9999px;
         `}
 `;
+
 export const Title = styled.h1`
   text-align: center;
 `;
@@ -77,12 +89,36 @@ export const Form = styled.form`
   flex-direction: column;
   justify-content: space-evenly;
   flex-grow: 1;
-  padding-bottom: 16px;
+  padding-bottom: 40px;
 `;
 
 export const Label = styled.label`
-  /* margin-top: 16px; */
+  margin-top: 10px;
 `;
+
+export const TickIcon = styled(FaCheck)`
+  ${(prop) =>
+    prop.valid
+      ? css`
+          color: limegreen;
+          margin-left: 0.25rem;
+        `
+      : css`
+          display: none;
+        `}
+`;
+export const CrossIcon = styled(FaTimes)`
+  ${(prop) =>
+    prop.invalid
+      ? css`
+          display: none;
+          margin-left: 0.25rem;
+        `
+      : css`
+          color: red;
+        `}
+`;
+export const InfoIcon = styled(FaInfoCircle)``;
 
 export const InputField = styled.input`
   font-size: 1rem;
@@ -97,30 +133,26 @@ export const InputField = styled.input`
     outline: none;
   }
 `;
-export const LoginButton = styled.button`
+
+export const CreateButton = styled.button`
   font-size: 1.3rem;
   font-weight: bold;
   padding: 4px;
   border-radius: 8px;
   margin-top: 16px;
   padding: 10px;
-  background-color: #562bf6;
-  color: #fff;
-  cursor: pointer;
-  border: none;
-`;
 
-export const CheckBoxContainer = styled.div`
-  font-size: 1rem;
-  margin-top: 5px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-end;
-`;
-export const CheckBox = styled.input`
-  height: 20px;
-  width: 20px;
-  margin: 0 5px 4px 2px;
+  ${(prop) =>
+    prop.disabled
+      ? css`
+          background-color: #808080;
+        `
+      : css`
+          background-color: #562bf6;
+          color: #fff;
+          cursor: pointer;
+          border: none;
+        `}
 `;
 
 export const LLink = styled(Link)`
@@ -133,3 +165,24 @@ export const Text = styled.p`
 `;
 
 export const Span = styled.span``;
+
+export const Attention = styled.p`
+  ${(prop) =>
+    prop.attention
+      ? css`
+          font-size: 0.8rem;
+          /* border-radius: 0.5rem;
+          background: #000; */
+          color: red;
+          padding: 4px;
+          position: relative;
+          bottom: -10px;
+          svg {
+            margin-right: 4px;
+          }
+        `
+      : css`
+          position: absolute;
+          left: -9999px;
+        `}
+`;

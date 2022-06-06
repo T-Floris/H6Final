@@ -145,6 +145,11 @@ const Login = () => {
               <Label htmlFor="persist">Remember me?</Label>
             </CheckBoxContainer>
           </Form>
+          <Text>              
+              <Span>
+                <LLink to="/forgotpassword">Forgot Password</LLink>
+              </Span>
+            </Text>
           <Text>
             Need an Account?
             <Span>
