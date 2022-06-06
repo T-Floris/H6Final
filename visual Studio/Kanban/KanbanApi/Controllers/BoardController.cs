@@ -1,5 +1,6 @@
 ﻿using KanbanApi.Data;
 using KanbanApi.Library.DataAccess.Board;
+using KanbanApi.Library.DataAccess.Group;
 using KanbanApi.Library.DTOs.Requests.Board;
 using KanbanApi.Library.DTOs.Responses.Board;
 using KanbanApi.Library.DTOs.Results.Board;
@@ -20,6 +21,7 @@ namespace KanbanApi.Controllers
     public class BoardController : ControllerBase
     {
         private readonly IBoard _board;
+        private readonly IGroup _group;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
@@ -182,8 +184,8 @@ namespace KanbanApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetBoard/{Id}")]
-        public IActionResult GetBoardById(Guid Id)
+        [Route("GetBoards/{BoardId}")]
+        public IActionResult GetBoardById(Guid BoardId)
         {
             var canConnect = _context.Database.CanConnect();
             if (!canConnect)
@@ -197,7 +199,8 @@ namespace KanbanApi.Controllers
                 });
             }
 
-            var board = _board.GetBoardById(Id);
+            var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var board = _board.GetBoardById(UserId, BoardId);
 
             return Ok(new GetBoardByIdResult()
             {
@@ -218,15 +221,37 @@ namespace KanbanApi.Controllers
 
 
         [HttpGet]
-        [Route("AddGroup/{boardId}/Group/{selectGroupId}")]
-        public IActionResult AddGroupToBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId/*, [FromBody] AddGroupToBoardRequest addGroupToBoard*/)
+        [Route("{boardId}/AddGroup/{selectGroupId}")]
+        public IActionResult AddGroupToBoard(Guid boardId, Guid selectGroupId, /*Guid BoardAccessId, */[FromBody] AddGroupToBoardRequest addGroupToBoard)
         {
-            AddGroupToBoardRequest addGroupToBoard = new()
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var board = _board.GetBoardById(userId, boardId);
+
+            if (board == null)
             {
-                BoardId = boardId,
-                BoardAccessId = BoardAccessId,
-                GroupId = selectGroupId,
-            };
+                var canAdd = _group.CheckUserAccess(selectGroupId, userId);
+
+                if (!canAdd)
+                    return BadRequest(new AddGroupToBoardResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                    {
+                        "you do not have access to 'remove group'"
+                    }
+                    });
+
+            }
+
+            addGroupToBoard.BoardId = boardId;
+
+            addGroupToBoard.GroupId = selectGroupId; 
+            //AddGroupToBoardRequest addGroupToBoard = new()
+            //{
+            //    BoardId = boardId,
+            //    BoardAccessId = BoardAccessId,
+            //    GroupId = selectGroupId,
+            //};
             if (TryValidateModel(addGroupToBoard))
             {
                 addGroupToBoard.BoardId = boardId;
@@ -255,9 +280,29 @@ namespace KanbanApi.Controllers
         }
 
         [HttpDelete]
-        [Route("RemoveGroup/{boardId}/Group/{selectGroupId}")]
-        public IActionResult RemoveGroupFromBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId/*, [FromBody] RemoveGroupFromBoardRequest removeGroupFromBoard*/)
+        [Route("{boardId}/RemoveGroup/Group/{selectGroupId}")]
+        public IActionResult RemoveGroupFromBoard(Guid boardId, Guid selectGroupId/*, [FromBody] RemoveGroupFromBoardRequest removeGroupFromBoard*/)
         {
+            var userId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+            var board =  _board.GetBoardById(userId, boardId);
+            
+            if (board == null)
+            {
+                var groupAccess = _group.CheckUserAccess(selectGroupId, userId);
+
+                if (!groupAccess)
+                    return BadRequest(new RemoveGroupFromBoardResponse()
+                    {
+                        IsSuccess = false,
+                        Errors = new List<string>()
+                    {
+                        "you do not have access to 'remove group'"
+                    }
+                    });
+            }
+
+
+
             RemoveGroupFromBoardRequest removeGroupFromBoard = new()
             {
                 BoardId = boardId,
@@ -289,7 +334,7 @@ namespace KanbanApi.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateGroup/{boardId}/Group/{selectGroupId}")]
+        [Route("{boardId}/UpdateGroup/Group/{selectGroupId}")]
         public IActionResult UpdateGroupRoleOnBoard(Guid boardId, Guid selectGroupId, Guid BoardAccessId, [FromBody] UpdateGroupRoleOnBoardRequest updateGroupRoleOnBoard)
         {
             if (ModelState.IsValid)

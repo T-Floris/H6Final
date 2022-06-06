@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spBoard_Select]
+	@UserId UNIQUEIDENTIFIER,
 	@BoardId UNIQUEIDENTIFIER
 AS
 BEGIN
@@ -10,5 +11,6 @@ BEGIN
 		[dbo].[Board], [dbo].[User]
 	WHERE
 		[Board].[Id] = @BoardId and
-		[User].[Id] = [Board].[UserId]
+		[User].[Id] = [Board].[UserId] and
+		[Board].[UserId] = @UserId
 END

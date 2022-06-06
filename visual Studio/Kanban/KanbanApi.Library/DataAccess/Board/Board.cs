@@ -36,9 +36,9 @@ namespace KanbanApi.Library.DataAccess.Board
             _sql.UpdateData("spBoard_Update", new { updateBoard.Id, updateBoard.Name, updateBoard.Description }, DatabaseName);
         }
 
-        public BoardModel GetBoardById(Guid Id)
+        public BoardModel GetBoardById(Guid UserId, Guid BoardId)
         {
-            var output = _sql.LoadData<BoardModel, dynamic>("dbo.spGroup_Select", new { Id }, DatabaseName).FirstOrDefault();
+            var output = _sql.LoadData<BoardModel, dynamic>("dbo.spBoard_Select", new { UserId, BoardId }, DatabaseName).FirstOrDefault();
             return output;
         }
 

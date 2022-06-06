@@ -140,7 +140,7 @@ namespace KanbanApi.Controllers
 
                     /// add user to role
                     await _userManager.AddToRoleAsync(existingUser, "User");
-                    //await _userManager.AddToRoleAsync(existingUser, "Admin");
+                    await _userManager.AddToRoleAsync(existingUser, "Admin");
                     /// log message
                     registrationResponse.Message.Add("Role addit to user");
 
@@ -428,11 +428,11 @@ namespace KanbanApi.Controllers
                     }
 
                     /// Delete user
-                    //var f = await _userManager.DeleteAsync(user);
+                    var f = await _userManager.DeleteAsync(user);
                     /// Delete user
                     try
                     {
-                      //  _userData.DeleteUser(deleteUser);
+                      _userData.DeleteUser(deleteUser);
 
                     }
                     catch (Exception)
@@ -536,7 +536,7 @@ namespace KanbanApi.Controllers
 
                 // TODO: change email
                 /// create email to send
-                var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com", "haoyechen@hotmail.com" }, subject, content, attachments, confimeEmailLink);
                 //var message = new Message(to, subject, content, attachments, confimeEmailLink);
 
                 ///send reset password email
