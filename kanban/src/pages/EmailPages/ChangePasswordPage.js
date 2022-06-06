@@ -4,7 +4,7 @@ import ForgotPassword from '../../components/Email/ForgotPassword';
 
 const Container = styled.div``;
 
-const ForgotPasswordPage = () => {
+const ChangePasswordPage = () => {
     return (
         <Container>
             <ForgotPassword/>
@@ -12,4 +12,4 @@ const ForgotPasswordPage = () => {
     )
 }
 
-export default ForgotPasswordPage
+export default ChangePasswordPage

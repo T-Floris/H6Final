@@ -425,11 +425,11 @@ namespace KanbanApi.Controllers
                     }
 
                     /// Delete user
-                    var f = await _userManager.DeleteAsync(user);
+                    //var f = await _userManager.DeleteAsync(user);
                     /// Delete user
                     try
                     {
-                        _userData.DeleteUser(deleteUser);
+                      //  _userData.DeleteUser(deleteUser);
 
                     }
                     catch (Exception)
@@ -794,25 +794,26 @@ namespace KanbanApi.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("RefreshToken")]
-        public async Task<IActionResult> RefreshToken(string token, string refreshToken)
+        public async Task<IActionResult> RefreshToken()
         {
+
             /// store token's
             TokenRefreshRequest tokenRequest = new();
 
             /// get tokens from cookies 
             //var CookieValue = Request.Cookies;
-            if (Request.Cookies["key"] != null)
+            if (Request.Cookies["jwt"] != null)
             {
                 var value = Request.Cookies["key"];
             }
 
-            tokenRequest.Token = Request.Cookies["Token"];
+            tokenRequest.Token = Request.Cookies["jwt"];
             tokenRequest.RefreshToken = Request.Cookies["RefreshToken"];
 
-            ///// make sure the model is validate
-            //if (TryValidateModel(tokenRequest))
-            //{
-            var canConnect = _context.Database.CanConnect();
+            /// make sure the model is validate
+            if (TryValidateModel(tokenRequest))
+            {
+                var canConnect = _context.Database.CanConnect();
                 if (!canConnect)
                 {
                     return BadRequest(new TokenRefreshResponse()
@@ -847,7 +848,7 @@ namespace KanbanApi.Controllers
 
 
                 return Ok(result);
-            //}
+            }
             /// return an error if the paylode is Invalid
             return BadRequest(new TokenRefreshResult()
             {
@@ -920,20 +921,20 @@ namespace KanbanApi.Controllers
             JwtPayload payload = new(claims);
 
             /// create security token
-            JwtSecurityToken jwt = new(header, payload);
+            JwtSecurityToken jwt1 = new(header, payload);
 
             /// Write access token
-            string Access_Token = new JwtSecurityTokenHandler().WriteToken(jwt);
+            string jwt = new JwtSecurityTokenHandler().WriteToken(jwt1);
 
             /// add token to Cookies
-            Response.Cookies.Append("Token", Access_Token, cookieOptions);
+            Response.Cookies.Append("jwt", jwt, cookieOptions);
 
 
 
             /// Create refresh token
             RefreshToken refreshToken = new()
             {
-                JwtId = jwt.Id,
+                JwtId = jwt1.Id,
                 IsUsed = false,
                 Ip = ip,
                 IsRevorked = false,
@@ -962,7 +963,7 @@ namespace KanbanApi.Controllers
             };
 
             logInResult.IsSuccess = true;
-            logInResult.Token = Access_Token;
+            logInResult.Token = jwt;
             logInResult.RefreshToken = refreshToken.Token;
             logInResult.Message.Add("token has benn created");
             foreach (var role in roles)

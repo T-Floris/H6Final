@@ -69,6 +69,24 @@ const ChangeEmail = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
+    
+    if (UserId === null && Token1 === null) {
+      setErrMsg("'user id' and 'token' are missind");
+      return;
+    }
+
+    if (Token1 === null) {
+      setErrMsg("'token' are missind");
+      return;      
+    }
+
+    if (UserId === null) {
+      setErrMsg("'user id' are missind");
+      return;      
+    }
+    
+
+
     const v1 = EMAIL_REGEX.test(emailAddress);
     const Token = Token1.split(' ').join('+');
 

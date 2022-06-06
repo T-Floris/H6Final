@@ -35,7 +35,7 @@ import Layout from "./components/Layout";
 //Email pages
 import ChangeEmailPage from "./pages/EmailPages/ChangeEmailPage";
 import ConfirmEmailPage from "./pages/EmailPages/ConfirmEmailPage";
-import ForgotPasswordPage from "./pages/EmailPages/ForgotPasswordPage";
+import ForgotPasswordPage from "./pages/EmailPages/ChangePasswordPage";
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
