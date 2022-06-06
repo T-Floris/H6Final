@@ -8,7 +8,8 @@ import {
   EditField,
 } from "./ProfileElements";
 
-const EditableInput = () => {
+const EditableInput = (e) => {
+  e.preventDefault();
   const [Value, setValue] = useState("");
   const [EditMode, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!EditMode);

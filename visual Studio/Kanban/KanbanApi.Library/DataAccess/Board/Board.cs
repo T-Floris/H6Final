@@ -60,9 +60,9 @@ namespace KanbanApi.Library.DataAccess.Board
             _sql.UpdateData("spBoardGRoup_ChangeRole", new {  }, DatabaseName);
         }
 
-        public List<BoardModel> GetBoards()
+        public List<BoardModel> GetBoards(Guid UserId)
         {
-            var output = _sql.LoadData<BoardModel, dynamic>("dbo.spBoard_GetAll", new {  }, DatabaseName);
+            var output = _sql.LoadData<BoardModel, dynamic>("dbo.spBoard_GetAll", new { UserId }, DatabaseName);
             return output;
         }
 

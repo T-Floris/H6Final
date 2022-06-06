@@ -61,15 +61,9 @@ const Login = () => {
           withCredentials: true,
         }
       );
-      console.log("test");
-      //console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
+
       const token = response?.data?.token;
       const roles = response?.data?.roles;
-      console.log(EmailAddress);
-      console.log(Password);
-      console.log(roles);
-      console.log(token);
       
       setAuth({ EmailAddress, Password, roles, token });
       setUser("");
@@ -80,10 +74,9 @@ const Login = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
-        console.log(err);
-        // } else if (err.response?.status === 400) {
-        //     setErrMsg('Missing Username or Password');
-        //    console.log(err?.response);
+        } else if (err.response?.status === 400) {
+            setErrMsg('Missing Username or Password');
+           console.log(err?.response);
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {

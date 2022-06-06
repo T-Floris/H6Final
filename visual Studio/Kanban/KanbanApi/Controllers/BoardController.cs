@@ -166,7 +166,9 @@ namespace KanbanApi.Controllers
                 });
             }
 
-            var boards = _board.GetBoards();
+            var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var boards = _board.GetBoards(UserId);
 
             return Ok(new GetBoardResult()
             {

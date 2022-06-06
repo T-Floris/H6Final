@@ -9,12 +9,20 @@ import {
   UnsubscribeButton,
 } from "./EmailElements";
 
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  
+}
+
 const Email = () => {
   return (
     <Container>
       <Title>Change your email</Title>
 
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Text>Your current email address is Username@hotmail.com</Text>
         <EmailInput
           type="email"

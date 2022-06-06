@@ -171,7 +171,8 @@ namespace KanbanApi.Controllers
                     /// create message
                     // TODO: change email
                     //var message = new Message(to, subject, content, attachments, confimeEmailLink);
-                    var message = new Message(new string[] { "psnfloris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+
+                    var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
 
                     /// send email
                     await _emailSender.ConfirmEmailAsync(message, existingUser);
@@ -291,7 +292,7 @@ namespace KanbanApi.Controllers
                     // TODO: change email
                     //var message = new Message(to, subject, content, attachments, confimeEmailLink);
                     /// create message
-                    var message = new Message(new string[] { "psnfloris@gmail.com" }, subject, content, attachments, confimeEmailLink);
+                    var message = new Message(new string[] { "tino.p.s.floris@gmail.com" }, subject, content, attachments, confimeEmailLink);
 
                     /// send email to user, there is a new login location
                     await _emailSender.FirstTimeLoggedInFromIpEmailAsync(message, user, ip);
@@ -530,7 +531,7 @@ namespace KanbanApi.Controllers
                 string[] to = { existingUser.Email };
                 string content = "";
                 IFormFileCollection attachments = null;
-                string confimeEmailLink = $"http://localhost:3000/ForgotPassword?UserId={existingUser.Id}&Token={token}";
+                string confimeEmailLink = $"http://localhost:3000/changePassword?UserId={existingUser.Id}&Token={token}";
 
 
                 // TODO: change email

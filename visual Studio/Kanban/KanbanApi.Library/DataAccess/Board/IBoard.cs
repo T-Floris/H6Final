@@ -15,7 +15,7 @@ namespace KanbanApi.Library.DataAccess.Board
         void DeleteBaord(Guid Id);
         void UpdateBoard(UpdateBoardRequest updateBoard);
         BoardModel GetBoardById(Guid Id);
-        List<BoardModel> GetBoards();
+        List<BoardModel> GetBoards(Guid UserId);
 
         BoardModel GetBoardGroupIsMemberOff(Guid GroupId, Guid BoardId);
 
