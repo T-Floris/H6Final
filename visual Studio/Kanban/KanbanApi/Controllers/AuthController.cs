@@ -329,7 +329,7 @@ namespace KanbanApi.Controllers
             TokenRevokeRequest revokeToken = new();
 
             /// get tokens from cookies 
-            revokeToken.Token = Request.Cookies["Token"];
+            revokeToken.Token = Request.Cookies["jwt"];
             revokeToken.RefreshToken = Request.Cookies["RefreshToken"];
 
             /// make sure the model is validate

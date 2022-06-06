@@ -1,4 +1,4 @@
-import axios from "../api/axios";
+import { axiosPrivate } from "../api/axios";
 import useAuth from "./useAuth";
 
 const useLogout = () => {
@@ -7,7 +7,7 @@ const useLogout = () => {
     const logout = async () => {
         setAuth({}); //when logout, empty our auth state
         try {
-            const response = await axios('/auth/logoff', {
+            const response = await axiosPrivate.post('/auth/logoff', {
                 withCredentials: true
             });
         } catch (err) {
