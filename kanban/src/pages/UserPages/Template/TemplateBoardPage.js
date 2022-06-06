@@ -1,9 +1,7 @@
 import React from "react";
-
 //import Board from "../../../components/Kanban/board";
 import { Provider } from "react-redux";
 //import store from "../../../redux/store";
-
 import styled from "styled-components";
 import MetaDecorator from "../../../components/Utils/Meta/MetaDecorator";
 import Sidebar from "../../../components/Menus/Sidebar";
@@ -37,13 +35,11 @@ const TemplateBoardPage = () => {
       />
 
       <Sidebar />
-
       {/* <Provider store={store}> */}
         {" "}
         {/*store is required by redux*/}
         {/* <Board /> */}
       {/* </Provider> */}
-
     </TemplateBoardContainer>
   );
 };
