@@ -66,7 +66,7 @@ const UserListV2 = () => {
     { title: "First name", field: "firstName" },
     { title: "Last name", field: "lastName" },
     { title: "Email", field: "emailAddress" },
-    // { title: "Username", field: "userName" },
+    { title: "Username", field: "userName" },
   ];
   const [data, setData] = useState([]); //table data
 
@@ -100,7 +100,7 @@ const UserListV2 = () => {
       isMounted = false;
       controller.abort();
     };
-  });
+  }, []);
 
   const UPDATE_URL = "admin/update/user/";
   const handleRowUpdate = (newData, oldData, resolve) => {
