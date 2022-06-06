@@ -640,7 +640,11 @@ namespace KanbanApi.Controllers
 
             var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             IdentityUser getUser = await _userManager.FindByIdAsync(UserId);
-            bool isInRole = _userManager.IsInRoleAsync(getUser, "Admin").Result;
+            if (getUser == null)
+            {
+                return BadRequest();
+            }
+            var isInRole = _userManager.IsInRoleAsync(getUser, "Admin").Result;
             if (!isInRole)
             {
                 return BadRequest(new GetAllUsersResponse()

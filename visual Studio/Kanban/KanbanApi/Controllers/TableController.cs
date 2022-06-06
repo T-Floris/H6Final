@@ -46,7 +46,7 @@ namespace KanbanApi.Controllers
                 {
                     dds.Add(_board.GetBoardGroupIsMemberOff(group.GroupId, boardId));
                 }
-                var d = _board.GetBoardById(boardId);
+                //var d = _board.GetBoardById(boardId);
                 createTable.BoardId = boardId;
 
                 _table.AddTable(createTable);
