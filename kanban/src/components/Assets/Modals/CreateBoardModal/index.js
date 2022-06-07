@@ -12,13 +12,14 @@ import {
   ModalForm,
   ModalLabel,
   ModalInputField,
-  ModalSelect,
-  ModalOption,
+
   ModalButtonContainer,
   ModalButton,
 } from "./CreateBoardModalElementals";
 import { AiOutlineLock } from "react-icons/ai";
 import { IoPeopleOutline, IoEarthOutline } from "react-icons/io5";
+import { useState } from "react";
+import { axiosPrivate } from "../../../../api/axios";
 
 const CreateBoardModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
@@ -44,6 +45,22 @@ const CreateBoardModal = ({ showModal, setShowModal }) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  const [createBoard, setcreateBoard] = useState("");
+  const CREATEBOARD_URL = "board/create";
+
+  const handleSubmit = async () => {
+    try {
+      await axiosPrivate.post(
+        CREATEBOARD_URL,
+        JSON.stringify({ Name: createBoard })
+      );
+
+      setcreateBoard("");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       {showModal ? (
@@ -60,25 +77,20 @@ const CreateBoardModal = ({ showModal, setShowModal }) => {
                   <ModalLabel>
                     Board title<span style={{ color: "red" }}>*</span>
                   </ModalLabel>
-                  <ModalInputField type="text" autoFocus required></ModalInputField>
-                  <ModalLabel>
-                    Workspace<span style={{ color: "red" }}>*</span>
-                  </ModalLabel>
-                  <ModalSelect>
-                    {Options.map(({ label }) => (
-                      <ModalOption>{label}</ModalOption>
-                    ))}
-                  </ModalSelect>
-                  <ModalLabel>
-                    Visibility<span style={{ color: "red" }}>*</span>
-                  </ModalLabel>
-                  <ModalSelect>
-                    {Visibility.map(({ label }) => (
-                      <ModalOption>{label}</ModalOption>
-                    ))}
-                  </ModalSelect>
+                  <ModalInputField
+                    type="text"
+                    value={createBoard}
+                    onChange={(e) => setcreateBoard(e.target.value)}
+                    autoFocus
+                    required
+                  ></ModalInputField>
+                
                   <ModalButtonContainer>
-                    <ModalButton type="submit" value="Submit">
+                    <ModalButton
+                      type="submit"
+                      value="Submit"
+                      onClick={handleSubmit}
+                    >
                       Create
                     </ModalButton>
                     <ModalButton onClick={() => setShowModal((prev) => !prev)}>

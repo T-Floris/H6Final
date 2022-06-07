@@ -112,21 +112,6 @@ export const ModalInputField = styled.input`
     outline: none;
   }
 `;
-export const ModalSelect = styled.select`
-  border-radius: 5px;
-  border: 1px solid #cccccc;
-  width: 300px;
-  height: 50px;
-  margin-bottom: 40px;
-  padding: 10px;
-  &:focus {
-    border: 3px solid;
-    border-color: #562bf6;
-    outline: none;
-  }
-`;
-
-export const ModalOption = styled.option``;
 
 export const ModalButtonContainer = styled.div`
   display: flex;
