@@ -1,5 +1,5 @@
 import React from "react";
-import UserBoard from "../../components/UserInterface/UserBoard"
+import UserBoard from "../../components/UserInterface/UserBoards"
 import styled from "styled-components";
 import Sidebar from "../../components/Menus/Sidebar";
 import { backgroundTheme } from "../../components/Assets/variables";
@@ -14,13 +14,14 @@ import {
   MdWorkspacesOutline,
 } from "react-icons/md";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
+import { Outlet } from "react-router-dom";
 const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const BoardContainer = styled.div`
   ${backgroundTheme}
 `;
 
-const BoardPage = () => {
+const BoardsPage = () => {
   //i18next
   const { t } = useTranslation();
   const LinksArray = [
@@ -39,7 +40,7 @@ const BoardPage = () => {
     {
       label: t("sidebar_board"),
       icon: <MdOutlineDashboard />,
-      to: "/board",
+      to: "/boards",
       notification: 0,
     },
     {
@@ -70,8 +71,9 @@ const BoardPage = () => {
 
       <Sidebar links={LinksArray}/>
       <UserBoard />
+      <Outlet />
     </BoardContainer>
   );
 };
 
-export default BoardPage;
+export default BoardsPage;

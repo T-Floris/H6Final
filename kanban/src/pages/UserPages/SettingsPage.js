@@ -39,7 +39,7 @@ const SettingPage = () => {
       {
         label: t("sidebar_board"),
         icon: <MdOutlineDashboard />,
-        to: "/board",
+        to: "/boards",
         notification: 0,
       },
       {
