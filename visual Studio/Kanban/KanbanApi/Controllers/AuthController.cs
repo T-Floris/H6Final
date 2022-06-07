@@ -166,7 +166,7 @@ namespace KanbanApi.Controllers
                     /// files to send with
                     IFormFileCollection attachments = null;
                     /// confirm email link
-                    string confimeEmailLink = $"http://localhost:3000/ConfirmEmail?userid={existingUser.Id}&token={token}";
+                    string confimeEmailLink = $"http://localhost:3000/ConfirmEmail?UserId={existingUser.Id}&Token={token}";
 
                     /// create message
                     // TODO: change email
@@ -537,7 +537,7 @@ namespace KanbanApi.Controllers
 
                 // TODO: change email
                 /// create email to send
-                var message = new Message(new string[] { "tino.p.s.floris@gmail.com", "haoyechen@hotmail.com", "psnfloris@gmail.com", "tino0100@elev.tec.dk" }, subject, content, attachments, confimeEmailLink);
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com"/*, "haoyechen@hotmail.com", "psnfloris@gmail.com", "tino0100@elev.tec.dk"*/ }, subject, content, attachments, confimeEmailLink);
                 //var message = new Message(to, subject, content, attachments, confimeEmailLink);
 
                 ///send reset password email
@@ -673,6 +673,7 @@ namespace KanbanApi.Controllers
                 /// Generate token to change email
                 var token = await _userManager.GenerateChangeEmailTokenAsync(user, changeEmail.NewEmailAddress);
 
+                
                 /// null check
                 if (token == null)
                 {
@@ -693,7 +694,7 @@ namespace KanbanApi.Controllers
                 string content = "";
                 IFormFileCollection attachments = null;
                 /// token link
-                string changeEmailLink = $"http://localhost:3000/ChangeEmail?userid={user.Id}&token={token}";
+                string changeEmailLink = $"http://localhost:3000/ChangeEmail?UserId={user.Id}&Token={token}";
 
 
 

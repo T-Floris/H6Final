@@ -43,7 +43,7 @@ const Dashboard = () => {
         const response = await axiosPrivate.get("user", {
           signal: controller.signal,
         });
-        console.log(response.data);
+        //console.log(response.data);
         isMounted && setAdmin(response.data);
       } catch (err) {
         // console.error(err);

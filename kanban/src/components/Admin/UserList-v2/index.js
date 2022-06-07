@@ -83,10 +83,10 @@ const UserListV2 = () => {
         const response = await axiosPrivate.get("admin/users/get", {
           signal: controller.signal,
         });
-        console.log(response.data);
+        // console.log(response.data);
         isMounted && setData(response.data.user);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
 
         //state send the user back where they were before, instead of getting dumped back to home page
         //instead of getting sent to the login, it will replaced with the location where they were
@@ -192,14 +192,14 @@ const UserListV2 = () => {
         dataDelete.splice(index, 1);
         setData([...dataDelete]);
         resolve();
-        console.log(res);
+        // console.log(res);
       })
       .catch((error) => {
         setErrorMessages(["Delete failed! Server error"]);
         setIserror(true);
 
         resolve();
-        console.log(error);
+        // console.log(error);
       });
   };
 

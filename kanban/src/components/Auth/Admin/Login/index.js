@@ -58,17 +58,17 @@ const AdminLogin = () => {
           withCredentials: true,
         }
       );
-      console.log("login");
-      console.log(JSON.stringify(response?.data));
+      // console.log("login");
+      // console.log(JSON.stringify(response?.data));
       // console.log(JSON.stringify(response));
       const token = response?.data?.token;
       const roles = response?.data?.roles;
       const refreshToken = response?.data?.refreshToken;
       setAuth({ EmailAddress, Password, roles, refreshToken, token });
-      console.log(EmailAddress);
-      console.log(Password);
-      console.log(roles);
-      console.log(token);
+      // console.log(EmailAddress);
+      // console.log(Password);
+      // console.log(roles);
+      // console.log(token);
 
       setAuth({ EmailAddress, Password, roles, token });
       setUser("");
@@ -79,15 +79,15 @@ const AdminLogin = () => {
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
-        console.log(err);
+        // console.log(err);
       } else if (err.response?.status === 400) {
         setErrMsg("Wrong Username & Email or Password");
-        console.log(err?.response);
+        // console.log(err?.response);
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {
         setErrMsg("Login Failed");
-        console.log(err);
+        // console.log(err);
       }
       // errRef.current.focus();
     }

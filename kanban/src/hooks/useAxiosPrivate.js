@@ -84,7 +84,7 @@ const useAxiosPrivate = (req, res) => {
         //expect it to be 403 which is forbidden, if request is failed due to expired token
         //                     //if sent does not exit or not true, we dont want endless loop, only want to retry once
         if (error?.response?.status === 403 && !prevRequest?.sent) {
-          console.log("test:");
+          //console.log("test:");
           prevRequest.sent = true;
           const newAccessToken = await refresh(); //get a new token
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;

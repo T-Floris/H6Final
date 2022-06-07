@@ -11,7 +11,7 @@ import {
 } from "./ProfileElements";
 
 const EditableInput = (e) => {
-  e.preventDefault();
+  //e.preventDefault();
   const [Value, setValue] = useState("");
   const [EditMode, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!EditMode);

@@ -20,10 +20,10 @@ const UserList = () => {
         const response = await axiosPrivate.get("admin/users/get", {
           signal: controller.signal,
         });
-        console.log(response.data);
+        // console.log(response.data);
         isMounted && setUsers(response.data.user);
       } catch (err) {
-        console.error(err);
+        // console.error(err);
 
         //state send the user back where they were before, instead of getting dumped back to home page
         //instead of getting sent to the login, it will replaced with the location where they were

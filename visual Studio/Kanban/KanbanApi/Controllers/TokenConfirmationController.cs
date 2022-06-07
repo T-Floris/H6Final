@@ -39,7 +39,6 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                string findUser = User.FindFirstValue(tokenConfirmEmail.UserId);
 
                 /// find user by id
                 IdentityUser user = await _userManager.FindByIdAsync(tokenConfirmEmail.UserId);
@@ -57,11 +56,11 @@ namespace KanbanApi.Controllers
 
                 }
                 
-                //await _userManager.ConfirmEmailAsync(user, tokenConfirmEmail.Token);
+                await _userManager.ConfirmEmailAsync(user, tokenConfirmEmail.Token);
 
                 bool isConfimd = await _userManager.IsEmailConfirmedAsync(user);
 
-                if (isConfimd)
+                if (!isConfimd)
                 {
                     return BadRequest(new TokenConfirmEmailResponse()
                     {
@@ -165,10 +164,8 @@ namespace KanbanApi.Controllers
         {
             if (ModelState.IsValid)
             {
-                string findUser = User.FindFirstValue(tokenChangeEmail.UserId);
-
                 /// find user by id
-                IdentityUser user = await _userManager.FindByIdAsync(findUser);
+                IdentityUser user = await _userManager.FindByIdAsync(tokenChangeEmail.UserId);
 
                 if (user == null)
                 {
@@ -183,6 +180,20 @@ namespace KanbanApi.Controllers
                 }
 
                 await _userManager.ChangeEmailAsync(user, tokenChangeEmail.NewEmail, tokenChangeEmail.Token);
+
+                var hasChange = _userManager.FindByEmailAsync(tokenChangeEmail.NewEmail).Result;
+
+                if (hasChange == null)
+                    return BadRequest(new TokenForgotPasswordResponse()
+                    {
+                        IsSuccess = false,
+                        Errors= new List<string>()
+                        {
+                            "email or user id do not match the token"
+                        }
+                    });
+
+
 
                 bool c = _userManager.FindByEmailAsync(tokenChangeEmail.NewEmail).Result.EmailConfirmed;
                 ChangeEmailRequest changeEmail = new()
