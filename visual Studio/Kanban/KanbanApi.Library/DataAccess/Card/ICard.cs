@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KanbanApi.Library.DTOs.Requests.Card;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,9 @@ namespace KanbanApi.Library.DataAccess.Card
 {
     public interface ICard
     {
-        void AddCard();
-        void DeleteCard();
-        void UpdateCard();
-        void MoveCard();
+        void AddCard(AddCardToTableRequest addCardToTable);
+        void DeleteCard(DeleteCardFromTableRequest deleteCardFromTable);
+        void UpdateCard(UpdateCardFromTableRequest updateCardFromTable);
+        void MoveCard(MoveCardFromTableRequest moveCardFromTable);
     }
 }

@@ -75,7 +75,7 @@ const ConfirmEmail = () => {
           headers: { "Content-Type": "application/json" }          
         }
       );
-      console.log(UserId);     
+      // console.log(UserId);     
     } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");

@@ -57,3 +57,12 @@ https://localhost:44338/api/TokenConfirmation/ConfirmEmail
 https://localhost:44338/api/TokenConfirmation/ForgotPassword
 https://localhost:44338/api/TokenConfirmation/ChangeEmail
 
+https://localhost:44338/api/board/{boardId}/Table/{tableId}/Card/create
+https://localhost:44338/api/board/{boardId}/Table/{tableId}/Card/delete/{cardId}
+https://localhost:44338/api/board/{boardId}/Table/{tableId}/Card/update/{cardId}
+https://localhost:44338/api/board/{boardId}/Table/{tableId}/Card/move/{cardId}
+
+
+
+
+

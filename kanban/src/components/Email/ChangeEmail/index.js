@@ -100,7 +100,7 @@ const ChangeEmail = () => {
         JSON.stringify({
           UserId,
           "Token" : Token,
-          emailAddress
+          "NewEmail" : emailAddress
           
         }),
         {
@@ -108,12 +108,7 @@ const ChangeEmail = () => {
           withCredentials: true,
         }
       );
-      // console.log(response?.data);
-      // console.log(response?.data.token);
       setSuccess(true);
-
-      //clear state and controlled inputs
-      //need value attrib on inputs for this
 
       setEmailAddress("");
     } catch (err) {
@@ -127,9 +122,9 @@ const ChangeEmail = () => {
           setErrMsg([err.response.data.errors[0]]);
         }
       } else {
-        setErrMsg("Change password Failed");
+        setErrMsg("Change Email Failed");
       }
-      //errRef.current.focus();
+      emailAddressRef.current.focus();
     }
   };
   return (

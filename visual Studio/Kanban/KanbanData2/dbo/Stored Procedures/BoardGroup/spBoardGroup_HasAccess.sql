@@ -17,12 +17,12 @@ SELECT CASE WHEN EXISTS (
 			[BoardGroup].[GroupId] = @groupId AND
 			[BoardGroup].[BoardId] = @boardId AND
 			[BoardGroup].[BoardAccessId] = [BoardAccess].[Id] AND
-			[BoardAccess].[Name] = '' AND
+			[BoardAccess].[Name] = 'admin' AND
 			[Group].[Id] = @groupId OR
 			[BoardGroup].[GroupId] = @groupId AND
 			[BoardGroup].[BoardId] = @boardId AND
 			[BoardGroup].[BoardAccessId] = [BoardAccess].[Id] AND
-			[BoardAccess].[Name] = '' AND
+			[BoardAccess].[Name] = 'owner' AND
 			[Group].[Id] = @groupId
 		)
 	THEN CAST(1 AS BIT)

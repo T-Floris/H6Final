@@ -12,7 +12,7 @@ import {
 
 
 const handleSubmit = async (e) => {
-  e.preventDefault();
+  // e.preventDefault();
 
   
 }

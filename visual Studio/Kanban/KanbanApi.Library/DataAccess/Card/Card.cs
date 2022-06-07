@@ -1,4 +1,6 @@
 ﻿using System;
+using KanbanApi.Library.DTOs.Requests.Card;
+using KanbanApi.Library.Internal.DataAccess;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,24 +10,32 @@ namespace KanbanApi.Library.DataAccess.Card
 {
     public class Card : ICard
     {
-        public void AddCard()
+        private readonly ISqlDataAccess _sql;
+        private string DatabaseName = "KanbanData";
+
+        public Card(ISqlDataAccess sql)
         {
-            throw new NotImplementedException();
+            _sql = sql;
         }
 
-        public void DeleteCard()
+        public void AddCard(AddCardToTableRequest addCardToTable)
         {
-            throw new NotImplementedException();
+            _sql.SaveData("spCard_Add", new { addCardToTable.BoardId, addCardToTable.TableId, addCardToTable.Info }, DatabaseName);
         }
 
-        public void MoveCard()
+        public void DeleteCard(DeleteCardFromTableRequest deleteCardFromTable)
         {
-            throw new NotImplementedException();
+            _sql.DeleteData("spCard_Delete", new { deleteCardFromTable.BoardId, deleteCardFromTable.TableId, deleteCardFromTable.CardId }, DatabaseName);
         }
 
-        public void UpdateCard()
+        public void MoveCard(MoveCardFromTableRequest moveCardFromTable)
         {
-            throw new NotImplementedException();
+            _sql.DeleteData("spCard_Move", new { moveCardFromTable.CardId, moveCardFromTable.TableId }, DatabaseName);
+        }
+
+        public void UpdateCard(UpdateCardFromTableRequest updateCardFromTable)
+        {
+            _sql.UpdateData("spCard_Update", new { updateCardFromTable.CardId, updateCardFromTable.Info }, DatabaseName);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spCard_Update]
-	@Id UNIQUEIDENTIFIER,
+	@CardId UNIQUEIDENTIFIER,
 	@Info nvarchar(max)	
 AS
 BEGIN
@@ -7,5 +7,5 @@ BEGIN
 
 	UPDATE [dbo].[Card]
 	SET [Info] = @Info
-	WHERE [Card].[Id] = @Id
+	WHERE [Card].[Id] = @CardId
 END

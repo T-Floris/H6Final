@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spCard_Move]
-	@param1 int = 0,
-	@param2 int
+	@CardId UNIQUEIDENTIFIER,
+	@TableId UNIQUEIDENTIFIER
 AS
-	SELECT @param1, @param2
+	SELECT @CardId, @TableId
 RETURN 0
