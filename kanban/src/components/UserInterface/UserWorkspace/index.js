@@ -26,7 +26,7 @@ const UserWorkspace = () => {
           <Title>Username workspaces</Title>
         </PageBar>
         <Wrapper>
-          <BoxLink to="/board">
+          <BoxLink to="/boards">
             <TextInBox>Username workspace</TextInBox>
           </BoxLink>
 
