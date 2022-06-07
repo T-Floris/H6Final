@@ -10,7 +10,7 @@ import LearnMorePage from "./pages/FrontPages/LearnMorePage";
 //Auth pages
 import RegisterPage from "./pages/AuthPages/User/RegisterPage";
 import LoginPage from "./pages/AuthPages/User/LoginPage";
-import ForgotPasswordPage from "./pages/AuthPages/User/ForgotPasswordPage"
+import ForgotPasswordPage from "./pages/AuthPages/User/ForgotPasswordPage";
 import AdminLoginPage from "./pages/AuthPages/Admin/AdminLoginPage";
 import RequireAuth from "./components/Auth/RequireAuth";
 import Unauthorized from "./components/Auth/Unauthorized";
@@ -18,7 +18,7 @@ import PersistLogin from "./components/Auth/PersistLogin";
 //User pages
 import UserStartPage from "./pages/UserPages/UserStartPage";
 import WorkspacePage from "./pages/UserPages/WorkspacePage";
-import BoardPage from "./pages/UserPages/BoardsPage";
+import BoardsPage from "./pages/UserPages/BoardsPage";
 import GroupPage from "./pages/UserPages/GroupPage";
 import CalendarPage from "./pages/UserPages/CalendarPage";
 import MessagePage from "./pages/UserPages/MessagePage";
@@ -40,6 +40,7 @@ import ChangePasswordPage from "./pages/EmailPages/ChangePasswordPage";
 
 // 404
 import NotFoundPage from "./pages/404Pages/NotFoundPage";
+import BoardPage from "./pages/UserPages/BoardPage";
 
 const ROLES = {
   User: "User",
@@ -76,7 +77,6 @@ const NavigateRoutes = () => {
           <Route path="/confirmemail" element={<ConfirmEmailPage />} />
           <Route path="/changePassword" element={<ChangePasswordPage />} />
 
-
           {/* Protected routes */}
           {/* User pages */}
           <Route element={<PersistLogin />}>
@@ -85,7 +85,9 @@ const NavigateRoutes = () => {
               {/* redirect to login page if not login */}
               <Route path="/userstart" element={<UserStartPage />} />
               <Route path="/workspace" element={<WorkspacePage />} />
-              <Route path="/board" element={<BoardPage />} />
+              <Route path="/boards" element={<BoardsPage />}>
+                <Route path=":id" element={<BoardPage />} />
+              </Route>
               <Route path="/templateboard" element={<TemplateBoardPage />} />
               <Route path="/group" element={<GroupPage />} />
               <Route path="/calendar" element={<CalendarPage />} />
