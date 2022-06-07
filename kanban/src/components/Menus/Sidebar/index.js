@@ -123,8 +123,8 @@ const Sidebar = ({ links }) => {
             onClick={() => setSidebarOpen((p) => !p)}
           />
           {/* short circuit: sidebaropen is closed display KB, otherwise display KanBan */}
-          {(!sidebarOpen && <SLogo to="/userstart">KB</SLogo>) || (
-            <SLogo to="/userstart">KanBan</SLogo>
+          {(!sidebarOpen && <SLogo to="/">KB</SLogo>) || (
+            <SLogo to="/">KanBan</SLogo>
           )}
 
           <SSearch
