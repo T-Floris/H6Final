@@ -15,6 +15,8 @@ const EditableInput = (e) => {
   const [Value, setValue] = useState("");
   const [EditMode, setEditMode] = useState(false);
   const toggleEditMode = () => setEditMode(!EditMode);
+
+  
   return (
     <>
       {EditMode ? (
@@ -72,15 +74,15 @@ const Profile = () => {
     <Container>
       <Title>About you</Title>
       <Form>
-        <TextLabel>Firstname</TextLabel>
-        <p>{user.firstName}</p>
+        <TextLabel>Firstname: <span>{user.firstName}</span></TextLabel>
+        
         <EditableInput />
-        <TextLabel>Lastname</TextLabel>
-        <p>{user.lastName}</p>
+        <TextLabel>Lastname: <span>{user.lastName}</span></TextLabel>
+        
         <EditableInput />
 
-        <TextLabel>Username</TextLabel>
-        <p>{user.userName}</p>
+        <TextLabel>Username: <span>{user.userName}</span></TextLabel>
+        
         <EditableInput />
       </Form>
     </Container>
