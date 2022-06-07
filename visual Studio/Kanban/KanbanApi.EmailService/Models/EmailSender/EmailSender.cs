@@ -36,6 +36,8 @@ namespace KanbanApi.EmailService.Models.EmailSender
         /// </summary>
         //private string logoimage = "https://lh3.googleusercontent.com/pw/AM-JKLWEFVuQ7TRAq0RmwSlo7AP4poyT3Fp_YzWlYNQKSXLcHGfFxCGmzwkLQxlrCmIoJT8bRlYZsw3PgiUFPpiFpMjJKeTuL5TBoFZ2rCTGhalAesEUWnRwdnl_rtvlF5hURI3xiuuq-qLEZ2busOdhh8A=s350-no?authuser=0";
         private string logoimage = "https://lh3.googleusercontent.com/pw/AM-JKLVvonn53EzNOl_J5GDXzlCpcL059dYDJV1QInDDkLyVvBiZ78dZTbwxtE3-GqJvMHkXwtL-Vq8q3wqIt2cAQgcZQyHgIj_THTAxcPl3sCfrzDU1QKjFwItkqgimNXj73AfepJo8aio7AgQw1joprWwb=s512-no";
+        //private string logoimage = "https://photos.app.goo.gl/sbzR369JoB8KwvyYA";
+        
         /// <summary>
         /// default path to webside
         /// </summary>

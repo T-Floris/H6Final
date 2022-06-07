@@ -347,6 +347,7 @@ namespace KanbanApi.Controllers
                     }
                     });
                 }
+
                 /// Revoke Token and make it unusebale
                 TokenRevokeResult tokenRevoke = await RevokeToken(revokeToken);
 
@@ -536,7 +537,7 @@ namespace KanbanApi.Controllers
 
                 // TODO: change email
                 /// create email to send
-                var message = new Message(new string[] { "tino.p.s.floris@gmail.com", "haoyechen@hotmail.com" }, subject, content, attachments, confimeEmailLink);
+                var message = new Message(new string[] { "tino.p.s.floris@gmail.com", "haoyechen@hotmail.com", "psnfloris@gmail.com", "tino0100@elev.tec.dk" }, subject, content, attachments, confimeEmailLink);
                 //var message = new Message(to, subject, content, attachments, confimeEmailLink);
 
                 ///send reset password email
@@ -900,7 +901,7 @@ namespace KanbanApi.Controllers
                 /// set the claims lifespan to begine
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString()),
                 /// set the claims lifspan to end after x day
-                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.UtcNow.AddDays(timetolive)).ToUnixTimeSeconds().ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.UtcNow.AddMinutes(timetolive)).ToUnixTimeSeconds().ToString()),
                 /// set an unique identifier for the JWT (prevent the JWT from being replayed)
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),                
             };

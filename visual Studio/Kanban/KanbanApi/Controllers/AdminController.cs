@@ -410,6 +410,7 @@ namespace KanbanApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("BoardAccess/Get")]
         public async Task<IActionResult> GetBoardAccess()
         {
@@ -623,6 +624,7 @@ namespace KanbanApi.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         [Route("GroupAccess/Get")]
         public async Task<IActionResult> GetAllGroupAccess()
         {
