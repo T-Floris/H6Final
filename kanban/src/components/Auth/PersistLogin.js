@@ -10,6 +10,7 @@ const PersistLogin = () => {
   
 
   useEffect(() => {
+      //fix memory leak
       let isMounted = true;
 
       const verifyRefreshToken = async () => {
