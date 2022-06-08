@@ -8,12 +8,12 @@ BEGIN
 	
 	SET @Position = (
 		SELECT
-			COUNT(*) + 1
+			COUNT([BoardTable].BoardId) + 1
 		FROM
 			[dbo].[BoardTable]
 		WHERE
-			[BoardTable].[BoardId] = @BoardId AND
-			[BoardTable].[TableId] = @TableId
+			[BoardTable].[BoardId] = @BoardId --AND
+			--[BoardTable].[TableId] = @TableId
 		)  
 
 	

@@ -1,6 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[spTable_Delete]
-	@param1 int = 0,
-	@param2 int
+	@TableId UNIQUEIDENTIFIER
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	DELETE
+	FROM
+		[Table]
+	WHERE
+		[Table].[Id] = @TableId
+END
+	

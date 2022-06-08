@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spTable_Edit]
-	@Id UNIQUEIDENTIFIER,
+	@TableId UNIQUEIDENTIFIER,
 	@Name NVARCHAR(50)
 AS
 BEGIN
@@ -10,5 +10,5 @@ BEGIN
 		[Name] = @Name
 
 	WHERE 
-		[Table].[Id] = @Id
+		[Table].[Id] = @TableId
 END

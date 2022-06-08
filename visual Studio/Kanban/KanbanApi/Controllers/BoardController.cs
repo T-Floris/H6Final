@@ -1,9 +1,13 @@
 ﻿using KanbanApi.Data;
 using KanbanApi.Library.DataAccess.Board;
+using KanbanApi.Library.DataAccess.Card;
 using KanbanApi.Library.DataAccess.Group;
+using KanbanApi.Library.DataAccess.Table;
 using KanbanApi.Library.DTOs.Requests.Board;
+using KanbanApi.Library.DTOs.Requests.Card;
 using KanbanApi.Library.DTOs.Responses.Board;
 using KanbanApi.Library.DTOs.Results.Board;
+using KanbanApi.Library.Models.Board;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -21,14 +25,20 @@ namespace KanbanApi.Controllers
     public class BoardController : ControllerBase
     {
         private readonly IBoard _board;
+        private readonly ITable _table;
+        private readonly ICard _card;
         private readonly IGroup _group;
         private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
 
-        public BoardController(IBoard board, ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public BoardController(IBoard board, ITable table, ICard card, IGroup group, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _board = board;
+            _table = table;
+            _card = card;
+            _group = group;
+
             _context = context;
             _userManager = userManager;
         }
@@ -170,7 +180,27 @@ namespace KanbanApi.Controllers
 
             var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            var boards = _board.GetBoards(UserId);
+            List<BoardModel> boardList = _board.GetBoards(UserId);
+
+            foreach (var board in boardList)
+            {
+                board.Table = _table.GetAllTablesOnBoard(board.Id);
+
+                foreach (var table in board.Table)
+                {
+                    GetCardsInTableRequest getCardsInTable = new()
+                    {
+                        BoardId = board.Id,
+                        TableId = table.TableId
+                    };
+
+                    table.Card = _card.GetAllInTable(getCardsInTable);
+
+
+                }
+            }
+
+            //var tables = _table.
 
             return Ok(new GetBoardResult()
             {
@@ -179,7 +209,7 @@ namespace KanbanApi.Controllers
                 {
                     "get all boards"
                 },
-                Boards = boards
+                Boards = boardList
             });
         }
 
@@ -201,6 +231,22 @@ namespace KanbanApi.Controllers
 
             var UserId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
             var board = _board.GetBoardById(UserId, BoardId);
+
+            board.Table = _table.GetAllTablesOnBoard(board.Id);
+
+            foreach (var table in board.Table)
+            {
+                GetCardsInTableRequest getCardsInTable = new()
+                {
+                    BoardId = board.Id,
+                    TableId = table.TableId
+                };
+
+                table.Card = _card.GetAllInTable(getCardsInTable);
+
+
+            }
+
 
             return Ok(new GetBoardByIdResult()
             {

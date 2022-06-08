@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KanbanApi.Library.Models.Card;
 
 namespace KanbanApi.Library.DataAccess.Card
 {
@@ -20,7 +21,7 @@ namespace KanbanApi.Library.DataAccess.Card
 
         public void AddCard(AddCardToTableRequest addCardToTable)
         {
-            _sql.SaveData("spCard_Add", new { addCardToTable.BoardId, addCardToTable.TableId, addCardToTable.Info }, DatabaseName);
+            _sql.SaveData("spCard_Add", new { addCardToTable.TableId, addCardToTable.Info }, DatabaseName);
         }
 
         public void DeleteCard(DeleteCardFromTableRequest deleteCardFromTable)
@@ -28,9 +29,21 @@ namespace KanbanApi.Library.DataAccess.Card
             _sql.DeleteData("spCard_Delete", new { deleteCardFromTable.BoardId, deleteCardFromTable.TableId, deleteCardFromTable.CardId }, DatabaseName);
         }
 
+        public List<CardModel> GetAllInTable(GetCardsInTableRequest getCardInTable)
+        {
+            var cards = _sql.LoadData<CardModel, dynamic>("spCard_GetAllInTable", new { getCardInTable.BoardId, getCardInTable.TableId }, DatabaseName);
+            return cards;
+        }
+
+        public CardModel GetCardInTableById(GetCardInTableByIdRequest getCardInTableById)
+        {
+            var card = _sql.LoadData<CardModel, dynamic>("spCard_GetCardInTableById", new { getCardInTableById.BoardId, getCardInTableById.TableId, getCardInTableById.CardId }, DatabaseName).FirstOrDefault();
+            return card;
+        }
+
         public void MoveCard(MoveCardFromTableRequest moveCardFromTable)
         {
-            _sql.DeleteData("spCard_Move", new { moveCardFromTable.CardId, moveCardFromTable.TableId }, DatabaseName);
+            _sql.DeleteData("spCard_Move", new { moveCardFromTable.CardId, moveCardFromTable.TableId, moveCardFromTable.NewPosition }, DatabaseName);
         }
 
         public void UpdateCard(UpdateCardFromTableRequest updateCardFromTable)

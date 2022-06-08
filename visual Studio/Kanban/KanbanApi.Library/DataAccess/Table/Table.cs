@@ -1,5 +1,6 @@
 ﻿using KanbanApi.Library.DTOs.Requests.Table;
 using KanbanApi.Library.Internal.DataAccess;
+using KanbanApi.Library.Models.Table;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,13 @@ namespace KanbanApi.Library.DataAccess.Table
         {
             _sql = sql;
         }
+
+        public List<TableModel> GetAllTablesOnBoard(Guid BoardId)
+        {
+            var tables = _sql.LoadData<TableModel, dynamic>("spTable_GetAllOnBoard", new { BoardId }, DatabaseName);
+            return tables;
+        }
+
         public void AddTable(CreateTableRequest createTable)
         {
             _sql.SaveData("spTable_Add", new { createTable.BoardId, createTable.Name }, DatabaseName);
@@ -23,17 +31,23 @@ namespace KanbanApi.Library.DataAccess.Table
 
         public void DeleteTable(DeleteTableRequest deleteTable)
         {
-            _sql.DeleteData("spTable_Delete", new { deleteTable.BoardId, deleteTable.TableId }, DatabaseName);
+            _sql.DeleteData("spTable_Delete", new { deleteTable.TableId }, DatabaseName);
         }
 
         public void MoveTable(MoveTableRequest moveTable)
         {
-            _sql.UpdateData("spTable_Move", new { moveTable.BoardId, moveTable.TableId }, DatabaseName);
+            _sql.UpdateData("spTable_Move", new { moveTable.TableId, moveTable.BoardId, moveTable.NewPosition }, DatabaseName);
         }
 
         public void UpdateTable(UpdateTableRequest updateTable)
         {
-            _sql.UpdateData("spTable_Edit", new { updateTable.BoardId, updateTable.TableId, updateTable.Name }, DatabaseName);
+            _sql.UpdateData("spTable_Edit", new { updateTable.TableId, updateTable.Name }, DatabaseName);
+        }
+
+        public TableModel GetSelectedTableOnBoard(Guid BoardId, Guid TableId)
+        {
+            var tables = _sql.LoadData<TableModel, dynamic>("spTable_GetOnBoardById", new { BoardId, TableId }, DatabaseName).FirstOrDefault();
+            return tables;
         }
     }
 }

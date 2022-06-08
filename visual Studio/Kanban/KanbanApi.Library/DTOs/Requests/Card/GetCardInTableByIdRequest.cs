@@ -5,12 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanbanApi.Library.DTOs.Requests.Table
+namespace KanbanApi.Library.DTOs.Requests.Card
 {
-    public class CreateTableRequest
+    public class GetCardInTableByIdRequest
     {
+        [Required]
         public Guid BoardId { get; set; }
         [Required]
-        public string Name { get; set; }
+        public Guid CardId { get; set; }
+        [Required]
+        public Guid TableId { get; set; }
+
     }
 }

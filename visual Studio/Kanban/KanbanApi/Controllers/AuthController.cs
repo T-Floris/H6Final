@@ -902,7 +902,7 @@ namespace KanbanApi.Controllers
                 /// set the claims lifespan to begine
                 new Claim(JwtRegisteredClaimNames.Nbf, new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString()),
                 /// set the claims lifspan to end after x day
-                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.UtcNow.AddMinutes(timetolive)).ToUnixTimeSeconds().ToString()),
+                new Claim(JwtRegisteredClaimNames.Exp, new DateTimeOffset(DateTime.UtcNow.AddDays(timetolive)).ToUnixTimeSeconds().ToString()),
                 /// set an unique identifier for the JWT (prevent the JWT from being replayed)
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),                
             };

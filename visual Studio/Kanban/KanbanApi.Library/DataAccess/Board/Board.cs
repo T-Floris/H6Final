@@ -66,9 +66,9 @@ namespace KanbanApi.Library.DataAccess.Board
             return output;
         }
 
-        public BoardModel GetBoardGroupIsMemberOff(Guid GroupId, Guid BoardId)
+        public BoardModel GetBoardGroupIsMemberOff(Guid groupId, Guid boardId)
         {
-            var output = _sql.LoadData<BoardModel, dynamic>("spGroupUser_HasAccess", new { GroupId, BoardId}, DatabaseName).FirstOrDefault();
+            var output = _sql.LoadData<BoardModel, dynamic>("spBoardGroup_HasAccess", new { groupId, boardId }, DatabaseName).FirstOrDefault();
             return output;
         }
 

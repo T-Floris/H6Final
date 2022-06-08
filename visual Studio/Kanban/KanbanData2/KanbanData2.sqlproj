@@ -144,6 +144,11 @@
     <Build Include="dbo\Stored Procedures\Table\spTable_Delete.sql" />
     <Build Include="dbo\Stored Procedures\User\spUser_UpdateInfo.sql" />
     <Build Include="dbo\Stored Procedures\Board\spBoard_GetMemberOf.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_Get.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_GetAllInTable.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_GetAllOnBoard.sql" />
+    <Build Include="dbo\Stored Procedures\Table\spTable_GetOnBoardById.sql" />
+    <Build Include="dbo\Stored Procedures\Card\spCard_GetCardInTableById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="KanbanData2.refactorlog" />

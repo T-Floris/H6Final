@@ -39,6 +39,53 @@ namespace KanbanApi.Controllers
         }
 
         [HttpGet]
+        [Route("Get")]
+        public IActionResult GetCard(Guid boardId, Guid tableId)
+        {
+            try
+            {
+                GetCardsInTableRequest getCardInTable = new()
+                {
+                    BoardId = boardId,
+                    TableId = tableId
+                };
+
+                var cads = _card.GetAllInTable(getCardInTable);
+
+                return Ok(cads);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+
+        }
+
+        [HttpGet]
+        [Route("Get/{carId}")]
+        public IActionResult GetCardById(Guid boardId, Guid tableId, Guid carId)
+        {
+            try
+            {
+                GetCardInTableByIdRequest getCardInTableById = new()
+                {
+                    BoardId = boardId,
+                    TableId = tableId,
+                    CardId = carId
+
+                };
+
+                return Ok(_card.GetCardInTableById(getCardInTableById));
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPost]
         [Route("create")]
         public IActionResult CreateCard(Guid boardId, Guid tableId, [FromBody] AddCardToTableRequest addCardToTable)
         {
@@ -126,18 +173,15 @@ namespace KanbanApi.Controllers
 
         [HttpPut]
         [Route("update/{cardId}")]
-        public IActionResult UpdateCard(Guid boardId, Guid tableId, Guid cardId)
+        public IActionResult UpdateCard(Guid boardId, Guid tableId, Guid cardId, UpdateCardFromTableRequest updateCardFromTable)
         {
-
-            UpdateCardFromTableRequest updateCardFromTable = new();
-
-            updateCardFromTable.BoardId= boardId;
-            updateCardFromTable.TableId= tableId;
             updateCardFromTable.CardId= cardId;
 
             if (TryValidateModel(updateCardFromTable))
             {
                 _card.UpdateCard(updateCardFromTable);
+
+                return Ok();
             }
 
             return BadRequest(new UpdateCardFromTableResponse()
@@ -148,6 +192,36 @@ namespace KanbanApi.Controllers
                     "Invalid payload"
                 }
 
+            });
+        }
+    
+        
+        [HttpPut]
+        [Route("move/{cardId}")]
+        public IActionResult MoveCard(Guid boardId, Guid tableId, Guid CardId, MoveCardFromTableRequest moveCardFromTable)
+        {
+            moveCardFromTable.CardId = CardId;
+            moveCardFromTable.TableId= tableId;
+            moveCardFromTable.BoardId= boardId;
+
+            if (TryValidateModel(moveCardFromTable))
+            {
+                _card.MoveCard(moveCardFromTable);
+
+                return Ok(new MoveCardFromTableResult()
+                {
+                    IsSuccess = true,
+                    Message = new List<string>()
+                    {
+                        "card has ben moved"
+                    }
+                });
+
+            }
+
+            return BadRequest(new MoveCardFromTableResponse()
+            {
+                
             });
         }
     }

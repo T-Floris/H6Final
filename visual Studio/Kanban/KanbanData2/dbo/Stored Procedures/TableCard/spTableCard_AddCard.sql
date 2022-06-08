@@ -8,11 +8,11 @@ BEGIN
 	
 	SET @Position = (
 		SELECT
-			COUNT(*) + 1 
+			COUNT([TableCard].[TableId]) + 1 
 		FROM
 			[dbo].[TableCard]
 		WHERE
-			[TableCard].[CardId] = @CardId and
+			--[TableCard].[CardId] = @CardId and
 			[TableCard].[TableId] = @TableId	
 		)  
 

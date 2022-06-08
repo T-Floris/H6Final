@@ -2,9 +2,12 @@
 using KanbanApi.Library.DataAccess.Card;
 using KanbanApi.Library.DataAccess.Group;
 using KanbanApi.Library.DataAccess.Table;
+using KanbanApi.Library.DTOs.Requests.Card;
 using KanbanApi.Library.DTOs.Requests.Table;
 using KanbanApi.Library.DTOs.Responses.Table;
+using KanbanApi.Library.DTOs.Results.Table;
 using KanbanApi.Library.Models.Board;
+using KanbanApi.Library.Models.Table;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,12 +25,78 @@ namespace KanbanApi.Controllers
         private readonly ITable _table;
         private readonly IGroup _group;
         private readonly IBoard _board;
+        private readonly ICard _card;
         //private readonly ICard _Card;
-        public TableController(ITable table, IGroup group, IBoard board)
+        public TableController(ITable table, IGroup group, IBoard board, ICard card)
         {
             _table = table;
             _group = group;
             _board = board;
+            _card = card;
+        }
+
+        [HttpGet]
+        [Route("get")]
+        public IActionResult GetAllTablesOnBoard(Guid boardId)
+        {
+            List<TableModel> tableList = _table.GetAllTablesOnBoard(boardId);
+
+            foreach (var table in tableList)
+            {
+                GetCardsInTableRequest getCardInTable = new()
+                {
+                    BoardId = boardId,
+                    TableId = table.TableId
+                };
+
+                table.Card = _card.GetAllInTable(getCardInTable);
+                
+            }
+
+            return Ok(new GetAllTablesResult()
+            {
+                IsSuccess = true,
+                Message = new List<string>()
+                {
+                    "success"
+                },
+                Tables = tableList
+            });
+        }
+
+
+        [HttpGet]
+        [Route("Get/{tableId}")]
+        public IActionResult GetSelectedTableOnBoard(Guid boardId, Guid tableId)
+        {
+            TableModel table = _table.GetSelectedTableOnBoard(boardId, tableId);
+
+            GetCardsInTableRequest getCardInTable = new()
+            {
+                BoardId = boardId,
+                TableId = table.TableId
+            };
+
+            table.Card = _card.GetAllInTable(getCardInTable);
+
+            return Ok(new GetSelectedTableResult()
+            {
+                IsSuccess = true,
+                Message = new List<string>()
+                {
+                    "success"
+                },
+                Table = table
+            });
+
+            return BadRequest(new GetSelectedTableResult()
+            {
+                IsSuccess = false,
+                Errors = new List<string>()
+                {
+                    "Invalid payload"
+                }
+            });
         }
 
         [HttpPost]
@@ -46,8 +115,13 @@ namespace KanbanApi.Controllers
                 {
                     dds.Add(_board.GetBoardGroupIsMemberOff(group.GroupId, boardId));
                 }
+
+                //_board.GetBoardGroupIsMemberOff(GroupId)
+
                 //var d = _board.GetBoardById(boardId);
+                //createTable.BoardId = boardId;
                 createTable.BoardId = boardId;
+                
 
                 _table.AddTable(createTable);
 
@@ -68,9 +142,25 @@ namespace KanbanApi.Controllers
 
         [HttpPut]
         [Route("update/{tableId}")]
-        public IActionResult UpdateTable(Guid boardId, Guid tableId)
+        public IActionResult UpdateTable(Guid boardId, Guid tableId, [FromBody] UpdateTableRequest updateTable)
         {
-            return Ok();
+            updateTable.BoardId = boardId;
+            updateTable.TableId = tableId;
+
+            if (TryValidateModel(updateTable))
+            {
+                _table.UpdateTable(updateTable);
+
+                return Ok(new UpdateTableResult()
+                {
+                    IsSuccess = true,
+                    Message = new List<string>()
+                    {
+                        "table name has ben updated"
+                    }
+                });
+
+            }
 
             return BadRequest(new UpdateTableResponse()
             {
@@ -83,8 +173,26 @@ namespace KanbanApi.Controllers
 
         [HttpPut]
         [Route("Move/{tableId}")]
-        public IActionResult MoveTable(Guid boardId, Guid tableId)
+        public IActionResult MoveTable(Guid boardId, Guid tableId, [FromBody] MoveTableRequest moveTable)
         {
+            moveTable.BoardId = boardId;
+            moveTable.TableId = tableId;
+
+            if (TryValidateModel(moveTable))
+            {
+                _table.MoveTable(moveTable);
+
+                return Ok(new MoveTableResult()
+                {
+                    IsSuccess = true,
+                    Message = new List<string>()
+                    {
+                        "Table has ben moved"
+                    }
+                });
+
+            }
+
             return Ok();
 
             return BadRequest(new MoveTableResponse()
@@ -108,6 +216,15 @@ namespace KanbanApi.Controllers
             if(TryValidateModel(deleteTable))
             {
                 _table.DeleteTable(deleteTable);
+
+                return Ok(new DeleteTableResult()
+                {
+                    IsSuccess = true,
+                    Message = new List<string>()
+                    {
+                        "delete"
+                    }
+                });
             }
 
             return BadRequest(new DeleteTableResponse()

@@ -1,6 +1,36 @@
 ﻿CREATE PROCEDURE [dbo].[spTable_Move]
-	@param1 int = 0,
-	@param2 int
+	@TableId UNIQUEIDENTIFIER,
+	@BoardId UNIQUEIDENTIFIER,
+	@NewPosition int
 AS
-	SELECT @param1, @param2
-RETURN 0
+BEGIN
+	DECLARE @StartPosition int 
+	
+	set @StartPosition = (
+		SELECT
+			[BoardTable].[Position]
+		FROM
+			[dbo].[BoardTable]
+		WHERE
+			[BoardTable].[TableId] = @TableId AND
+			[BoardTable].[BoardId] = @BoardId
+	)
+
+
+	UPDATE
+		[BoardTable]
+	SET
+		[Position] = @NewPosition
+	WHERE
+		[BoardTable].[TableId] = @TableId
+
+
+	UPDATE
+		[BoardTable]
+	SET
+		[Position] = [BoardTable].[Position] + 1
+	WHERE
+		[BoardTable].[TableId] != @TableId AND
+		[BoardTable].[Position] >= @NewPosition AND
+		[BoardTable].[Position] <= @StartPosition
+END

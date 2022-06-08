@@ -13,6 +13,8 @@ namespace KanbanApi.Library.DTOs.Requests.Table
         public Guid BoardId { get; set; }
         [Required]
         public Guid TableId { get; set; }
+        [Required]
+        public int NewPosition { get; set; }
 
     }
 }
