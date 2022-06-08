@@ -6,6 +6,25 @@ AS
 BEGIN
 	SET NOCOUNT ON;
 
+	DECLARE @UpdatePosition int
+
+	set @UpdatePosition = (
+		SELECT 
+			[TableCard].[Position]
+		FROM
+			[dbo].[TableCard]
+		WHERE
+			[TableCard].[TableId] = @TableId AND
+			[TableCard].[CardId] = @CardId
+	)
+
+	UPDATE
+		[TableCard]
+	SET
+		[Position] = [Position] - 1
+	WHERE
+		[TableCard].[Position] < @UpdatePosition
+
 	DELETE 
 		[TableCard]
 	WHERE

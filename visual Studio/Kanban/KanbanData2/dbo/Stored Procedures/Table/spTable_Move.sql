@@ -32,5 +32,6 @@ BEGIN
 	WHERE
 		[BoardTable].[TableId] != @TableId AND
 		[BoardTable].[Position] >= @NewPosition AND
-		[BoardTable].[Position] <= @StartPosition
+		[BoardTable].[Position] <= @StartPosition AND
+		[BoardTable].[BoardId] = @BoardId
 END

@@ -31,7 +31,7 @@ namespace KanbanApi.Library.DataAccess.Table
 
         public void DeleteTable(DeleteTableRequest deleteTable)
         {
-            _sql.DeleteData("spTable_Delete", new { deleteTable.TableId }, DatabaseName);
+            _sql.DeleteData("spTable_Delete", new { deleteTable.BoardId, deleteTable.TableId }, DatabaseName);
         }
 
         public void MoveTable(MoveTableRequest moveTable)

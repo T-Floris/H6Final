@@ -43,7 +43,7 @@ namespace KanbanApi.Library.DataAccess.Card
 
         public void MoveCard(MoveCardFromTableRequest moveCardFromTable)
         {
-            _sql.DeleteData("spCard_Move", new { moveCardFromTable.CardId, moveCardFromTable.TableId, moveCardFromTable.NewPosition }, DatabaseName);
+            _sql.DeleteData("spCard_Move", new { moveCardFromTable.BoardId, moveCardFromTable.CardId, moveCardFromTable.TableId, moveCardFromTable.NewPosition, moveCardFromTable.NewTableId }, DatabaseName);
         }
 
         public void UpdateCard(UpdateCardFromTableRequest updateCardFromTable)
