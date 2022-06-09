@@ -24,5 +24,6 @@ namespace KanbanApi.Library.DataAccess.Group
 
         void AddUserToGroup(AddUserToGroupRequest addUserToGroup);
         void DeleteUserFromGroup(DeleteUserFromGroupRequest deleteUserFromGroup);
+        void UpdateUserGroupRole(UpdateUserGroupRoleRequest updateUserGroupRole);
     }
 }

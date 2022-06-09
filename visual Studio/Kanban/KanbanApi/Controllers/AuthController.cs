@@ -721,7 +721,7 @@ namespace KanbanApi.Controllers
 
         }
 
-        [HttpPost]
+        [HttpPut]
         [Route("ChangeUserName")]
         public async Task<IActionResult> ChangeUserName([FromBody] ChangeUserNameRequest changeUserName)
         {

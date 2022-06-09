@@ -40,7 +40,7 @@ namespace KanbanApi.Controllers
 
         [HttpGet]
         [Route("Get")]
-        public IActionResult GetCard(Guid boardId, Guid tableId)
+        public IActionResult GetCards(Guid boardId, Guid tableId)
         {
             try
             {
@@ -181,7 +181,14 @@ namespace KanbanApi.Controllers
             {
                 _card.UpdateCard(updateCardFromTable);
 
-                return Ok();
+                return Ok(new UpdateCardFromTableResult()
+                {
+                    IsSuccess= true,
+                    Message= new List<string>()
+                    {
+                        "card is updated"
+                    }
+                });
             }
 
             return BadRequest(new UpdateCardFromTableResponse()

@@ -1,4 +1,5 @@
 ﻿using KanbanApi.Library.DTOs.Responses.Search;
+using KanbanApi.Library.Models.Group;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace KanbanApi.Library.DTOs.Results.Search
 {
     public class SearchGroupUserResult : SearchGroupUserResponse
     {
+        public List<GroupMemberModel> groupMember { get; set; }
     }
 }

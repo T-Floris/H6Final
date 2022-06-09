@@ -120,7 +120,11 @@ namespace KanbanApi.Controllers
                     });
                 }
 
-                return Ok(group);
+                return Ok(new SearchGroupResult()
+                {
+                    IsSuccess = true,
+                    Groups = group
+                });
 
             }
 
@@ -148,7 +152,14 @@ namespace KanbanApi.Controllers
                     });
                 }
 
-                return Ok(groupUser);
+                
+                
+                return Ok(new SearchGroupUserResult() 
+                {
+                    IsSuccess = true,
+                    groupMember = groupUser,
+
+                });
 
             }
 

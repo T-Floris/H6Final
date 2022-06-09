@@ -120,5 +120,10 @@ namespace KanbanApi.Library.DataAccess.Group
             bool isMemberOff = _sql.LoadData<bool, dynamic>("spGroupUser_IsMemberOff", new { groupId, userId }, DatabaseName).FirstOrDefault();
             return isMemberOff;
         }
+
+        public void UpdateUserGroupRole(UpdateUserGroupRoleRequest updateUserGroupRole)
+        {
+            _sql.UpdateData("spGroupUser_ChangeRole", new { updateUserGroupRole.GroupId, updateUserGroupRole.UserId, updateUserGroupRole.GroupAccessId }, DatabaseName);
+        }
     }
 }

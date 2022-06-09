@@ -266,7 +266,7 @@ namespace KanbanApi.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("{boardId}/AddGroup/{selectGroupId}")]
         public IActionResult AddGroupToBoard(Guid boardId, Guid selectGroupId, /*Guid BoardAccessId, */[FromBody] AddGroupToBoardRequest addGroupToBoard)
         {
@@ -283,7 +283,7 @@ namespace KanbanApi.Controllers
                         IsSuccess = false,
                         Errors = new List<string>()
                     {
-                        "you do not have access to 'remove group'"
+                        "you do not have access to 'add group'"
                     }
                     });
 

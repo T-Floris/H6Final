@@ -125,7 +125,10 @@ namespace KanbanApi.Controllers
 
                 _table.AddTable(createTable);
 
-                return Ok();
+                return Ok(new CreateTableResult()
+                {
+                    IsSuccess = true
+                });
 
                 
 

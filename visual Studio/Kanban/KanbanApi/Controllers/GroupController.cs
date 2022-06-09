@@ -128,9 +128,19 @@ namespace KanbanApi.Controllers
                     }
                 });
             }
+            UpdateUserGroupRoleRequest updateUserGroupRole = new()
+            {
+                GroupAccessId = groupAccessId,
+                GroupId = groupId,
+                UserId = selectUserId,
+            };
 
-            var dd = _group.GetAllGroupUserIsMemberOff(selectUserId);
-            ;
+            _group.UpdateUserGroupRole(updateUserGroupRole);
+
+            //var dd = _group.GetAllGroupUserIsMemberOff(selectUserId);
+
+            
+            
 
             return Ok();
         }
@@ -192,7 +202,7 @@ namespace KanbanApi.Controllers
 
         [HttpGet]
         [Route("Get/{groupId}")]
-        public IActionResult GetGroups(Guid groupId)
+        public IActionResult GetGroupById(Guid groupId)
         {
             var group = _group.GetGroupById(groupId);
             
@@ -208,10 +218,10 @@ namespace KanbanApi.Controllers
                 
             });
         }
-
+        
         [HttpGet]
         [Route("Get")]
-        public IActionResult GetGroupById()
+        public IActionResult GetGroups()
         {
             var group = _group.GetAllGroups();
 

@@ -153,9 +153,73 @@ namespace KanbanApi.Controllers
             });;
         }
 
+        [HttpGet]
+        [Route("Users/Get/{roleName}")]
+        public async Task<IActionResult> GetUsersInRoleByRoleName(string roleName)
+        {
+            var canConnect = _context.Database.CanConnect();
+            if (!canConnect)
+            {
+                return BadRequest(new GetAllUsersInRoleResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "can't reach the server"
+                    }
+                });
+            }
+            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            IdentityUser getUser = await _userManager.FindByIdAsync(UserId);
+            bool isInRole = _userManager.IsInRoleAsync(getUser, "Admin").Result;
+            if (!isInRole)
+            {
+                return BadRequest(new GetAllUsersResponse()
+                {
+                    Errors = new List<string>()
+                    {
+                        "You are not a admin"
+                    }
+                });
+            }
+
+            var findRole = _roleManager.RoleExistsAsync(roleName).Result;
+            if (findRole)
+            {
+                var users = _userManager.GetUsersInRoleAsync(roleName).Result;
+                List<UserModel> userInRole = new List<UserModel>();
+                foreach (var user in users)
+                {
+                    var usermodel = _userData.GetUserById(user.Id);
+                    userInRole.Add(usermodel);
+                }
+
+                return Ok(new GetAllUsersInRoleResult()
+                {
+                    IsSuccess = true,
+                    UserInRole = userInRole,
+                    Message = new List<string>()
+                    {
+                        $"all user in role { roleName }"
+                    }
+                });
+            }
+
+            return BadRequest(new GetAllUsersInRoleResponse()
+            {
+                IsSuccess = false,
+                Errors = new List<string>()
+                {
+                    "Role is not found"
+                }
+
+            });
+
+        }
+
+
         [HttpDelete]
         [Route("delete/user/{userId}")]
-        public async Task<IActionResult> Delete(string userId, [FromBody] DeleteUserRequest deleteUser)
+        public async Task<IActionResult> DeleteUser(string userId, [FromBody] DeleteUserRequest deleteUser)
         {
                 var canConnect = _context.Database.CanConnect();
                 if (!canConnect)
@@ -291,68 +355,6 @@ namespace KanbanApi.Controllers
 
         }
 
-        [HttpGet]
-        [Route("Users/Get/{roleName}")]
-        public async Task<IActionResult> GetUsersInRole(string roleName)
-        {
-            var canConnect = _context.Database.CanConnect();
-            if (!canConnect)
-            {
-                return BadRequest(new GetAllUsersInRoleResponse()
-                {
-                    Errors = new List<string>()
-                    {
-                        "can't reach the server"
-                    }
-                });
-            }
-            var UserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            IdentityUser getUser = await _userManager.FindByIdAsync(UserId);
-            bool isInRole = _userManager.IsInRoleAsync(getUser, "Admin").Result;
-            if (!isInRole)
-            {
-                return BadRequest(new GetAllUsersResponse()
-                {
-                    Errors = new List<string>()
-                    {
-                        "You are not a admin"
-                    }
-                });
-            }
-
-            var findRole = _roleManager.RoleExistsAsync(roleName).Result;
-            if (findRole)
-            {
-                var users = _userManager.GetUsersInRoleAsync(roleName).Result;
-                List<UserModel> userInRole = new List<UserModel>();
-                foreach (var user in users)
-                {
-                    var usermodel = _userData.GetUserById(user.Id);
-                    userInRole.Add(usermodel);
-                }
-
-                return Ok(new GetAllUsersInRoleResult()
-                {
-                    IsSuccess = true,   
-                    UserInRole = userInRole,
-                    Message = new List<string>()
-                    {
-                        $"all user in role { roleName }"
-                    }
-                });
-            }
-
-            return BadRequest(new GetAllUsersInRoleResponse()
-            {
-                IsSuccess = false,
-                Errors = new List<string>()
-                {
-                    "Role is not found"
-                }
-
-            });
-
-        }
 
 
         [HttpPost]
@@ -394,7 +396,7 @@ namespace KanbanApi.Controllers
                     IsSuccess =true,
                     Message =new List<string>
                     {
-                        "Group is add'et"
+                        "BaordAccess is add'et"
                     }
                 });
             }
