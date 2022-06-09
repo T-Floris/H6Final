@@ -1,11 +1,11 @@
 import React from "react";
-import { Container, Title, Text, Wrapper } from "./StartElements";
+import { Container, Title, Text, Wrapper } from "./UserStartElements";
 import { PageBar } from "../../Menus/CurrentPageBar/CurrentPageBarElements";
 import { useTranslation } from "react-i18next";
 import useAxiosPrivate from "../../../hooks/useAxiosPrivate";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+// import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
   //i18next

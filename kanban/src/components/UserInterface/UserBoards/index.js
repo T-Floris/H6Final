@@ -57,12 +57,9 @@ const UserBoards = () => {
         </PageBar>
 
         <Wrapper>
-          <BoxLink to="/templateboard">
-            <TextInBox>Template board</TextInBox>
-          </BoxLink>
 
           {boards.map((board, index) => (
-            <BoxLink key={index} to={"/board/"+board.id}>
+            <BoxLink key={index} to={"/boards/"+board.id}>
               <TextInBox>{board.name}</TextInBox>
             </BoxLink>
           ))}{" "}
@@ -70,6 +67,7 @@ const UserBoards = () => {
           <BoxButton onClick={openModal}>
             <TextInBox>Create new board</TextInBox>
           </BoxButton>
+          
         </Wrapper>
       </Container>
     </>

@@ -1,5 +1,5 @@
 import React from "react";
-import UserBoard from "../../components/UserInterface/UserBoards"
+import UserBoard from "../../components/UserInterface/UserBoards";
 import styled from "styled-components";
 import Sidebar from "../../components/Menus/Sidebar";
 import { backgroundTheme } from "../../components/Assets/variables";
@@ -14,7 +14,6 @@ import {
   MdWorkspacesOutline,
 } from "react-icons/md";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
-import { Outlet } from "react-router-dom";
 const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const BoardContainer = styled.div`
@@ -69,9 +68,9 @@ const BoardsPage = () => {
         description={MetaData.boardPageDesc}
       />
 
-      <Sidebar links={LinksArray}/>
+      <Sidebar links={LinksArray} />
+
       <UserBoard />
-      <Outlet />
     </BoardContainer>
   );
 };

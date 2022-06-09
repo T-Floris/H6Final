@@ -1,5 +1,4 @@
 import React from "react";
-import UserBoard from "../../components/UserInterface/UserBoards"
 import styled from "styled-components";
 import Sidebar from "../../components/Menus/Sidebar";
 import { backgroundTheme } from "../../components/Assets/variables";
@@ -14,6 +13,9 @@ import {
   MdWorkspacesOutline,
 } from "react-icons/md";
 import MetaDecorator from "../../components/Utils/Meta/MetaDecorator";
+import { Provider } from "react-redux";
+import Board from "../../containers/Board";
+import store from "../../store";
 const MetaData = require("../../components/Utils/Meta/MetaData.json");
 
 const BoardContainer = styled.div`
@@ -68,8 +70,12 @@ const BoardPage = () => {
         description={MetaData.boardPageDesc}
       />
 
-      <Sidebar links={LinksArray}/>
-      <p>test</p>
+      <Sidebar links={LinksArray} />
+      <Provider store={store}>
+        {" "}
+        {/*store is required by redux*/}
+        <Board />
+      </Provider>
     </BoardContainer>
   );
 };
