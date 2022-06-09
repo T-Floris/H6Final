@@ -11,8 +11,8 @@ namespace KanbanApi.Library.DataAccess.Card
     public interface ICard
     {
         List<CardModel> GetAllInTable(GetCardsInTableRequest getCardInTable);
-        CardModel GetCardInTableById(GetCardInTableByIdRequest getCardInTableById); 
-        void AddCard(AddCardToTableRequest addCardToTable);
+        CardModel GetCardInTableById(GetCardInTableByIdRequest getCardInTableById);
+        CardModel AddCard(AddCardToTableRequest addCardToTable);
         void DeleteCard(DeleteCardFromTableRequest deleteCardFromTable);
         void UpdateCard(UpdateCardFromTableRequest updateCardFromTable);
         void MoveCard(MoveCardFromTableRequest moveCardFromTable);

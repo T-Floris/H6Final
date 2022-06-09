@@ -101,10 +101,11 @@ const CardListHeader = (props) => {
   // }, []);
 
   return (
+    <>
     <StyledCardListHeader
       onMouseEnter={() => setOnHover(true)}
       onMouseLeave={() => setOnHover(false)}
-    >
+      >
       <ContentEditable
         innerRef={ref}
         html={listName}
@@ -117,11 +118,11 @@ const CardListHeader = (props) => {
         <IconButton.ButtonContainer
           top="11px"
           right={editMode ? "11px" : "42px"}
-        >
+          >
           <IconButton
             onClick={onClickSaveEdit}
             iconType={editMode ? "confirm" : "edit"}
-          />
+            />
         </IconButton.ButtonContainer>
       )}
       {onHover && !editMode && (
@@ -135,6 +136,7 @@ const CardListHeader = (props) => {
         </>
       )}
     </StyledCardListHeader>
+    </>
   );
 };
 

@@ -13,7 +13,7 @@ namespace KanbanApi.Library.DataAccess.Table
     {
         public List<TableModel> GetAllTablesOnBoard(Guid BoardId);
         TableModel GetSelectedTableOnBoard(Guid BoardId, Guid TableId);
-        void AddTable(CreateTableRequest createTable);
+        TableModel AddTable(CreateTableRequest createTable);
         void UpdateTable(UpdateTableRequest updateTable);
         void DeleteTable(DeleteTableRequest deleteTable);
         void MoveTable(MoveTableRequest moveTable);

@@ -48,6 +48,8 @@ const Card = ({
     }
   };
   return (
+    <>
+    {console.log("caed")}
     <Draggable key={card.id} draggableId={card.id} index={index}>
       {(provided) => (
         <CardContainer
@@ -86,6 +88,7 @@ const Card = ({
         </CardContainer>
       )}
     </Draggable>
+    </>
   );
 };
 

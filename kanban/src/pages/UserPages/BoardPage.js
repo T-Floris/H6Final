@@ -25,6 +25,7 @@ const BoardContainer = styled.div`
 const BoardPage = () => {
   //i18next
   const { t } = useTranslation();
+
   const LinksArray = [
     {
       label: t("sidebar_start"),
@@ -63,6 +64,7 @@ const BoardPage = () => {
       notification: 5,
     },
   ];
+  
   return (
     <BoardContainer>
       <MetaDecorator

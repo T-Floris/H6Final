@@ -66,7 +66,14 @@ const CardList = (props) => {
   // }, []);
   
   return (
+    
+    
     <CardListWrapper>
+      {console.log("CardList")}
+      {console.log(CardList)} 
+      {console.log("2")}
+      {console.log("2")}
+      {console.log(props)}
       <CardListHeader
         listName={props.list.name}
         onChangeListName={props.onChangeListName}
@@ -94,6 +101,7 @@ const CardList = (props) => {
             {provided.placeholder}
             <AddCard
               onConfirm={props.onAddCard}
+              id = {props.droppableId}
               placeholder="+ Add new card"
               focusPlaceholder="Enter card content"
             />

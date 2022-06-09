@@ -19,9 +19,10 @@ namespace KanbanApi.Library.DataAccess.Card
             _sql = sql;
         }
 
-        public void AddCard(AddCardToTableRequest addCardToTable)
+        public CardModel AddCard(AddCardToTableRequest addCardToTable)
         {
-            _sql.SaveData("spCard_Add", new { addCardToTable.TableId, addCardToTable.Info }, DatabaseName);
+            var card = _sql.SaveData<CardModel, dynamic>("spCard_Add", new { addCardToTable.BoardId, addCardToTable.TableId, addCardToTable.Info }, DatabaseName).FirstOrDefault();
+            return card;
         }
 
         public void DeleteCard(DeleteCardFromTableRequest deleteCardFromTable)

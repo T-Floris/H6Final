@@ -28,5 +28,7 @@ BEGIN
 
 
 	EXEC [dbo].[spBoardTable_AddTable] @BoardId, @TableId
+
+	EXEC [dbo].[spTable_GetOnBoardById] @BoardId, @TableId
 END
 

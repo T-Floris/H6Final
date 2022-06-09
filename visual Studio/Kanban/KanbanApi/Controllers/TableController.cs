@@ -123,11 +123,12 @@ namespace KanbanApi.Controllers
                 createTable.BoardId = boardId;
                 
 
-                _table.AddTable(createTable);
+                var tableId = _table.AddTable(createTable);
 
                 return Ok(new CreateTableResult()
                 {
-                    IsSuccess = true
+                    IsSuccess = true,
+                    TableId = tableId.TableId
                 });
 
                 

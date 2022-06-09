@@ -111,7 +111,7 @@ namespace KanbanApi.Controllers
                 //}
 
 
-                _card.AddCard(addCardToTable);
+                var card = _card.AddCard(addCardToTable);
 
                 return Ok(new AddCardToTableResult()
                 {
@@ -119,7 +119,8 @@ namespace KanbanApi.Controllers
                     Message = new List<string>()
                     {
                         "new card created"
-                    }
+                    },
+                    Card = card
                 });
 
 

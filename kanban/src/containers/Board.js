@@ -62,7 +62,10 @@ const Board = (props) => {
   const url = String(window.location.pathname);
   const lastSegment = url.split("/").pop();
   const GETCARDLIST_URL = `board/${lastSegment}/Table/get`;
+  const GETBOARD_URL = "board/getBoards/314ca280-18b2-4ae8-9c19-802be90697fa";
+  //const BOARD_URL = `board/GetBoards/${lastSegment}/`;
   const [value, setValue] = useState();
+  const [tables, setTables] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -73,15 +76,37 @@ const Board = (props) => {
         const response = await axiosPrivate.get(GETCARDLIST_URL, {
           signal: controller.signal,
         });
-        console.log(response.data);
-        isMounted && setValue(response.data.tables);
+        //console.log(response.data.tables);
+        //console.log(props.onAddList);
+        console.log("-");
+        isMounted && setTables(response.data.tables);
+        console.log(tables);
+        console.log("test " + props.lists);
       } catch (err) {
         console.error(err);
         // navigate("/login", { state: { from: location }, replace: true });
       }
     };
 
+    // const getBoard = async () => {
+    //   try {
+    //     console.log(BOARD_URL);
+    //     const response = await axiosPrivate.get(BOARD_URL, {
+    //       signal: controller.signal
+    //     });
+
+    //     isMounted && setBoard(response.data.board.board)
+    //     console.log(board);
+    //     // console.log("tetetetetete");
+    //   }
+    //   catch (err){
+    //     console.log("nej");
+    //     console.log(err);
+    //   }
+    // }
+
     getListName();
+    // getBoard();
 
     return () => {
       isMounted = false;
@@ -92,10 +117,12 @@ const Board = (props) => {
     <Container>
       <BoardContainer countColumns={props.lists.length + 1}>
         <DragDropContext onDragEnd={onDragEnd}>
+          {console.log("frfr")}
+          {console.log(props.lists)}
           {props.lists.map((list, listIndex) => (
             <CardList
-              key={list.id}
-              droppableId={list.id}
+              key={tables[listIndex].tableId}
+              droppableId={tables[listIndex].tableId}
               list={list}
               onChangeListName={(listName) =>
                 props.onChangeListName(listIndex, listName)

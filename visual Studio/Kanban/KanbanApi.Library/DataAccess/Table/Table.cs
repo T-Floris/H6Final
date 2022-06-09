@@ -24,9 +24,10 @@ namespace KanbanApi.Library.DataAccess.Table
             return tables;
         }
 
-        public void AddTable(CreateTableRequest createTable)
+        public TableModel AddTable(CreateTableRequest createTable)
         {
-            _sql.SaveData("spTable_Add", new { createTable.BoardId, createTable.Name }, DatabaseName);
+            var table = _sql.SaveData<TableModel, dynamic>("spTable_Add", new { createTable.BoardId, createTable.Name }, DatabaseName).FirstOrDefault();
+            return table;
         }
 
         public void DeleteTable(DeleteTableRequest deleteTable)

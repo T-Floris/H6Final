@@ -17,13 +17,15 @@ const AddList = (props) => {
 
   //works
   const onSubmit = async (e) => {
+    console.log("addList");
     e.preventDefault();
     e.stopPropagation();
     try {
-      await axiosPrivate.post(
+      const response = await axiosPrivate.post(
         CREATELIST_URL,
         JSON.stringify({ name: value })
       );
+      console.log(response.data);
       if (value) {
         props.onConfirm(value);
       }

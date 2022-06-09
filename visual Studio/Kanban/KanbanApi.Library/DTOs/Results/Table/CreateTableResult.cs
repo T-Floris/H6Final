@@ -10,5 +10,7 @@ namespace KanbanApi.Library.DTOs.Results.Table
     public class CreateTableResult : CreateTableResponse
     {
         public List<string> Message { get; set; }
+        public Guid TableId { get; set; }
+
     }
 }
