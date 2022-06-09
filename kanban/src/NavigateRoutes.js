@@ -24,7 +24,6 @@ import CalendarPage from "./pages/UserPages/CalendarPage";
 import MessagePage from "./pages/UserPages/MessagePage";
 import SettingsPage from "./pages/UserPages/SettingsPage";
 import UserProfilePage from "./pages/UserPages/UserProfilePage";
-import TemplateBoardPage from "./pages/UserPages/Template/TemplateBoardPage";
 
 //Admin pages
 import DashboardPage from "./pages/AdminPages/DashboardPage";
@@ -85,10 +84,8 @@ const NavigateRoutes = () => {
               {/* redirect to login page if not login */}
               <Route path="/userstart" element={<UserStartPage />} />
               <Route path="/workspace" element={<WorkspacePage />} />
-              <Route path="/boards" element={<BoardsPage />}>
-                <Route path=":id" element={<BoardPage />} />
-              </Route>
-              <Route path="/templateboard" element={<TemplateBoardPage />} />
+              <Route path="/boards" element={<BoardsPage />} />
+              <Route path="/boards/:id" element={<BoardPage />} />
               <Route path="/group" element={<GroupPage />} />
               <Route path="/calendar" element={<CalendarPage />} />
               <Route path="/message" element={<MessagePage />} />
