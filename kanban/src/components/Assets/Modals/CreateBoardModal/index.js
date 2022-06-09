@@ -19,7 +19,7 @@ import {
 import { AiOutlineLock } from "react-icons/ai";
 import { IoPeopleOutline, IoEarthOutline } from "react-icons/io5";
 import { useState } from "react";
-import { axiosPrivate } from "../../../../api/axios";
+import useAxiosPrivate from "../../../../hooks/useAxiosPrivate";
 
 const CreateBoardModal = ({ showModal, setShowModal }) => {
   const modalRef = useRef();
@@ -45,6 +45,7 @@ const CreateBoardModal = ({ showModal, setShowModal }) => {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  const axiosPrivate = useAxiosPrivate();
   const [createBoard, setcreateBoard] = useState("");
   const CREATEBOARD_URL = "board/create";
 
